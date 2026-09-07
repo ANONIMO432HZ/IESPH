@@ -1,0 +1,10 @@
+{
+  "description": "Provides comprehensive information and resources for students and staff of Instituto Superior Publico Huanta through a user-friendly web platform.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
