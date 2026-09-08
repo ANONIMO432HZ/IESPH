@@ -1,38 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 html,
 body,
 #root {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-editorial {
+  font-family: 'Lora', Georgia, serif;
 }
 
 :root {
-  --primary: #8B1A1A;
-  --primary-dark: #6B1414;
-  --primary-light: #C0392B;
-  --secondary: #1A3A6B;
-  --accent: #F0A500;
-  --background: #FFFFFF;
-  --surface: #F5F5F5;
-  --text: #1A1A1A;
-  --text-muted: #5A5A5A;
-  --border: #E0E0E0;
+  /* Humanistic Institutional Palette: Dignified Academic Navy, Warm Wine & Slate */
+  --primary: #123055;
+  --primary-dark: #0A1C33;
+  --primary-light: #1D4577;
+  --secondary: #8C2230; /* Peruvian academic crimson/wine */
+  --secondary-dark: #6D1623;
+  --accent: #D9822B; /* Warm terracotta/gold */
+  --surface: #F9FAFB;
+  --surface-alt: #F3F4F6;
+  --surface-warm: #FAF9F6;
+  --border: #E5E7EB;
+  --border-subtle: #ECEEF2;
+  --text-main: #111827;
+  --text-muted: #4B5563;
+  --text-light: #6B7280;
 }
 
 @theme inline {
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
   --color-secondary: var(--secondary);
+  --color-secondary-dark: var(--secondary-dark);
   --color-accent: var(--accent);
+}
+
+/* Subtle humanistic styling */
+.bg-institutional {
+  background: linear-gradient(180deg, #102A4C 0%, #0B1C33 100%);
+}
+
+.bg-warm-canvas {
+  background-color: #FAF9F6;
+}
+
+.card-subtle {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-subtle:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
 }
 
 .scrollbar-hide::-webkit-scrollbar {
