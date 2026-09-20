@@ -1,12 +1,12 @@
-import logoIES1 from "@/imports/LOGOIES-1.png"
-import { INSTITUTION_CONTACT } from "@/data/institution"
-import { FOOTER_SECTIONS } from "@/data/navigation"
 import {
-  IconPhone,
+  IconClock,
   IconMail,
   IconMapPin,
-  IconClock,
+  IconPhone,
 } from "@/components/icons/Icons"
+import { INSTITUTION_CONTACT } from "@/data/institution"
+import { FOOTER_SECTIONS } from "@/data/navigation"
+import logoIES1 from "@/imports/LOGOIES-1.png"
 
 export default function Footer() {
   return (

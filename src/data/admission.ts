@@ -1,10 +1,10 @@
-import { AdmissionStep, AdmissionModality } from "@/types"
+import type { AdmissionModality, AdmissionStep } from "@/types"
 
 export const ADMISSION_PROCESS_INFO = {
   title: "Proceso de Admisión 2026",
   subtitle: "Convocatoria Oficial de Vacantes para el Año Académico 2026",
   description:
-    'Proceso mediante el cual los postulantes acceden a una vacante en cualquiera de los 5 programas de estudio del IESTP Público "Huanta". Se realiza mediante convocatoria pública y procedimientos normados por el MINEDU y la Dirección Regional de Educación de Ayacucho (DREA).',
+    'Proceso mediante el cual los postulantes acceden a una vacante en cualquiera de los 5 programas de estudio del Instituto de Educación Superior Público "Huanta". Se realiza mediante convocatoria pública y procedimientos normados por el MINEDU y la Dirección Regional de Educación de Ayacucho (DREA).',
   licenseNote:
     "Instituto de Educación Superior Licenciado por MINEDU · Título a Nombre de la Nación",
   academicCycle: "2026-I / 2026-II",

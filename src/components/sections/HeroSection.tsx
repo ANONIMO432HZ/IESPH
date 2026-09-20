@@ -1,6 +1,6 @@
-import { useState, FormEvent } from "react"
-import { CAREERS } from "@/data/careers"
+import { type FormEvent, useState } from "react"
 import { IconCheck } from "@/components/icons/Icons"
+import { CAREERS } from "@/data/careers"
 
 interface HeroSectionProps {
   onCareerSelect?: (careerName: string) => void
@@ -37,7 +37,7 @@ export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
         {/* Left: Value Proposition & Institutional Mission */}
         <div className="space-y-6">
           {/* Institutional Badge — Understated & Academic */}
-          <div className="inline-flex items-center gap-2 bg-slate-800/80 text-slate-200 text-xs font-semibold px-3.5 py-1.5 rounded-md border border-slate-700">  
+          <div className="inline-flex items-center gap-2 bg-slate-800/80 text-slate-200 text-xs font-semibold px-3.5 py-1.5 rounded-md border border-slate-700">
             <span>Institución Licenciada por el MINEDU · R.M. N° 068-2020</span>
           </div>
 

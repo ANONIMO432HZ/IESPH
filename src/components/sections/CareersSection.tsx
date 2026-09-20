@@ -1,14 +1,14 @@
 import { useState } from "react"
-import { CAREERS } from "@/data/careers"
-import { Career } from "@/types"
 import {
+  IconAcademicCap,
+  IconBeaker,
   IconComputer,
   IconHeartPulse,
-  IconWrench,
-  IconBeaker,
   IconLeaf,
-  IconAcademicCap,
+  IconWrench,
 } from "@/components/icons/Icons"
+import { CAREERS } from "@/data/careers"
+import type { Career } from "@/types"
 
 interface CareersSectionProps {
   onOpenCareerModal: (career: Career) => void

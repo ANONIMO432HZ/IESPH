@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
 html,
 body,
@@ -9,34 +9,40 @@ body,
 }
 
 * {
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Plus Jakarta Sans", sans-serif;
   letter-spacing: -0.02em;
 }
 
 .font-editorial {
-  font-family: 'Lora', Georgia, serif;
+  font-family: "Lora", Georgia, serif;
 }
 
 :root {
   /* Humanistic Institutional Palette: Dignified Academic Navy, Warm Wine & Slate */
   --primary: #123055;
-  --primary-dark: #0A1C33;
-  --primary-light: #1D4577;
-  --secondary: #8C2230; /* Peruvian academic crimson/wine */
-  --secondary-dark: #6D1623;
-  --accent: #D9822B; /* Warm terracotta/gold */
-  --surface: #F9FAFB;
-  --surface-alt: #F3F4F6;
-  --surface-warm: #FAF9F6;
-  --border: #E5E7EB;
-  --border-subtle: #ECEEF2;
+  --primary-dark: #0a1c33;
+  --primary-light: #1d4577;
+  --secondary: #8c2230; /* Peruvian academic crimson/wine */
+  --secondary-dark: #6d1623;
+  --accent: #d9822b; /* Warm terracotta/gold */
+  --surface: #f9fafb;
+  --surface-alt: #f3f4f6;
+  --surface-warm: #faf9f6;
+  --border: #e5e7eb;
+  --border-subtle: #eceef2;
   --text-main: #111827;
-  --text-muted: #4B5563;
-  --text-light: #6B7280;
+  --text-muted: #4b5563;
+  --text-light: #6b7280;
 }
 
 @theme inline {
@@ -50,21 +56,21 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Subtle humanistic styling */
 .bg-institutional {
-  background: linear-gradient(180deg, #102A4C 0%, #0B1C33 100%);
+  background: linear-gradient(180deg, #102a4c 0%, #0b1c33 100%);
 }
 
 .bg-warm-canvas {
-  background-color: #FAF9F6;
+  background-color: #faf9f6;
 }
 
 .card-subtle {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-subtle:hover {
-  border-color: #CBD5E1;
+  border-color: #cbd5e1;
   box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
 }
 

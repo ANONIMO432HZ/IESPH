@@ -1,10 +1,10 @@
-import { NewsItem } from "@/types"
+import type { NewsItem } from "@/types"
 
 export const NEWS_ITEMS: NewsItem[] = [
   {
     id: "admision-2026-convocatoria",
     title:
-      'Convocatoria Oficial: Proceso de Admisión 2026 en el IESP Público "Huanta"',
+      'Convocatoria Oficial: Proceso de Admisión 2026 en el Instituto de Educación Superior Público "Huanta"',
     excerpt:
       "Se abre la convocatoria para las 5 carreras técnicas licenciadas. Conoce el cronograma de inscripción, modalidades y vacantes disponibles en nuestra sede.",
     date: "20 Feb 2026",

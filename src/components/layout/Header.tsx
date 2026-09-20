@@ -1,8 +1,8 @@
 import { useState } from "react"
-import logoIES from "@/imports/LOGOIES.png"
+import { IconClock, IconMapPin, IconPhone } from "@/components/icons/Icons"
 import { INSTITUTION_CONTACT } from "@/data/institution"
 import { MAIN_NAV_ITEMS, TOP_NAV_LINKS } from "@/data/navigation"
-import { IconPhone, IconMapPin, IconClock } from "@/components/icons/Icons"
+import logoIES from "@/imports/LOGOIES.png"
 
 interface HeaderProps {
   onOpenApplyModal?: () => void

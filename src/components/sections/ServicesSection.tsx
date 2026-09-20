@@ -1,15 +1,15 @@
-import { INSTITUTION_CONTACT } from "@/data/institution"
 import {
-  IconComputer,
   IconBook,
   IconBriefcase,
-  IconDocument,
   IconBuilding,
+  IconClock,
+  IconComputer,
+  IconDocument,
+  IconMail,
   IconMapPin,
   IconPhone,
-  IconMail,
-  IconClock,
 } from "@/components/icons/Icons"
+import { INSTITUTION_CONTACT } from "@/data/institution"
 
 export default function ServicesSection() {
   const services = [

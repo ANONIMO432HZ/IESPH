@@ -1,13 +1,13 @@
-import { Career } from "@/types"
 import {
+  IconAcademicCap,
+  IconBeaker,
+  IconCheck,
   IconComputer,
   IconHeartPulse,
-  IconWrench,
-  IconBeaker,
   IconLeaf,
-  IconAcademicCap,
-  IconCheck,
+  IconWrench,
 } from "@/components/icons/Icons"
+import type { Career } from "@/types"
 
 interface CareerModalProps {
   career: Career | null

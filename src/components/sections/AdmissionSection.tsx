@@ -1,11 +1,11 @@
 import { useState } from "react"
-import {
-  ADMISSION_STEPS,
-  ADMISSION_MODALITIES,
-  GENERAL_REQUIREMENTS,
-  ADMISSION_PROCESS_INFO,
-} from "@/data/admission"
 import { IconCheck, IconDocument } from "@/components/icons/Icons"
+import {
+  ADMISSION_MODALITIES,
+  ADMISSION_PROCESS_INFO,
+  ADMISSION_STEPS,
+  GENERAL_REQUIREMENTS,
+} from "@/data/admission"
 
 interface AdmissionSectionProps {
   onStartApply: () => void
@@ -14,8 +14,9 @@ interface AdmissionSectionProps {
 export default function AdmissionSection({
   onStartApply,
 }: AdmissionSectionProps) {
-  const [activeTab, setActiveTab] =
-    useState<"pasos" | "requisitos" | "modalidades">("pasos")
+  const [activeTab, setActiveTab] = useState<
+    "pasos" | "requisitos" | "modalidades"
+  >("pasos")
 
   return (
     <section
@@ -120,9 +121,9 @@ export default function AdmissionSection({
               <span>Documentos Obligatorios para la Carpeta de Postulante</span>
             </h3>
             <div className="space-y-2.5">
-              {GENERAL_REQUIREMENTS.map((req, idx) => (
+              {GENERAL_REQUIREMENTS.map((req) => (
                 <div
-                  key={idx}
+                  key={req}
                   className="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-200"
                 >
                   <span className="w-4 h-4 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 mt-0.5">

@@ -1,20 +1,52 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Production builds & outputs
 dist/
 build/
+*.tsbuildinfo
+
+# Cache and temporary files
 .cache/
-.env*
 .vite/
 vite.config.*.timestamp-*
-*.tsbuildinfo
-*-debug.log*
-logs/
-*.log
-.claude-replay.*
 .tmp-*
+.claude-replay.*
 
-# Platform-managed agentplat state, not project source. In the
-# client-initiated single-repo workspace layout (make's `Path: "."` spec) the
-# repo root IS the workspace root, so these land inside this repo rather than
-# beside it.
+# Environment variables
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs
+*.log
+logs/
+*-debug.log*
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor files
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.sublime-workspace
+*.sublime-project
+
+# Archives & workspace backups
+*.zip
+!IESPH.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Platform & agent caches
 /.plugins/
 /.opencode-skills/
+.atl/
+

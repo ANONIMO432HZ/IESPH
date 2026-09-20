@@ -1,10 +1,7 @@
-import { defineConfig, type HtmlTagDescriptor, type Plugin } from "vite"
-
-import react from "@vitejs/plugin-react"
-
-import tailwindcss from "@tailwindcss/vite"
-
 import path from "node:path"
+import tailwindcss from "@tailwindcss/vite"
+import react from "@vitejs/plugin-react"
+import { defineConfig, type HtmlTagDescriptor, type Plugin } from "vite"
 
 import siteConfiguration from "./.figma/make/site.json"
 
@@ -366,21 +363,21 @@ function figmaErrorOverlayReplay(): Plugin {
         ...args: any[]
       ) => void
 
-      server.ws.send = (((...args: any[]) => {
+      server.ws.send = ((...args: any[]) => {
         const payload = args[0]
 
         if (payload && typeof payload === "object" && !Array.isArray(payload)) {
           const type = (payload as { type?: string }).type
 
           if (type === "error") {
-            lastError = (payload as object)
+            lastError = payload as object
           } else if (type === "update" || type === "full-reload") {
             lastError = null
           }
         }
 
         return origSend(...args)
-      }) as typeof server.ws.send)
+      }) as typeof server.ws.send
 
       server.ws.on("connection", (socket) => {
         if (lastError !== null) {

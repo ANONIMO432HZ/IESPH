@@ -11,7 +11,8 @@ export default function CtaBanner({ onApplyClick }: CtaBannerProps) {
         </span>
 
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-          Inicia tu formación profesional en el Instituto Público de Huanta
+          Inicia tu formación profesional en el Instituto de Educación Superior
+          Público "Huanta"
         </h2>
 
         <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">

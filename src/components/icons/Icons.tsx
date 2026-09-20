@@ -1,5 +1,3 @@
-import React from "react"
-
 export function IconPhone({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg

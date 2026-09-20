@@ -1,4 +1,4 @@
-import { NavItem, QuickLink } from "@/types"
+import type { NavItem, QuickLink } from "@/types"
 
 export const TOP_NAV_LINKS: QuickLink[] = [
   { label: "Postulante", href: "#admision", badge: "Admisión 2026" },

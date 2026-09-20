@@ -1,10 +1,10 @@
-import { INSTITUTION_VALUES } from "@/data/institution"
 import {
-  IconBuilding,
   IconBriefcase,
-  IconFlask,
+  IconBuilding,
   IconDocument,
+  IconFlask,
 } from "@/components/icons/Icons"
+import { INSTITUTION_VALUES } from "@/data/institution"
 
 export default function WhyChooseUsSection() {
   const reasons = [
@@ -46,7 +46,8 @@ export default function WhyChooseUsSection() {
             Nuestra Propuesta Formativa
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight mt-1">
-            ¿Por qué estudiar en el IESP Público "Huanta"?
+            ¿Por qué estudiar en el Instituto de Educación Superior Público
+            "Huanta"?
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
             Formación técnica superior con sólida base científica, práctica y
