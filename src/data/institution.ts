@@ -3,6 +3,8 @@ import type { InstitutionContact, InstitutionValues } from "@/types"
 export const INSTITUTION_CONTACT: InstitutionContact = {
   phone: "(066) 322296",
   phoneRaw: "066322296",
+  whatsapp: "51966322296",
+  whatsappDisplay: "966 322 296",
   address: "Jr. Córdova N° 650",
   city: "Huanta",
   region: "Ayacucho, Perú",

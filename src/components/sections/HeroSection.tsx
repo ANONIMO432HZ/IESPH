@@ -5,17 +5,25 @@ import {
   IconBuilding,
   IconCheck,
   IconClock,
+  IconSparkles,
+  IconSpinner,
 } from "@/components/icons/Icons"
 import { CAREERS } from "@/data/careers"
+import type { Career } from "@/types"
 
 interface HeroSectionProps {
   onCareerSelect?: (careerName: string) => void
+  onOpenCareerModal?: (career: Career) => void
 }
 
-export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
+export default function HeroSection({
+  onCareerSelect,
+  onOpenCareerModal,
+}: HeroSectionProps) {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [selectedCareer, setSelectedCareer] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: FormEvent) => {
@@ -24,7 +32,11 @@ export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
       alert("Por favor completa todos los campos requeridos.")
       return
     }
-    setSubmitted(true)
+    setIsSubmitting(true)
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setSubmitted(true)
+    }, 450)
   }
 
   return (
@@ -260,9 +272,17 @@ export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
 
               <button
                 type="submit"
-                className="w-full min-h-11 flex items-center justify-center bg-slate-900 dark:bg-sky-600 hover:bg-slate-800 dark:hover:bg-sky-500 text-white font-bold text-xs sm:text-sm py-3 rounded-lg shadow-xs active:scale-[0.99] transition-all"
+                disabled={isSubmitting}
+                className="w-full min-h-11 flex items-center justify-center gap-2 btn-pill-gradient text-white font-bold text-xs sm:text-sm py-3 px-4 shadow-lg active:scale-[0.98] transition-all disabled:opacity-75 cursor-pointer"
               >
-                Solicitar Información de Admisión
+                {isSubmitting ? (
+                  <>
+                    <IconSpinner className="w-4 h-4 text-white" />
+                    <span>Procesando solicitud...</span>
+                  </>
+                ) : (
+                  <span>Solicitar Información de Admisión</span>
+                )}
               </button>
 
               <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center leading-tight">
@@ -271,6 +291,71 @@ export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
               </p>
             </form>
           )}
+        </div>
+      </div>
+
+      {/* ── Franja Flotante de los 5 Programas de Estudio Oficiales ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 mt-12 lg:mt-16 pt-8 border-t border-slate-200/80 dark:border-slate-800/80">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#7114EF] dark:text-[#08D9FF] mb-1">
+              <IconSparkles className="w-3.5 h-3.5" />
+              Oferta Académica Licenciada
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              Nuestros 5 Programas de Estudio
+            </h2>
+          </div>
+          <a
+            href="/carreras"
+            className="text-xs font-bold text-[#1475F7] dark:text-[#08D9FF] hover:underline flex items-center gap-1.5 self-start sm:self-auto"
+          >
+            Ver mallas curriculares
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          {CAREERS.map((career) => (
+            <div
+              key={career.id}
+              onClick={() => {
+                if (onOpenCareerModal) {
+                  onOpenCareerModal(career)
+                } else if (onCareerSelect) {
+                  onCareerSelect(career.name)
+                }
+              }}
+              className="group relative cursor-pointer bg-white dark:bg-slate-900/90 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 fancy-card-hover overflow-hidden"
+            >
+              {/* Degradado superior en hover */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-[#7114EF] to-[#1475F7] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-2xl transform group-hover:scale-110 transition-transform duration-200 ease-out">
+                  {career.icon}
+                </span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 group-hover:bg-[#7114EF]/10 group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors">
+                  {career.code}
+                </span>
+              </div>
+
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors line-clamp-2 leading-snug">
+                {career.name}
+              </h3>
+
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                {career.tagline}
+              </p>
+
+              <div className="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-semibold text-[#1475F7] dark:text-[#08D9FF]">
+                <span>Ver carrera</span>
+                <span className="transform group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

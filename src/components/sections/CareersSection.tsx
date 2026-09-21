@@ -5,9 +5,11 @@ import {
   IconComputer,
   IconHeartPulse,
   IconLeaf,
+  IconWhatsApp,
   IconWrench,
 } from "@/components/icons/Icons"
 import { CAREERS } from "@/data/careers"
+import { INSTITUTION_CONTACT } from "@/data/institution"
 import type { Career } from "@/types"
 
 interface CareersSectionProps {
@@ -94,28 +96,28 @@ export default function CareersSection({
           {filteredCareers.map((career) => (
             <div
               key={career.id}
-              className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
+              className="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden fancy-card-hover flex flex-col justify-between"
             >
               <div>
                 {/* Image */}
-                <div className="relative h-44 sm:h-48 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div className="relative h-48 sm:h-52 bg-slate-100 dark:bg-slate-800 overflow-hidden">
                   <img
                     src={career.image}
                     alt={career.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  <span className="absolute top-3 left-3 bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded">
+                  <span className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md border border-white/10">
                     {career.code}
                   </span>
-                  <span className="absolute top-3 right-3 bg-white/95 dark:bg-slate-900/95 text-slate-800 dark:text-slate-200 text-[10px] font-semibold px-2.5 py-1 rounded border border-slate-200 dark:border-slate-700">
-                    {career.modality}
+                  <span className="absolute top-3 right-3 bg-linear-to-r from-[#7114EF] to-[#1475F7] text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-xs">
+                    Título Oficial MINEDU
                   </span>
                 </div>
 
                 {/* Content */}
                 <div className="p-5 sm:p-6">
                   <div className="flex items-center gap-2.5 mb-2">
-                    <span className="p-1.5 bg-slate-100 dark:bg-slate-800 rounded-md">
+                    <span className="p-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg group-hover:bg-[#7114EF]/10 group-hover:text-[#7114EF] transition-colors">
                       {getCareerIcon(career.id)}
                     </span>
                     <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
@@ -123,7 +125,7 @@ export default function CareersSection({
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors">
                     {career.name}
                   </h3>
 
@@ -136,7 +138,7 @@ export default function CareersSection({
                       <strong className="text-slate-700 dark:text-slate-300">
                         Módulos:
                       </strong>{" "}
-                      3 módulos formativos
+                      3 módulos formativos anuales
                     </div>
                     <div>
                       <strong className="text-slate-700 dark:text-slate-300">
@@ -148,20 +150,34 @@ export default function CareersSection({
                 </div>
               </div>
 
-              {/* Actions with accessible touch targets */}
-              <div className="p-5 sm:p-6 pt-0 flex items-center gap-2 sm:gap-2.5">
-                <button
-                  onClick={() => onOpenCareerModal(career)}
-                  className="flex-1 min-h-11 flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs py-2 px-3 rounded-lg transition-colors text-center"
+              {/* Actions with accessible touch targets & WhatsApp lead */}
+              <div className="p-5 sm:p-6 pt-0 space-y-2.5">
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <button
+                    onClick={() => onOpenCareerModal(career)}
+                    className="flex-1 min-h-11 flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs py-2 px-3 rounded-xl transition-colors text-center cursor-pointer"
+                  >
+                    Plan de Estudios
+                  </button>
+                  <button
+                    onClick={() => onApplyForCareer(career.name)}
+                    className="min-h-11 flex items-center justify-center bg-slate-900 dark:bg-slate-800 hover:bg-[#7114EF] dark:hover:bg-[#7114EF] text-white font-semibold text-xs px-3.5 sm:px-4 py-2 rounded-xl transition-colors shrink-0 active:scale-[0.98] cursor-pointer"
+                  >
+                    Inscribirse →
+                  </button>
+                </div>
+
+                <a
+                  href={`https://wa.me/${INSTITUTION_CONTACT.whatsapp || "51966322296"}?text=${encodeURIComponent(
+                    `Hola IESPH, deseo información sobre la carrera de ${career.name}`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full min-h-10 flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 rounded-xl text-xs font-semibold transition-all active:scale-[0.98]"
                 >
-                  Plan de Estudios
-                </button>
-                <button
-                  onClick={() => onApplyForCareer(career.name)}
-                  className="min-h-11 flex items-center justify-center bg-slate-900 dark:bg-sky-600 hover:bg-slate-800 dark:hover:bg-sky-500 text-white font-semibold text-xs px-3.5 sm:px-4 py-2 rounded-lg transition-colors shrink-0 active:scale-[0.98]"
-                >
-                  Inscribirse →
-                </button>
+                  <IconWhatsApp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <span>Consultar por WhatsApp</span>
+                </a>
               </div>
             </div>
           ))}

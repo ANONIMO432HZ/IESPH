@@ -1,6 +1,8 @@
 export interface InstitutionContact {
   phone: string
   phoneRaw: string
+  whatsapp?: string
+  whatsappDisplay?: string
   address: string
   city: string
   region: string

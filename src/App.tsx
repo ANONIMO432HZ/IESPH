@@ -110,7 +110,10 @@ export default function App() {
       {/* ── Main Content Landmark ──────────────────────────────────── */}
       <main className="flex-1">
         {/* Hero Section with Lead Capture Form */}
-        <HeroSection />
+        <HeroSection
+          onOpenCareerModal={(career) => setActiveCareerModal(career)}
+          onCareerSelect={(careerName) => handleScrollToApply(careerName)}
+        />
 
         {/* Institutional Statistics Strip */}
         <StatsStrip />
