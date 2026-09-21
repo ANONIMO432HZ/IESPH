@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
-import CareerModal from "@/components/modals/CareerModal"
 import AdmissionSection from "@/components/sections/AdmissionSection"
 import CareersSection from "@/components/sections/CareersSection"
 import CtaBanner from "@/components/sections/CtaBanner"
@@ -12,11 +11,78 @@ import StatsStrip from "@/components/sections/StatsStrip"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
 import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection"
 import type { Career } from "@/types"
+import { navigateTo } from "@/utils/navigation"
+
+// Lazy loading diferido bajo demanda para optimización en redes lentas
+const CareerModal = lazy(() => import("@/components/modals/CareerModal"))
+const ComplaintsBookModal = lazy(
+  () => import("@/components/modals/ComplaintsBookModal"),
+)
 
 export default function App() {
   const [activeCareerModal, setActiveCareerModal] = useState<Career | null>(
     null,
   )
+  const [complaintsModalOpen, setComplaintsModalOpen] = useState(false)
+
+  // Listen for clean path navigation and browser back/forward (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname
+      const hash = window.location.hash
+
+      if (
+        path === "/libro-de-reclamaciones" ||
+        hash === "#libro-de-reclamaciones"
+      ) {
+        setComplaintsModalOpen(true)
+      } else {
+        setComplaintsModalOpen(false)
+        if (path !== "/" && path !== "") {
+          const sectionId = path.replace(/^\//, "")
+          const el = document.getElementById(sectionId)
+          if (el) el.scrollIntoView({ behavior: "smooth" })
+        } else if (hash) {
+          const el = document.getElementById(hash.replace(/^#/, ""))
+          if (el) el.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    }
+
+    const handleOpenModal = () => {
+      setComplaintsModalOpen(true)
+    }
+
+    // Handle initial route on mount
+    handlePopState()
+
+    window.addEventListener("popstate", handlePopState)
+    window.addEventListener("open-complaints-modal", handleOpenModal)
+
+    // Global click interceptor for clean internal paths (/carreras, /nosotros, etc.)
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest("a")
+      if (!target) return
+      const href = target.getAttribute("href")
+      if (
+        href?.startsWith("/") &&
+        !href.startsWith("//") &&
+        !target.hasAttribute("download") &&
+        target.target !== "_blank"
+      ) {
+        e.preventDefault()
+        navigateTo(href)
+      }
+    }
+
+    document.addEventListener("click", handleDocumentClick)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+      window.removeEventListener("open-complaints-modal", handleOpenModal)
+      document.removeEventListener("click", handleDocumentClick)
+    }
+  }, [])
 
   const handleScrollToApply = (careerName?: string) => {
     const el = document.getElementById("postular")
@@ -34,9 +100,12 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-full bg-white text-slate-900 selection:bg-indigo-600 selection:text-white flex flex-col">
+    <div className="min-h-full bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-600 selection:text-white flex flex-col transition-colors">
       {/* ── Main Site Header ────────────────────────────────────────── */}
-      <Header onOpenApplyModal={() => handleScrollToApply()} />
+      <Header
+        onOpenApplyModal={() => handleScrollToApply()}
+        onOpenComplaintsModal={() => setComplaintsModalOpen(true)}
+      />
 
       {/* ── Main Content Landmark ──────────────────────────────────── */}
       <main className="flex-1">
@@ -72,14 +141,33 @@ export default function App() {
       </main>
 
       {/* ── Site Footer ─────────────────────────────────────────────── */}
-      <Footer />
+      <Footer onOpenComplaintsModal={() => setComplaintsModalOpen(true)} />
 
-      {/* ── Career Detail Modal ─────────────────────────────────────── */}
-      <CareerModal
-        career={activeCareerModal}
-        onClose={() => setActiveCareerModal(null)}
-        onSelectForApply={(careerName) => handleScrollToApply(careerName)}
-      />
+      {/* ── Modales cargados bajo demanda con Suspense ───────────── */}
+      <Suspense fallback={null}>
+        {activeCareerModal && (
+          <CareerModal
+            career={activeCareerModal}
+            onClose={() => setActiveCareerModal(null)}
+            onSelectForApply={(careerName) => handleScrollToApply(careerName)}
+          />
+        )}
+
+        {complaintsModalOpen && (
+          <ComplaintsBookModal
+            isOpen={complaintsModalOpen}
+            onClose={() => {
+              setComplaintsModalOpen(false)
+              if (
+                window.location.pathname === "/libro-de-reclamaciones" ||
+                window.location.hash === "#libro-de-reclamaciones"
+              ) {
+                window.history.pushState(null, "", "/")
+              }
+            }}
+          />
+        )}
+      </Suspense>
     </div>
   )
 }

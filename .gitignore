@@ -8,6 +8,8 @@ build/
 *.tsbuildinfo
 
 # Cache and temporary files
+__pycache__/
+*.pyc
 .cache/
 .vite/
 vite.config.*.timestamp-*

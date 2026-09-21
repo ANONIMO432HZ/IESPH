@@ -1,130 +1,132 @@
 import type { NavItem, QuickLink } from "@/types"
 
 export const TOP_NAV_LINKS: QuickLink[] = [
-  { label: "Postulante", href: "#admision", badge: "Admisión 2026" },
-  { label: "Estudiante", href: "#servicios" },
-  { label: "Docente", href: "#institucion" },
-  { label: "Egresado", href: "#testimonios" },
-  { label: "Transparencia", href: "#transparencia" },
+  { label: "Postulante", href: "/admision", badge: "Admisión 2026" },
+  { label: "Estudiante", href: "/servicios" },
+  { label: "Docente", href: "/nosotros" },
+  { label: "Egresado", href: "/testimonios" },
+  { label: "Transparencia", href: "/transparencia" },
 ]
 
 export const MAIN_NAV_ITEMS: NavItem[] = [
   {
     label: "Nosotros",
-    href: "#nosotros",
+    href: "/nosotros",
     children: [
       {
         label: "Presentación Institucional",
-        href: "#nosotros",
+        href: "/nosotros",
         description: "Historia y trayectoria del IESPH",
       },
       {
         label: "Visión, Misión y Valores",
-        href: "#nosotros",
+        href: "/nosotros",
         description: "Rumbo estratégico al 2031",
       },
       {
         label: "Organización y Plana Docente",
-        href: "#nosotros",
+        href: "/nosotros",
         description: "Autoridades y equipo académico",
       },
       {
         label: "Local e Infraestructura",
-        href: "#servicios",
+        href: "/servicios",
         description: "Sede Jr. Córdova N° 650",
       },
     ],
   },
   {
     label: "Programas de Estudio",
-    href: "#carreras",
+    shortLabel: "Carreras",
+    href: "/carreras",
     children: [
       {
         label: "Diseño y Programación Web",
-        href: "#carreras",
+        href: "/carreras",
         description: "Tecnologías digitales y software",
       },
       {
         label: "Enfermería Técnica",
-        href: "#carreras",
+        href: "/carreras",
         description: "Ciencia del cuidado y salud asistencial",
       },
       {
         label: "Mecatrónica Automotriz",
-        href: "#carreras",
+        href: "/carreras",
         description: "Diagnóstico electrónico y sistemas vehiculares",
       },
       {
         label: "Industrias de Alimentos y Bebidas",
-        href: "#carreras",
+        href: "/carreras",
         description: "Transformación agroindustrial y control HACCP",
       },
       {
         label: "Producción Agropecuaria",
-        href: "#carreras",
+        href: "/carreras",
         description: "Agricultura tecnificada y sanidad pecuaria",
       },
     ],
   },
   {
     label: "Admisión 2026",
-    href: "#admision",
+    shortLabel: "Admisión",
+    href: "/admision",
     children: [
       {
         label: "Proceso de Admisión 2026",
-        href: "#admision",
+        href: "/admision",
         description: "Cronograma, vacantes y pasos",
       },
       {
         label: "Modalidades de Ingreso",
-        href: "#admision",
+        href: "/admision",
         description: "Ordinario, Exonerados y Beca 18",
       },
       {
         label: "Requisitos de Inscripción",
-        href: "#admision",
+        href: "/admision",
         description: "Documentos para postular",
       },
       {
         label: "Matrícula Oficial",
-        href: "#admision",
+        href: "/admision",
         description: "Guía para estudiantes ingresantes",
       },
     ],
   },
   {
     label: "Servicios",
-    href: "#servicios",
+    href: "/servicios",
     children: [
       {
         label: "Laboratorios y Talleres",
-        href: "#servicios",
+        href: "/servicios",
         description: "Equipamiento tecnológico",
       },
       {
         label: "Biblioteca Institucional",
-        href: "#servicios",
+        href: "/servicios",
         description: "Catálogo bibliográfico",
       },
       {
         label: "Bolsa Laboral y Convenios",
-        href: "#servicios",
+        href: "/servicios",
         description: "Alianzas con empresas",
       },
       {
         label: "Libro de Reclamaciones",
-        href: "#contacto",
+        href: "/libro-de-reclamaciones",
         description: "Atención de sugerencias y reclamos",
       },
     ],
   },
   {
     label: "Noticias",
-    href: "#noticias",
+    href: "/noticias",
   },
   {
     label: "Contacto",
-    href: "#contacto",
+    href: "/contacto",
   },
 ]
 
@@ -132,22 +134,22 @@ export const FOOTER_SECTIONS = [
   {
     title: "Institución",
     links: [
-      { label: "Presentación y Reseña", href: "#nosotros" },
-      { label: "Misión y Visión al 2031", href: "#nosotros" },
-      { label: "Licenciamiento MINEDU", href: "#nosotros" },
-      { label: "Organización Institucional", href: "#nosotros" },
-      { label: "Documentos de Gestión (PEI / PAT / RI)", href: "#servicios" },
+      { label: "Presentación y Reseña", href: "/nosotros" },
+      { label: "Misión y Visión al 2031", href: "/nosotros" },
+      { label: "Licenciamiento MINEDU", href: "/nosotros" },
+      { label: "Organización Institucional", href: "/nosotros" },
+      { label: "Documentos de Gestión (PEI / PAT / RI)", href: "/servicios" },
     ],
   },
   {
     title: "Académico",
     links: [
-      { label: "Diseño y Programación Web", href: "#carreras" },
-      { label: "Enfermería Técnica", href: "#carreras" },
-      { label: "Mecatrónica Automotriz", href: "#carreras" },
-      { label: "Industrias de Alimentos y Bebidas", href: "#carreras" },
-      { label: "Producción Agropecuaria", href: "#carreras" },
-      { label: "Admisión 2026", href: "#admision" },
+      { label: "Diseño y Programación Web", href: "/carreras" },
+      { label: "Enfermería Técnica", href: "/carreras" },
+      { label: "Mecatrónica Automotriz", href: "/carreras" },
+      { label: "Industrias de Alimentos y Bebidas", href: "/carreras" },
+      { label: "Producción Agropecuaria", href: "/carreras" },
+      { label: "Admisión 2026", href: "/admision" },
     ],
   },
   {
@@ -159,8 +161,8 @@ export const FOOTER_SECTIONS = [
       },
       { label: "DRE Ayacucho (DREA)", href: "http://drea.gob.pe" },
       { label: "PRONABEC / Beca 18", href: "https://www.gob.pe/pronabec" },
-      { label: "TUPA Institucional", href: "#contacto" },
-      { label: "Libro de Reclamaciones", href: "#contacto" },
+      { label: "Transparencia Institucional", href: "/transparencia" },
+      { label: "TUPA Institucional", href: "/contacto" },
     ],
   },
 ]

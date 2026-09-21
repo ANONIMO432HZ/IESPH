@@ -79,6 +79,7 @@ export interface Testimonial {
 
 export interface NavItem {
   label: string
+  shortLabel?: string
   href: string
   description?: string
   children?: { label: string; href: string; description?: string }[]
