@@ -54,11 +54,8 @@ export default function CareersSection({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
-              Oferta Educativa Superior
-            </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
-              Programas de Estudio Profesionales
+              Programas de Estudio
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl mt-2 leading-relaxed">
               Formación técnica de 3 años estructurada en 3 módulos

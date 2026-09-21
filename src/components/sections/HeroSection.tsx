@@ -49,7 +49,7 @@ export default function HeroSection({ onCareerSelect }: HeroSectionProps) {
         <div className="space-y-6">
           {/* Institutional Accreditation */}
           <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-sky-400">
-            MINEDU Licenciado · Resolución Ministerial N° 068-2020
+            Resolución Ministerial N° 068-2020
           </div>
 
           {/* Main Title — Prestigious & Punchy */}

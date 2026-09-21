@@ -123,7 +123,7 @@ export const CAREERS: Career[] = [
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "🛠️",
     image:
-      "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&auto=format&fit=crop&q=80",
+      "https://itep.edu.pe/wp-content/uploads/2025/07/MECANICA-AUTOMOTRIZ.png",
     color: "#7114EF",
     modules: [
       {
