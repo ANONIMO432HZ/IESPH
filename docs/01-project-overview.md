@@ -33,7 +33,7 @@ El objetivo principal es transformar el portal institucional tradicional en una 
 
 ---
 
-## 4. Oferta Académica Licenciada
+## 4. Oferta Académica
 
 La institución ofrece 5 programas de estudios con título oficial a Nombre de la Nación en un periodo formativo de 3 años (6 semestres académicos):
 

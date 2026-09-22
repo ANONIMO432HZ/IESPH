@@ -14,32 +14,44 @@ import { INSTITUTION_CONTACT } from "@/data/institution"
 export default function ServicesSection() {
   const services = [
     {
-      icon: <IconComputer className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconComputer className="w-5 h-5 text-blue-600 dark:text-sky-300" />
+      ),
       title: "Laboratorios de Computación",
       desc: "Aulas informáticas equipadas para diseño web, desarrollo de software y aplicaciones empresariales.",
     },
     {
-      icon: <IconBook className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconBook className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
+      ),
       title: "Biblioteca Especializada",
       desc: "Fondo bibliográfico técnico en ciencias de la salud, mecánica, agronomía e industrias alimentarias.",
     },
     {
-      icon: <IconBuilding className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconBuilding className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+      ),
       title: "Talleres de Práctica Productiva",
       desc: "Ambientes dedicados al diagnóstico automotriz, enfermería clínica y procesamiento agroindustrial.",
     },
     {
-      icon: <IconBriefcase className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconBriefcase className="w-5 h-5 text-amber-600 dark:text-amber-300" />
+      ),
       title: "Bolsa Laboral Institucional",
       desc: "Articulación con empleadores locales y regionales para prácticas y puestos de trabajo técnico.",
     },
     {
-      icon: <IconDocument className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconDocument className="w-5 h-5 text-emerald-600 dark:text-emerald-300" />
+      ),
       title: "Gestión de Trámites y Certificados",
       desc: "Expedición de constancias de estudio, certificados modulares por año cursado y titulación oficial.",
     },
     {
-      icon: <IconDocument className="w-5 h-5 text-slate-700" />,
+      icon: (
+        <IconDocument className="w-5 h-5 text-rose-600 dark:text-rose-300" />
+      ),
       title: "Libro de Reclamaciones",
       desc: "Atención a sugerencias, observaciones y solicitudes conforme a las normas de transparencia del Estado.",
     },

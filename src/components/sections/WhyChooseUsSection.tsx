@@ -9,25 +9,33 @@ import { INSTITUTION_VALUES } from "@/data/institution"
 export default function WhyChooseUsSection() {
   const reasons = [
     {
-      icon: <IconBuilding className="w-6 h-6 text-slate-700" />,
+      icon: (
+        <IconBuilding className="w-6 h-6 text-blue-600 dark:text-sky-400" />
+      ),
       title: "Instituto Licenciado por MINEDU",
       description:
         "Acreditación oficial que garantiza el cumplimiento estricto de las Condiciones Básicas de Calidad exigidas por la Ley de Educación Superior.",
     },
     {
-      icon: <IconBriefcase className="w-6 h-6 text-slate-700" />,
+      icon: (
+        <IconBriefcase className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+      ),
       title: "Prácticas en Situaciones Reales de Trabajo",
       description:
         "Convenios de formación práctica con empresas privadas, hospitales y dependencias públicas de la provincia y la región.",
     },
     {
-      icon: <IconFlask className="w-6 h-6 text-slate-700" />,
+      icon: (
+        <IconFlask className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+      ),
       title: "Talleres y Laboratorios Equipados",
       description:
         "Espacios formativos para computación, mecatrónica automotriz, enfermería clínica y plantas de transformación de alimentos.",
     },
     {
-      icon: <IconDocument className="w-6 h-6 text-slate-700" />,
+      icon: (
+        <IconDocument className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+      ),
       title: "Título Oficial a Nombre de la Nación",
       description:
         "Graduación oficial en 3 años con certificación modular progresiva y reconocimiento nacional para el ejercicio profesional.",

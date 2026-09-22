@@ -3,9 +3,9 @@ import logoIES from "@/assets/logo.webp"
 import {
   IconClock,
   IconMapPin,
-  IconMoon,
   IconPhone,
-  IconSun,
+  MorphMenuToggle,
+  MorphThemeToggle,
 } from "@/components/icons/Icons"
 import { INSTITUTION_CONTACT } from "@/data/institution"
 import { MAIN_NAV_ITEMS, TOP_NAV_LINKS } from "@/data/navigation"
@@ -43,14 +43,14 @@ export default function Header({
             </a>
             <span className="text-slate-300 dark:text-slate-700">|</span>
             <span className="flex items-center gap-1 text-slate-600 dark:text-slate-300">
-              <IconMapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 shrink-0" />
+              <IconMapPin className="w-3.5 h-3.5 text-slate-400 dark:text-sky-300 shrink-0" />
               <span>{INSTITUTION_CONTACT.address}</span>
             </span>
             <span className="hidden lg:inline-block text-slate-300 dark:text-slate-700">
               |
             </span>
             <span className="hidden lg:flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <IconClock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 shrink-0" />
+              <IconClock className="w-3.5 h-3.5 text-slate-400 dark:text-sky-300 shrink-0" />
               <span>{INSTITUTION_CONTACT.schedule}</span>
             </span>
           </div>
@@ -197,7 +197,7 @@ export default function Header({
 
         {/* Theme Toggle, Action Button & Hamburger */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* Selector de Tema (Modo Claro / Oscuro) */}
+          {/* Selector de Tema (Modo Claro / Oscuro) con morphing */}
           <button
             onClick={toggleTheme}
             type="button"
@@ -213,11 +213,12 @@ export default function Header({
                 : "Cambiar a modo oscuro"
             }
           >
-            {theme === "dark" ? (
-              <IconSun className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-amber-400" />
-            ) : (
-              <IconMoon className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-slate-700" />
-            )}
+            <MorphThemeToggle
+              isDark={theme === "dark"}
+              className={`w-4.5 h-4.5 sm:w-5 sm:h-5 ${
+                theme === "dark" ? "text-amber-400" : "text-slate-700"
+              }`}
+            />
           </button>
 
           <a
@@ -242,28 +243,10 @@ export default function Header({
             aria-label="Menú principal de navegación"
             aria-expanded={mobileMenuOpen}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {mobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            <MorphMenuToggle
+              isOpen={mobileMenuOpen}
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            />
           </button>
         </div>
       </div>
@@ -398,19 +381,15 @@ export default function Header({
             </span>
             <button
               onClick={toggleTheme}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-2xs border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-slate-100"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-2xs border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-slate-100"
             >
-              {theme === "dark" ? (
-                <>
-                  <IconSun className="w-4 h-4 text-amber-400" />
-                  <span>Modo Claro</span>
-                </>
-              ) : (
-                <>
-                  <IconMoon className="w-4 h-4 text-slate-700" />
-                  <span>Modo Oscuro</span>
-                </>
-              )}
+              <MorphThemeToggle
+                isDark={theme === "dark"}
+                className={`w-4 h-4 ${
+                  theme === "dark" ? "text-amber-400" : "text-slate-700"
+                }`}
+              />
+              <span>{theme === "dark" ? "Modo Claro" : "Modo Oscuro"}</span>
             </button>
           </div>
 

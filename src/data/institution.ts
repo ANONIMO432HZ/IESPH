@@ -24,25 +24,56 @@ export const INSTITUTION_VALUES: InstitutionValues = {
     "¡Transforma tu Futuro en solo 3 Años con Título a Nombre de la Nación!",
 }
 
-export const STATS = [
+export interface StatItem {
+  numericValue: number
+  prefix?: string
+  suffix?: string
+  label: string
+  subtext: string
+  iconType: "graduates" | "teachers" | "programs" | "experience"
+}
+
+export const FOUNDATION_DATE = new Date("1986-06-05T00:00:00")
+export const DEFAULT_YEARS_OF_TRAJECTORY = 40
+
+export function getYearsOfTrajectory(currentDate = new Date()): number {
+  let years = currentDate.getFullYear() - FOUNDATION_DATE.getFullYear()
+  const monthDiff = currentDate.getMonth() - FOUNDATION_DATE.getMonth()
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && currentDate.getDate() < FOUNDATION_DATE.getDate())
+  ) {
+    years--
+  }
+  // Fallback de seguridad: si la fecha del cliente está desfasada (ej. < 2026), nunca reportar menos de 40 años
+  return Math.max(years, DEFAULT_YEARS_OF_TRAJECTORY)
+}
+
+export const STATS: StatItem[] = [
   {
-    value: "40+",
+    numericValue: 3000,
+    suffix: "+",
+    label: "Estudiantes Egresados",
+    subtext: "Profesionales técnicos titulados insertados en el mercado",
+    iconType: "graduates",
+  },
+  {
+    numericValue: 50,
+    suffix: "+",
+    label: "Docentes Especializados",
+    subtext: "Plana docente con amplia experiencia técnica y pedagógica",
+    iconType: "teachers",
+  },
+  {
+    numericValue: 5,
+    label: "Programas de Estudio",
+    subtext: "Carreras licenciadas de 3 años con certificación modular",
+    iconType: "programs",
+  },
+  {
+    numericValue: getYearsOfTrajectory(),
     label: "Años de Trayectoria",
-    subtext: "Líder en educación técnica en Ayacucho",
-  },
-  {
-    value: "5",
-    label: "Programas Licenciados",
-    subtext: "Currículas alineadas al mercado laboral",
-  },
-  {
-    value: "100%",
-    label: "Presencial y Práctico",
-    subtext: "Talleres y laboratorios modernos",
-  },
-  {
-    value: "3 Años",
-    label: "Duración de Carreras",
-    subtext: "Título Oficial a Nombre de la Nación",
+    subtext: "Líder en formación tecnológica y pública en Huanta y Ayacucho",
+    iconType: "experience",
   },
 ]

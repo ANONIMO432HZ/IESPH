@@ -20,17 +20,29 @@ interface CareersSectionProps {
 function getCareerIcon(id: string) {
   switch (id) {
     case "diseno-programacion-web":
-      return <IconComputer className="w-5 h-5 text-slate-700" />
+      return (
+        <IconComputer className="w-5 h-5 text-blue-600 dark:text-sky-300" />
+      )
     case "enfermeria-tecnica":
-      return <IconHeartPulse className="w-5 h-5 text-slate-700" />
+      return (
+        <IconHeartPulse className="w-5 h-5 text-rose-600 dark:text-rose-300" />
+      )
     case "mecatronica-automotriz":
-      return <IconWrench className="w-5 h-5 text-slate-700" />
+      return (
+        <IconWrench className="w-5 h-5 text-amber-600 dark:text-amber-300" />
+      )
     case "industrias-alimentos-bebidas":
-      return <IconBeaker className="w-5 h-5 text-slate-700" />
+      return (
+        <IconBeaker className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+      )
     case "produccion-agropecuaria":
-      return <IconLeaf className="w-5 h-5 text-slate-700" />
+      return (
+        <IconLeaf className="w-5 h-5 text-emerald-600 dark:text-emerald-300" />
+      )
     default:
-      return <IconAcademicCap className="w-5 h-5 text-slate-700" />
+      return (
+        <IconAcademicCap className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
+      )
   }
 }
 

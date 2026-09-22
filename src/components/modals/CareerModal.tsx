@@ -19,25 +19,27 @@ function getCareerIcon(id: string) {
   switch (id) {
     case "diseno-programacion-web":
       return (
-        <IconComputer className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+        <IconComputer className="w-6 h-6 text-blue-600 dark:text-sky-300" />
       )
     case "enfermeria-tecnica":
       return (
-        <IconHeartPulse className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+        <IconHeartPulse className="w-6 h-6 text-rose-600 dark:text-rose-300" />
       )
     case "mecatronica-automotriz":
       return (
-        <IconWrench className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+        <IconWrench className="w-6 h-6 text-amber-600 dark:text-amber-300" />
       )
     case "industrias-alimentos-bebidas":
       return (
-        <IconBeaker className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+        <IconBeaker className="w-6 h-6 text-purple-600 dark:text-purple-300" />
       )
     case "produccion-agropecuaria":
-      return <IconLeaf className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+      return (
+        <IconLeaf className="w-6 h-6 text-emerald-600 dark:text-emerald-300" />
+      )
     default:
       return (
-        <IconAcademicCap className="w-6 h-6 text-slate-700 dark:text-slate-200" />
+        <IconAcademicCap className="w-6 h-6 text-indigo-600 dark:text-indigo-300" />
       )
   }
 }

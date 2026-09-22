@@ -123,7 +123,7 @@ export default function Footer({ onOpenComplaintsModal }: FooterProps) {
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-slate-400 shrink-0">
-                  <IconMail className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                  <IconMail className="w-4 h-4 text-blue-600 dark:text-sky-400" />
                 </span>
                 <a
                   href={`mailto:${INSTITUTION_CONTACT.email}`}
@@ -134,14 +134,14 @@ export default function Footer({ onOpenComplaintsModal }: FooterProps) {
               </div>
               <div className="flex items-start gap-2.5">
                 <span className="text-slate-400 mt-0.5 shrink-0">
-                  <IconClock className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                  <IconClock className="w-4 h-4 text-blue-600 dark:text-sky-400" />
                 </span>
                 <span>{INSTITUTION_CONTACT.schedule}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-slate-400 shrink-0">
                   <svg
-                    className="w-4 h-4 fill-current text-slate-500 dark:text-slate-400"
+                    className="w-4 h-4 fill-current text-[#1877F2] dark:text-[#4285F4]"
                     viewBox="0 0 24 24"
                   >
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -158,7 +158,7 @@ export default function Footer({ onOpenComplaintsModal }: FooterProps) {
               </div>
               <div className="flex items-center gap-2.5">
                 <span className="text-slate-400 shrink-0">
-                  <IconBook className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+                  <IconBook className="w-4 h-4 text-blue-600 dark:text-sky-400" />
                 </span>
                 <button
                   type="button"
