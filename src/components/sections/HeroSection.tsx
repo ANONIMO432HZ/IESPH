@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from "react"
+import campusFrontis from "@/assets/campus/frontis-principal.jpg"
 import {
   IconAcademicCap,
   IconBriefcase,
@@ -48,9 +49,9 @@ export default function HeroSection({
       {/* Campus photography with atmospheric gradient blend */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&auto=format&fit=crop&q=80"
-          alt="Estudiantes en el campus IESPH Huanta"
-          className="w-full h-full object-cover opacity-5 dark:opacity-10 mix-blend-multiply dark:mix-blend-luminosity"
+          src={campusFrontis}
+          alt="Sede Central del IESP Huanta - Jr. Córdova 650"
+          className="w-full h-full object-cover opacity-10 dark:opacity-20 mix-blend-multiply dark:mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/90 to-blue-50/80 dark:from-[#071322] dark:via-[#09182a]/95 dark:to-[#0b1e35]/85" />
       </div>

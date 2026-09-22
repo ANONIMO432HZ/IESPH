@@ -93,13 +93,26 @@ export default function NewsSection() {
 
               {/* Read link with accessible target */}
               <div className="p-5 pt-0">
-                <a
-                  href="/noticias"
-                  className="text-xs font-semibold text-slate-900 dark:text-sky-400 hover:text-slate-700 dark:hover:text-sky-300 flex items-center gap-1 min-h-9 py-1"
-                >
-                  <span>Leer comunicado</span>
-                  <span>→</span>
-                </a>
+                {n.pdfUrl ? (
+                  <a
+                    href={n.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="text-xs font-semibold text-blue-700 dark:text-sky-400 hover:text-blue-800 dark:hover:text-sky-300 flex items-center gap-1.5 min-h-9 py-1"
+                  >
+                    <span>Descargar Documento Oficial (PDF)</span>
+                    <span>↓</span>
+                  </a>
+                ) : (
+                  <a
+                    href="/noticias"
+                    className="text-xs font-semibold text-slate-900 dark:text-sky-400 hover:text-slate-700 dark:hover:text-sky-300 flex items-center gap-1 min-h-9 py-1"
+                  >
+                    <span>Leer comunicado</span>
+                    <span>→</span>
+                  </a>
+                )}
               </div>
             </article>
           ))}

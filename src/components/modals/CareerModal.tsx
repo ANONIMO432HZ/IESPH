@@ -118,6 +118,24 @@ export default function CareerModal({
             </div>
           </div>
 
+          {career.schedulePdf && (
+            <div className="flex items-center justify-between p-3 rounded-xl bg-blue-50/70 dark:bg-sky-950/30 border border-blue-200/80 dark:border-sky-800/50 text-xs">
+              <span className="text-slate-700 dark:text-slate-300 font-medium">
+                Horario lectivo oficial del periodo académico vigente:
+              </span>
+              <a
+                href={career.schedulePdf}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-semibold text-xs shadow-xs transition-colors shrink-0"
+              >
+                <span>Descargar Horario PDF</span>
+                <span>↓</span>
+              </a>
+            </div>
+          )}
+
           {/* Overview */}
           <div>
             <h4 className="text-xs uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 mb-2">

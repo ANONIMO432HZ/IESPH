@@ -1,52 +1,53 @@
+import admisionResImg from "@/assets/news/admision-resultados-2026.jpg"
+import comPedagogicaImg from "@/assets/news/comunicado-gestion-pedagogica.jpg"
+import convConcursoImg from "@/assets/news/convocatoria-concurso-2026.jpg"
+import convDocenteImg from "@/assets/news/convocatoria-docente-2026.png"
 import type { NewsItem } from "@/types"
 
 export const NEWS_ITEMS: NewsItem[] = [
   {
-    id: "admision-2026-convocatoria",
+    id: "resultado-admision-2026",
     title:
-      'Convocatoria Oficial: Proceso de Admisión 2026 en el Instituto de Educación Superior Público "Huanta"',
+      "Resultados Oficiales del Proceso de Admisión 2026 — Modalidad Ordinaria",
     excerpt:
-      "Se abre la convocatoria para las 5 carreras técnicas licenciadas. Conoce el cronograma de inscripción, modalidades y vacantes disponibles en nuestra sede.",
-    date: "20 Feb 2026",
+      "Publicación de la nómina general de ingresantes a los 5 programas de estudio del IESP Huanta. Descarga el padrón oficial con los puntajes y vacantes adjudicadas.",
+    date: "05 Abr 2026",
     category: "Admisión",
-    image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80",
-    readTime: "3 min de lectura",
+    image: admisionResImg,
+    readTime: "2 min de lectura",
+    pdfUrl: "/docs/Resultado-Admision-2026.pdf",
   },
   {
-    id: "equipamiento-laboratorios-computo",
+    id: "convocatoria-docente-2026",
     title:
-      "Modernización y equipamiento de laboratorios informáticos y mecatrónicos",
+      "Convocatoria para el Concurso Público de Méritos de Docentes Regulares 2026",
     excerpt:
-      "Se implementaron nuevos equipos computarizados y escáneres automotrices para fortalecer las prácticas formativas en situaciones reales de trabajo.",
-    date: "12 Feb 2026",
+      "Concurso público abierto para docentes en los programas de Diseño y Programación Web, Enfermería Técnica, Mecatrónica, Agropecuaria e Industrias de Alimentos.",
+    date: "18 Feb 2026",
     category: "Institucional",
-    image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80",
+    image: convDocenteImg,
     readTime: "4 min de lectura",
   },
   {
-    id: "convenio-practicas-salud-agro",
+    id: "convocatoria-concurso-publico-2026",
     title:
-      "Firma de convenios interinstitucionales para experiencias formativas en campo",
+      "Convocatoria Pública Institucional para Fortalecimiento Académico y Administrativo",
     excerpt:
-      "Estudiantes de Enfermería Técnica y Producción Agropecuaria acceden a prácticas pre-profesionales supervisadas en centros de salud y fundos agroexportadores.",
-    date: "03 Feb 2026",
-    category: "Académico",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80",
+      "Proceso de selección para plazas técnicas y de soporte en talleres, laboratorios y áreas estratégicas del campus institucional.",
+    date: "25 Mar 2026",
+    category: "Institucional",
+    image: convConcursoImg,
     readTime: "3 min de lectura",
   },
   {
-    id: "aniversario-institucional-logros",
+    id: "convocatoria-gestion-pedagogica",
     title:
-      "Conmemoración institucional y balance de logros en educación tecnológica",
+      "Convocatoria para Encargatura de Puesto o Funciones de Gestión Pedagógica",
     excerpt:
-      "La comunidad educativa del IESPH celebró un año más formando profesionales técnicos que transforman el desarrollo productivo de la provincia de Huanta.",
-    date: "28 Ene 2026",
-    category: "Evento",
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=80",
-    readTime: "2 min de lectura",
+      "El Comité Institucional publica las bases para la encargatura de puestos pedagógicos y coordinaciones académicas bajo directivas de la DREA y MINEDU.",
+    date: "08 Sep 2025",
+    category: "Académico",
+    image: comPedagogicaImg,
+    readTime: "3 min de lectura",
   },
 ]

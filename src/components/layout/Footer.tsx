@@ -38,10 +38,10 @@ export default function Footer({ onOpenComplaintsModal }: FooterProps) {
             </div>
 
             <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 max-w-sm">
-              Institución pública de educación superior técnica de la provincia
-              de Huanta y la región Ayacucho. Comprometidos con la formación
+              Institución pública de educación superior de la provincia de
+              Huanta y la región Ayacucho. Comprometidos con la formación
               integral, científica y humanista de profesionales técnicos al
-              servicio del desarrollo nacional.
+              servicio del desarrollo productivo regional y nacional.
             </p>
 
             {/* Dignified Institutional Accreditation — Clean & Humanistic */}
@@ -78,10 +78,14 @@ export default function Footer({ onOpenComplaintsModal }: FooterProps) {
                         href={link.href}
                         className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors py-0.5 inline-block"
                         target={
-                          link.href.startsWith("http") ? "_blank" : undefined
+                          link.href.startsWith("http") ||
+                          link.href.endsWith(".pdf")
+                            ? "_blank"
+                            : undefined
                         }
                         rel={
-                          link.href.startsWith("http")
+                          link.href.startsWith("http") ||
+                          link.href.endsWith(".pdf")
                             ? "noopener noreferrer"
                             : undefined
                         }

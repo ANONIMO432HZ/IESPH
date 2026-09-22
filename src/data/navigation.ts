@@ -1,10 +1,16 @@
-import type { NavItem, QuickLink } from "@/types"
+import type { FooterSection, NavItem, QuickLink } from "@/types"
 
 export const TOP_NAV_LINKS: QuickLink[] = [
   { label: "Postulante", href: "/admision", badge: "Admisión 2026" },
-  { label: "Estudiante", href: "/servicios" },
-  { label: "Docente", href: "/nosotros" },
-  { label: "Egresado", href: "/testimonios" },
+  {
+    label: "Portal Estudiante (SIGAEST)",
+    href: "https://iestphuanta.sistema.edu.pe/login/",
+  },
+  {
+    label: "Portal Docente (SISPA)",
+    href: "https://sispa.iestphuanta.edu.pe/docente/login/",
+  },
+  { label: "Bolsa Laboral (AVANZA)", href: "https://avanza.minedu.gob.pe/" },
   { label: "Transparencia", href: "/transparencia" },
 ]
 
@@ -130,15 +136,20 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
 ]
 
-export const FOOTER_SECTIONS = [
+export const FOOTER_SECTIONS: FooterSection[] = [
   {
     title: "Institución",
     links: [
       { label: "Presentación y Reseña", href: "/nosotros" },
       { label: "Misión y Visión al 2031", href: "/nosotros" },
-      { label: "Licenciamiento MINEDU", href: "/nosotros" },
+      {
+        label: "Licenciamiento (R.M. 068-2020)",
+        href: "/docs/Licenciamiento-RMN371-2025-MINEDU.pdf",
+      },
       { label: "Organización Institucional", href: "/nosotros" },
-      { label: "Documentos de Gestión (PEI / PAT / RI)", href: "/servicios" },
+      { label: "Proyecto Educativo (PEI)", href: "/docs/PEI-IESPH.pdf" },
+      { label: "Manual de Puestos (MPP)", href: "/docs/MPP-IESPH.pdf" },
+      { label: "TUPA Institucional (PDF)", href: "/docs/TUPA-IESPH.pdf" },
     ],
   },
   {
@@ -150,19 +161,34 @@ export const FOOTER_SECTIONS = [
       { label: "Industrias de Alimentos y Bebidas", href: "/carreras" },
       { label: "Producción Agropecuaria", href: "/carreras" },
       { label: "Admisión 2026", href: "/admision" },
+      {
+        label: "Resultados Admisión 2026 (PDF)",
+        href: "/docs/Resultado-Admision-2026.pdf",
+      },
     ],
   },
   {
-    title: "Enlaces Oficiales",
+    title: "Portales y Enlaces",
     links: [
+      {
+        label: "Portal Estudiante (SIGAEST)",
+        href: "https://iestphuanta.sistema.edu.pe/login/",
+      },
+      {
+        label: "Portal Docente (SISPA)",
+        href: "https://sispa.iestphuanta.edu.pe/docente/login/",
+      },
+      {
+        label: "Bolsa de Empleo (AVANZA)",
+        href: "https://avanza.minedu.gob.pe/",
+      },
       {
         label: "Ministerio de Educación (MINEDU)",
         href: "https://www.gob.pe/minedu",
       },
       { label: "DRE Ayacucho (DREA)", href: "http://drea.gob.pe" },
       { label: "PRONABEC / Beca 18", href: "https://www.gob.pe/pronabec" },
-      { label: "Transparencia Institucional", href: "/transparencia" },
-      { label: "TUPA Institucional", href: "/contacto" },
+      { label: "Portal de Transparencia", href: "/transparencia" },
     ],
   },
 ]

@@ -1,3 +1,13 @@
+import dpwImg from "@/assets/careers/diseno-programacion-web.jpg"
+import dpwArt from "@/assets/careers/diseno-programacion-web-art.png"
+import etImg from "@/assets/careers/enfermeria-tecnica.jpg"
+import etArt from "@/assets/careers/enfermeria-tecnica-art.png"
+import iabImg from "@/assets/careers/industrias-alimentos-bebidas.jpg"
+import iabArt from "@/assets/careers/industrias-alimentos-bebidas-art.png"
+import maImg from "@/assets/careers/mecatronica-automotriz.jpg"
+import maArt from "@/assets/careers/mecatronica-automotriz-art.png"
+import paImg from "@/assets/careers/produccion-agropecuaria.jpg"
+import paArt from "@/assets/careers/produccion-agropecuaria-art.png"
 import type { Career } from "@/types"
 
 export const CAREERS: Career[] = [
@@ -6,104 +16,107 @@ export const CAREERS: Career[] = [
     name: "Diseño y Programación Web",
     code: "DPW",
     tagline:
-      "Crea el futuro digital con interfaces modernas y software escalable",
+      "Crea el futuro digital con desarrollo full-stack, interfaces UI/UX y software escalable",
     description:
-      "Formación técnica de vanguardia en desarrollo de software web, diseño de interfaces UI/UX, bases de datos y arquitecturas modernas para la industria tecnológica.",
+      "Formación técnica especializada en desarrollo frontend y backend, bases de datos relacionales y no relacionales, diseño de interfaces y aplicaciones móviles.",
     overview:
-      "El Programa de Estudios de Diseño y Programación Web en el Instituto de Educación Superior Público Huanta está orientado a formar profesionales con competencias sólidas en el desarrollo y diseño de sitios web. Combina creatividad y tecnología, permitiendo aprender desde fundamentos de diseño gráfico hasta programación avanzada frontend y backend.",
+      'El Programa de Estudios de Diseño y Programación Web del Instituto de Educación Superior Público "Huanta" forma profesionales altamente competentes en el desarrollo, diseño, despliegue y administración de soluciones digitales. Con laboratorios informáticos equipados y formación práctica, los egresados dominan las tecnologías más demandadas del mercado tecnológico regional y nacional.',
     degreeAwarded: "Profesional Técnico en Diseño y Programación Web",
     duration: "6 semestres (3 años)",
     semesters: 6,
     modality: "Presencial",
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "💻",
-    image:
-      "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80",
+    image: dpwImg,
+    artImage: dpwArt,
+    schedulePdf: "/docs/Horario-DPW-2025-I.pdf",
     color: "#1475F7",
     modules: [
       {
         number: 1,
-        title: "Análisis y Diseño de Sistemas Web",
+        title: "Gestión de Soporte Técnico y Tecnologías de la Información",
         description:
-          "Construcción y modelado de programas y sistemas de información de acuerdo al diseño funcional, UX/UI, estándares de TI y buenas prácticas.",
+          "Instalación, mantenimiento y administración de redes, conectividad e infraestructura informática para empresas y organizaciones.",
       },
       {
         number: 2,
-        title: "Desarrollo de Aplicaciones Web Frontend y Backend",
+        title: "Desarrollo de Software y Administración de Base de Datos",
         description:
-          "Implementación de soluciones web interactivas con HTML5, CSS3, JavaScript, frameworks modernos, APIs REST y bases de datos relacionales.",
+          "Diseño y modelado de datos, programación estructurada y orientada a objetos, y desarrollo de aplicaciones de escritorio y corporativas.",
       },
       {
         number: 3,
-        title: "Gestión de Servidores, Seguridad y Servicios Cloud",
+        title: "Programación Web, Interfaces Digitales y Soluciones Cloud",
         description:
-          "Despliegue, administración de servidores web, seguridad informática, optimización SEO y mantenimiento continuo de plataformas digitales.",
+          "Desarrollo de aplicaciones web interactivas, integración de APIs REST, diagramación digital UI/UX y despliegue de plataformas online.",
       },
     ],
     jobOpportunities: [
-      "Desarrollador Web Frontend / Backend",
-      "Diseñador de Interfaces de Usuario (UI / UX)",
-      "Administrador de Portales y CMS Corporativos",
-      "Consultor y Freelancer en Tecnologías Digitales",
-      "Soporte y Gestión de Plataformas Informáticas",
+      "Desarrollador Web Frontend y Backend (Full-Stack)",
+      "Diseñador de Interfaces de Usuario (UI/UX) y Diagramador Digital",
+      "Administrador de Bases de Datos y Servidores Cloud",
+      "Consultor Tecnológico y Especialista Freelance",
+      "Soporte y Gestión de Infraestructura TI en Entidades Públicas y Privadas",
     ],
     requirements: [
       "Certificado original de estudios secundarios completos",
       "Copia simple de DNI vigente",
       "Partida de nacimiento original",
-      "2 fotografías tamaño carnet a color con fondo blanco",
+      "Pago por derecho de admisión",
     ],
   },
   {
     id: "enfermeria-tecnica",
     name: "Enfermería Técnica",
     code: "ET",
-    tagline: "Vocación, ciencia y cuidado integral de la salud humana",
+    tagline:
+      "Vocación humanista, ciencia y cuidado integral de la salud pública",
     description:
-      "Capacitación asistencial de primer nivel con prácticas hospitalarias para brindar cuidados integrales de salud a personas, familias y comunidades.",
+      "Capacitación asistencial de primer nivel con prácticas hospitalarias para brindar atención integral en salud comunitaria, prevención y rehabilitación.",
     overview:
-      "El Programa de Estudios de Enfermería Técnica forma profesionales éticos y comprometidos con el bienestar humano, preparados para participar activamente en la promoción, prevención, recuperación y rehabilitación de la salud en centros hospitalarios y de atención primaria.",
+      'El Programa de Estudios de Enfermería Técnica del Instituto de Educación Superior Público "Huanta" forma profesionales éticos y comprometidos con el bienestar integral de la persona, familia y comunidad. Su plan de estudios combina sólidas bases científicas con experiencias formativas directas en centros de salud, hospitales y postas de la provincia de Huanta y la región Ayacucho.',
     degreeAwarded: "Profesional Técnico en Enfermería Técnica",
     duration: "6 semestres (3 años)",
     semesters: 6,
     modality: "Presencial",
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "🏥",
-    image:
-      "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&auto=format&fit=crop&q=80",
+    image: etImg,
+    artImage: etArt,
+    schedulePdf: "/docs/Horario-Enfermeria-Tecnica.pdf",
     color: "#08D9FF",
     modules: [
       {
         number: 1,
-        title: "Atención Primaria y Salud Comunitaria",
+        title: "Atención Primaria en Salud y Salud Comunitaria",
         description:
-          "Promoción de la salud, prevención de enfermedades infectocontagiosas y educación sanitaria en la comunidad.",
+          "Promoción de la salud, educación sanitaria comunitaria, epidemiología y prevención de enfermedades en el ámbito familiar.",
       },
       {
         number: 2,
-        title: "Servicios Asistenciales de Enfermería y Cuidados Hospitalarios",
+        title: "Servicios Técnicos de Enfermería Asistencial",
         description:
-          "Procedimientos invasivos y no invasivos, administración de medicamentos, bioseguridad y atención pre-hospitalaria.",
+          "Procedimientos invasivos y no invasivos, bioseguridad, administración técnica de medicamentos y asistencia al usuario quirúrgico.",
       },
       {
         number: 3,
-        title: "Atención Especializada Materno-Infantil y Adulto Mayor",
+        title: "Servicios Técnicos de Enfermería Especializada",
         description:
-          "Cuidados integrales durante el ciclo vital, atención materno-neonatal, geriatría y apoyo en emergencias médicas.",
+          "Atención integral materno-neonatal, cuidado del niño y adolescente, atención integral al adulto mayor y soporte en urgencias.",
       },
     ],
     jobOpportunities: [
-      "Hospitales y Clínicas del Sector Público (MINSA, EsSalud) y Privado",
-      "Centros de Salud y Puestos Sanitarios Comunitarios",
-      "Centros Geriátricos y Asilos Especializados",
-      "Programas Sociales de Salud y Nutrición",
-      "Atención Asistencial Domiciliaria Personalizada",
+      "Hospitales y Redes de Salud del Ministerio de Salud (MINSA)",
+      "Policlínicos y Hospitales de EsSalud",
+      "Clínicas y Centros de Diagnóstico Privados",
+      "Puestos y Centros de Salud Comunitarios Rurales y Urbanos",
+      "Centros de Atención Integral para el Adulto Mayor y Programas de Nutrición",
     ],
     requirements: [
       "Certificado original de estudios secundarios completos",
       "Copia simple de DNI vigente",
       "Partida de nacimiento original",
-      "Certificado de salud física y mental",
+      "Pago por derecho de admisión",
     ],
   },
   {
@@ -111,53 +124,54 @@ export const CAREERS: Career[] = [
     name: "Mecatrónica Automotriz",
     code: "MA",
     tagline:
-      "Tecnología, electrónica y diagnóstico computarizado del parque automotor",
+      "Diagnóstico computarizado, electrónica automotriz y potencia mecánica",
     description:
-      "Especialización en diagnóstico electrónico, sistemas mecánicos de inyección electrónica, vehículos híbridos y mantenimiento integral de flotas automotrices.",
+      "Especialización en diagnóstico por escáner, inyección electrónica, motores Otto y diésel, sistemas hidráulicos y vehículos de última generación.",
     overview:
-      "El Programa de Mecatrónica Automotriz capacita a los estudiantes en el dominio de las tecnologías mecánicas, eléctricas y electrónicas que gobiernan los vehículos automotores modernos. Cuenta con talleres equipados con escáneres automotrices y bancos de prueba de última generación.",
+      'El Programa de Mecatrónica Automotriz del Instituto de Educación Superior Público "Huanta" capacita a los estudiantes en el dominio de las tecnologías mecánicas, eléctricas y electrónicas que integran el parque automotor moderno. Con talleres equipados con bancos de prueba, elevadores y escáneres automotrices, garantiza una formación práctica aplicada a las exigencias del transporte y la minería.',
     degreeAwarded: "Profesional Técnico en Mecatrónica Automotriz",
     duration: "6 semestres (3 años)",
     semesters: 6,
     modality: "Presencial",
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "🛠️",
-    image:
-      "https://itep.edu.pe/wp-content/uploads/2025/07/MECANICA-AUTOMOTRIZ.png",
+    image: maImg,
+    artImage: maArt,
+    schedulePdf: "/docs/Horario-Mecatronica-Automotriz.pdf",
     color: "#7114EF",
     modules: [
       {
         number: 1,
         title: "Mantenimiento de Sistemas de Suspensión, Dirección y Frenos",
         description:
-          "Diagnóstico, reparación y calibración de los sistemas mecánicos e hidráulicos de seguridad activa del automotor.",
+          "Diagnóstico, reparación y alineamiento de los sistemas mecánicos e hidráulicos de estabilidad y seguridad activa del vehículo automotor.",
       },
       {
         number: 2,
         title:
           "Mantenimiento del Sistema de Transmisión y Motores de Combustión",
         description:
-          "Overhaul de motores a gasolina y diésel, transmisiones mecánicas y automáticas asistidas electrónicamente.",
+          "Restablecimiento de la funcionalidad del motor Otto y Diésel, sincronización y mantenimiento integral del tren motriz.",
       },
       {
         number: 3,
         title: "Sistemas Eléctricos, Electrónica e Inyección Computarizada",
         description:
-          "Diagnóstico con escáner automotriz, osciloscopios, sensores, actuadores y gestión electrónica automotriz.",
+          "Diagnóstico con escáner automotriz, osciloscopios, sensores, actuadores y gestión electrónica del encendido e inyección.",
       },
     ],
     jobOpportunities: [
-      "Talleres y Concesionarios Automotrices Oficiales",
-      "Empresas Mineras y de Transporte de Carga Pesada",
-      "Centros de Inspección Técnica Vehicular",
-      "Talleres Especializados de Inyección Electrónica",
-      "Emprendimiento de Taller Mecatrónico Propio",
+      "Concesionarios y Talleres Mecatrónicos Especializados",
+      "Empresas de Transporte de Pasajeros y Carga Pesada",
+      "Compañías Mineras y Constructoras de Mantenimiento de Maquinaria",
+      "Centros de Inspección Técnica Vehicular y Rectificación",
+      "Emprendimiento y Gestión de Taller de Diagnóstico Electrónico Propio",
     ],
     requirements: [
       "Certificado original de estudios secundarios completos",
       "Copia simple de DNI vigente",
       "Partida de nacimiento original",
-      "2 fotografías tamaño carnet a color",
+      "Pago por derecho de admisión",
     ],
   },
   {
@@ -165,53 +179,59 @@ export const CAREERS: Career[] = [
     name: "Industrias de Alimentos y Bebidas",
     code: "IAB",
     tagline:
-      "Transformación agroindustrial, calidad bromatológica y valor agregado",
+      "Transformación agroindustrial, aseguramiento de inocuidad y control bromatológico",
     description:
-      "Formación técnica en procesamiento de frutas, lácteos, cárnicos, cereales y bebidas bajo estrictos estándares de inocuidad y control de calidad HACCP.",
+      "Formación técnica en procesamiento de frutas, lácteos, carnes, cereales andinos y bebidas bajo rigurosos estándares de calidad HACCP y BPM.",
     overview:
-      "El Programa de Estudios de Industrias de Alimentos y Bebidas impulsa el aprovechamiento de la rica biodiversidad del valle de Huanta y la región Ayacucho, formando profesionales capaces de transformar materias primas en productos inocuos, nutritivos y con alto valor comercial.",
+      'El Programa de Estudios de Industrias de Alimentos y Bebidas del Instituto de Educación Superior Público "Huanta" forma profesionales para la producción, procesamiento y control de calidad alimentaria. Aprovechando el potencial agrícola del valle de Huanta, los estudiantes adquieren competencias en biotecnología, pasteurización, envasado y desarrollo de productos con valor agregado.',
     degreeAwarded: "Profesional Técnico en Industrias de Alimentos y Bebidas",
     duration: "6 semestres (3 años)",
     semesters: 6,
     modality: "Presencial",
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "🥤",
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=80",
+    image: iabImg,
+    artImage: iabArt,
+    schedulePdf: "/docs/Horario-Industrias-Alimentos.pdf",
     color: "#F59E0B",
     modules: [
       {
         number: 1,
-        title: "Tecnología de Procesamiento de Frutas, Hortalizas y Bebidas",
+        title: "Recepción, Acondicionamiento y Mezclado de Materia Prima",
         description:
-          "Transformación agroindustrial de néctares, mermeladas, conservas, licores y bebidas fermentadas.",
+          "Recepción y preparación de insumos alimentarios conforme a la normativa sanitaria y buenas prácticas de manufactura (BPM).",
       },
       {
         number: 2,
-        title: "Tecnología de Productos Lácteos y Derivados Cárnicos",
+        title: "Tratamiento Térmico y Procesamiento de Alimentos",
         description:
-          "Elaboración de quesos madurados, yogures, embutidos y derivados con control de fermentos y salubridad.",
+          "Ejecución de procesos térmicos, deshidratación, separación y conservación en líneas de producción de bebidas y conservas.",
       },
       {
         number: 3,
-        title:
-          "Control de Calidad, Inocuidad Alimentaria (HACCP/BPM) y Gestión",
+        title: "Biotecnología y Envasado en el Procesamiento de Alimentos",
         description:
-          "Análisis fisicoquímico, microbiológico, aseguramiento de inocuidad alimentaria y desarrollo de nuevos productos.",
+          "Aplicación de fermentaciones controladas, envasado hermético y etiquetado industrial bajo estándares de salubridad.",
+      },
+      {
+        number: 4,
+        title: "Aseguramiento de la Calidad e Inocuidad (HACCP)",
+        description:
+          "Implementación de sistemas de gestión de inocuidad, análisis bromatológico y cumplimiento de directivas sanitarias de DIGESA.",
       },
     ],
     jobOpportunities: [
-      "Plantas Procesadoras de Alimentos y Embotelladoras",
-      "Laboratorios de Control de Calidad Bromatológica",
-      "Empresas Agroexportadoras de la Región",
-      "Supermercados y Cadenas de Distribución Alimentaria",
-      "Empresas de Elaboración de Productos Artesanales e Industriales",
+      "Plantas Procesadoras de Lácteos, Néctares, Bebidas y Cárnicos",
+      "Laboratorios de Control de Calidad Bromatológica y Microbiológica",
+      "Empresas Agroindustriales y Exportadoras de la Región",
+      "Supermercados y Almacenes de Conservación Alimentaria",
+      "Emprendimientos de Elaboración de Productos Agroindustriales",
     ],
     requirements: [
       "Certificado original de estudios secundarios completos",
       "Copia simple de DNI vigente",
       "Partida de nacimiento original",
-      "Carnet de sanidad vigente",
+      "Pago por derecho de admisión",
     ],
   },
   {
@@ -219,52 +239,59 @@ export const CAREERS: Career[] = [
     name: "Producción Agropecuaria",
     code: "PA",
     tagline:
-      "Agricultura tecnificada, sanidad pecuaria y desarrollo sostenible",
+      "Agricultura tecnificada, sanidad pecuaria y desarrollo rural sostenible",
     description:
-      "Manejo agronómico de cultivos de exportación, crianza técnica de animales mayores y menores, riego tecnificado y gestión ambiental de parcelas.",
+      "Manejo agronómico de cultivos de exportación, fruticultura, riego tecnificado, crianza animal y proyectos agroecológicos sostenibles.",
     overview:
-      "El Programa de Producción Agropecuaria combina el trabajo en campo y laboratorios agronómicos para tecnificar el agro huantino. Los estudiantes adquieren competencias en sanidad vegetal, fertilización ecológica, manejo de ganado vacuno, ovino, porcino y cuyes, así como gestión de cadenas productivas.",
+      'El Programa de Producción Agropecuaria del Instituto de Educación Superior Público "Huanta" ofrece formación integral combinando parcelas demostrativas en campo y laboratorios agronómicos. Los estudiantes dominan técnicas de cultivo de palto, lúcumo, hortalizas y cereales, así como la sanidad y nutrición en ganado vacuno, porcino y animales menores.',
     degreeAwarded: "Profesional Técnico en Producción Agropecuaria",
     duration: "6 semestres (3 años)",
     semesters: 6,
     modality: "Presencial",
     schedule: "Turno Mañana (7:30 am – 1:15 pm)",
     icon: "🌾",
-    image:
-      "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800&auto=format&fit=crop&q=80",
+    image: paImg,
+    artImage: paArt,
+    schedulePdf: "/docs/Horario-Produccion-Agropecuaria.pdf",
     color: "#10B981",
     modules: [
       {
         number: 1,
-        title: "Producción de Cultivos Agrícolas y Fruticultura Tecnificada",
+        title: "Preparación del Terreno e Infraestructura Agropecuaria",
         description:
-          "Manejo agronómico de palto, lúcumo, hortalizas, cereales andinos y sistemas de riego por goteo.",
+          "Implementación de infraestructura agrícola y pecuaria, análisis de suelos y diseño de sistemas de riego tecnificado por goteo.",
       },
       {
         number: 2,
-        title: "Producción y Sanidad de Animales Menores y Mayores",
+        title: "Supervisión y Ejecución de Procesos Productivos Agropecuarios",
         description:
-          "Alimentación balanceada, mejoramiento genético, sanidad animal y manejo técnico de vacunos y animales menores.",
+          "Gestión agronómica de siembra, fertilización ecológica, nutrición balanceada y manejo técnico de crianzas.",
       },
       {
         number: 3,
-        title: "Protección Vegetal, Agroecología y Comercialización",
+        title: "Procesamiento Primario y Aprovechamiento de Productos",
         description:
-          "Control biológico de plagas, manejo integrado de cultivos, fertilizantes orgánicos y planes de negocios agrarios.",
+          "Manejo poscosecha, acopio, selección y aprovechamiento de derivados agrícolas y pecuarios para mercados locales y de exportación.",
+      },
+      {
+        number: 4,
+        title: "Almacenamiento y Comercialización de la Producción",
+        description:
+          "Gestión comercial, articulación con cooperativas agrarias y planes de negocio agropecuarios sostenibles.",
       },
     ],
     jobOpportunities: [
-      "Fundos Agrícolas y Empresas Agroexportadoras",
-      "Organizaciones de Productores y Cooperativas Agrarias",
-      "Entidades Públicas: Agencias Agrarias, SENASA, INIA",
-      "Centros de Acopio y Comercialización Agropecuaria",
-      "Emprendimientos de Producción Agrícola y Pecuaria Sostenible",
+      "Fundos Agrícolas y Empresas de Agroexportación",
+      "Organizaciones y Cooperativas de Productores Agrarios",
+      "Entidades Estatales: SENASA, INIA, Agencias Agrarias y Municipios",
+      "Centros de Acopio y Distribución de Productos Agropecuarios",
+      "Empresas Propias de Producción Agrícola y Ganadera Sostenible",
     ],
     requirements: [
       "Certificado original de estudios secundarios completos",
       "Copia simple de DNI vigente",
       "Partida de nacimiento original",
-      "2 fotografías tamaño carnet a color",
+      "Pago por derecho de admisión",
     ],
   },
 ]

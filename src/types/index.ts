@@ -39,6 +39,8 @@ export interface Career {
   schedule: string
   icon: string
   image: string
+  artImage?: string
+  schedulePdf?: string
   color: string
   modules: CareerModule[]
   jobOpportunities: string[]
@@ -67,6 +69,30 @@ export interface NewsItem {
   category: "Admisión" | "Institucional" | "Académico" | "Evento"
   image: string
   readTime: string
+  pdfUrl?: string
+}
+
+export interface AuthorityItem {
+  name: string
+  role: string
+  email?: string
+  phone?: string
+}
+
+export interface PartnerPlatform {
+  name: string
+  url: string
+  logo: string
+  description: string
+}
+
+export interface OfficialStateLink {
+  name: string
+  fullName: string
+  description: string
+  url: string
+  tag: string
+  logo: string
 }
 
 export interface Testimonial {
@@ -91,6 +117,17 @@ export interface QuickLink {
   label: string
   href: string
   badge?: string
+}
+
+export interface FooterLink {
+  label: string
+  href: string
+  logo?: string
+}
+
+export interface FooterSection {
+  title: string
+  links: FooterLink[]
 }
 
 export interface LeadSubmission {

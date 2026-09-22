@@ -1,10 +1,11 @@
+import campusFrontis from "@/assets/campus/frontis-principal.jpg"
 import {
   IconBook,
   IconBriefcase,
   IconBuilding,
   IconClock,
   IconComputer,
-  IconDocument,
+  IconHeartPulse,
   IconMail,
   IconMapPin,
   IconPhone,
@@ -15,45 +16,41 @@ export default function ServicesSection() {
   const services = [
     {
       icon: (
-        <IconComputer className="w-5 h-5 text-blue-600 dark:text-sky-300" />
+        <IconHeartPulse className="w-5 h-5 text-rose-600 dark:text-rose-400" />
       ),
-      title: "Laboratorios de Computación",
-      desc: "Aulas informáticas equipadas para diseño web, desarrollo de software y aplicaciones empresariales.",
+      title: "Tópico y Primeros Auxilios",
+      desc: "Atención médica básica y primeros auxilios para estudiantes, docentes y personal institucional ante cualquier eventualidad de salud.",
     },
     {
       icon: (
-        <IconBook className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
+        <IconBuilding className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
       ),
-      title: "Biblioteca Especializada",
-      desc: "Fondo bibliográfico técnico en ciencias de la salud, mecánica, agronomía e industrias alimentarias.",
+      title: "Servicio Psicopedagógico",
+      desc: "Orientación vocacional, acompañamiento socioemocional y talleres grupales para fortalecer el rendimiento y bienestar del estudiante.",
     },
     {
       icon: (
-        <IconBuilding className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+        <IconBriefcase className="w-5 h-5 text-amber-600 dark:text-amber-400" />
       ),
-      title: "Talleres de Práctica Productiva",
-      desc: "Ambientes dedicados al diagnóstico automotriz, enfermería clínica y procesamiento agroindustrial.",
+      title: "Bienestar y Bolsa de Empleabilidad",
+      desc: "Articulación con empresas e instituciones mediante AVANZA (MINEDU) para prácticas pre-profesionales e inserción laboral.",
+    },
+    {
+      icon: <IconBook className="w-5 h-5 text-blue-600 dark:text-sky-400" />,
+      title: "Biblioteca y Repositorio Virtual",
+      desc: "Fondo bibliográfico técnico en salud, mecánica, agropecuaria, computación y alimentos, con acceso a la red de bibliotecas DREA.",
+    },
+    {
+      icon: <IconComputer className="w-5 h-5 text-sky-600 dark:text-sky-400" />,
+      title: "Laboratorios de Informática y Redes",
+      desc: "Aulas informáticas acondicionadas para diseño web, desarrollo de software full-stack, modelado y administración de redes.",
     },
     {
       icon: (
-        <IconBriefcase className="w-5 h-5 text-amber-600 dark:text-amber-300" />
+        <IconBuilding className="w-5 h-5 text-purple-600 dark:text-purple-400" />
       ),
-      title: "Bolsa Laboral Institucional",
-      desc: "Articulación con empleadores locales y regionales para prácticas y puestos de trabajo técnico.",
-    },
-    {
-      icon: (
-        <IconDocument className="w-5 h-5 text-emerald-600 dark:text-emerald-300" />
-      ),
-      title: "Gestión de Trámites y Certificados",
-      desc: "Expedición de constancias de estudio, certificados modulares por año cursado y titulación oficial.",
-    },
-    {
-      icon: (
-        <IconDocument className="w-5 h-5 text-rose-600 dark:text-rose-300" />
-      ),
-      title: "Libro de Reclamaciones",
-      desc: "Atención a sugerencias, observaciones y solicitudes conforme a las normas de transparencia del Estado.",
+      title: "Talleres y Parcelas Demostrativas",
+      desc: "Talleres de diagnóstico y mecánica automotriz, laboratorio de lácteos y parcelas agrícolas con sistemas de riego tecnificado.",
     },
   ]
 
@@ -74,7 +71,7 @@ export default function ServicesSection() {
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base mt-2 leading-relaxed">
             Instalaciones acondicionadas para que el estudiante consolide sus
-            aprendizajes teóricos y prácticos.
+            aprendizajes teóricos y prácticos en situaciones reales de trabajo.
           </p>
         </div>
 
@@ -144,8 +141,8 @@ export default function ServicesSection() {
                     {INSTITUTION_CONTACT.email}
                   </span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <IconClock className="w-4 h-4 text-slate-500 dark:text-slate-400 shrink-0" />
+                <div className="flex items-start gap-2.5">
+                  <IconClock className="w-4 h-4 text-blue-600 dark:text-sky-400 shrink-0" />
                   <span>
                     <strong className="text-slate-900 dark:text-white">
                       Horario de Secretaría:
@@ -156,31 +153,43 @@ export default function ServicesSection() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800/80 rounded-xl p-5 sm:p-6 border border-slate-200 dark:border-slate-700 space-y-4 shadow-xs dark:shadow-none">
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                Consultas de Admisión e Informes
-              </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Si requieres información sobre costos de inscripción, fechas del
-                examen o convalidaciones, contáctanos por nuestros canales
-                oficiales.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <a
-                  href={`tel:${INSTITUTION_CONTACT.phoneRaw}`}
-                  className="w-full sm:w-auto min-h-11 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold py-2.5 px-5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-xs"
-                >
-                  <IconPhone className="w-3.5 h-3.5" />
-                  <span>Llamar a Informes ({INSTITUTION_CONTACT.phone})</span>
-                </a>
-                <a
-                  href={INSTITUTION_CONTACT.facebookUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto min-h-11 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-white text-xs font-semibold py-2.5 px-5 rounded-lg border border-slate-300 dark:border-slate-600 transition-colors flex items-center justify-center"
-                >
-                  Facebook Institucional
-                </a>
+            <div className="bg-white dark:bg-slate-800/80 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-xs dark:shadow-none">
+              <div className="relative h-44 sm:h-48 overflow-hidden bg-slate-100 dark:bg-slate-900">
+                <img
+                  src={campusFrontis}
+                  alt="Fachada de la Sede Principal IESP Huanta"
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute bottom-2 left-2 bg-slate-950/80 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded border border-white/10">
+                  Jr. Córdova N° 650 · Huanta
+                </span>
+              </div>
+              <div className="p-5 sm:p-6 space-y-4">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                  Consultas de Admisión e Informes
+                </h4>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Si requieres información sobre costos de inscripción, fechas
+                  del examen o convalidaciones, contáctanos por nuestros canales
+                  oficiales.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                  <a
+                    href={`tel:${INSTITUTION_CONTACT.phoneRaw}`}
+                    className="w-full sm:w-auto min-h-11 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold py-2.5 px-5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-xs"
+                  >
+                    <IconPhone className="w-3.5 h-3.5" />
+                    <span>Llamar a Informes ({INSTITUTION_CONTACT.phone})</span>
+                  </a>
+                  <a
+                    href={INSTITUTION_CONTACT.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto min-h-11 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-white text-xs font-semibold py-2.5 px-5 rounded-lg border border-slate-300 dark:border-slate-600 transition-colors flex items-center justify-center"
+                  >
+                    Facebook Institucional
+                  </a>
+                </div>
               </div>
             </div>
           </div>

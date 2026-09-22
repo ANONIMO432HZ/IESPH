@@ -6,40 +6,14 @@ import {
   IconShieldCheck,
   IconUsers,
 } from "@/components/icons/Icons"
-import { STATS, type StatItem } from "@/data/institution"
+import {
+  COMPLEMENTARY_STATE_LINKS,
+  OFFICIAL_STATE_LINKS,
+  STATS,
+  type StatItem,
+} from "@/data/institution"
 import { useCountUp } from "@/hooks/useCountUp"
 import { useTrajectoryYears } from "@/hooks/useTrajectoryYears"
-
-const OFFICIAL_LINKS = [
-  {
-    name: "MINEDU",
-    fullName: "Ministerio de Educación",
-    description: "Normativa nacional y licenciamiento institucional",
-    url: "https://www.gob.pe/minedu",
-    tag: "Portal del Estado",
-  },
-  {
-    name: "TITULA",
-    fullName: "Consulta de Títulos",
-    description: "Verificación de títulos oficiales de institutos",
-    url: "https://titula.minedu.gob.pe/",
-    tag: "Validez Nacional",
-  },
-  {
-    name: "REGISTRA",
-    fullName: "Registro de Matrículas",
-    description: "Expediente del estudiante y constancias oficiales",
-    url: "https://registra.minedu.gob.pe/",
-    tag: "Sistema MINEDU",
-  },
-  {
-    name: "AVANZA",
-    fullName: "Carrera Pública Docente",
-    description: "Gestión institucional y plana docente calificada",
-    url: "https://avanza.minedu.gob.pe/",
-    tag: "Gestión Pública",
-  },
-]
 
 function getStatIcon(type: StatItem["iconType"]) {
   switch (type) {
@@ -162,38 +136,69 @@ export default function StatsStrip() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {OFFICIAL_LINKS.map((link) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+            {OFFICIAL_STATE_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative bg-white dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-[#1475F7]/40 hover:shadow-md transition-all flex flex-col justify-between"
+                className="group relative bg-white dark:bg-slate-900/80 hover:bg-slate-50/80 dark:hover:bg-slate-900 rounded-xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-[#1475F7]/40 hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-sm font-black text-slate-900 dark:text-white group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors">
+                  {/* Contenedor blanco para el logo institucional oficial que garantiza contraste óptimo en ambos temas */}
+                  <div className="w-full h-14 bg-white rounded-lg p-2 flex items-center justify-center border border-slate-200/60 dark:border-slate-200/20 shadow-2xs mb-3 group-hover:scale-[1.02] transition-transform">
+                    <img
+                      src={link.logo}
+                      alt={link.name}
+                      className="max-h-full max-w-full w-auto object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between gap-1.5 mb-1.5">
+                    <span className="text-sm font-black text-slate-900 dark:text-white group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors tracking-tight">
                       {link.name}
                     </span>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0">
                       {link.tag}
                     </span>
                   </div>
-                  <div className="text-xs font-semibold text-slate-700 dark:text-slate-200">
+                  <div className="text-xs font-semibold text-slate-700 dark:text-slate-200 line-clamp-1">
                     {link.fullName}
                   </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed line-clamp-2">
                     {link.description}
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-semibold text-[#1475F7] dark:text-[#08D9FF]">
+                <div className="mt-3.5 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-semibold text-[#1475F7] dark:text-[#08D9FF]">
                   <span>Acceder al portal</span>
                   <IconExternalLink className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </a>
             ))}
+          </div>
+
+          {/* Enlaces Complementarios del Estado Peruano */}
+          <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs text-slate-500 dark:text-slate-400">
+            <span className="font-semibold text-slate-700 dark:text-slate-300">
+              Otros portales y entidades públicas vinculadas:
+            </span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+              {COMPLEMENTARY_STATE_LINKS.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-[#1475F7] dark:hover:text-[#08D9FF] transition-colors font-medium text-slate-600 dark:text-slate-300 py-0.5"
+                >
+                  <span>{item.label}</span>
+                  <IconExternalLink className="w-3 h-3 text-slate-400 dark:text-slate-500" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
