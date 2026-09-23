@@ -20,7 +20,7 @@ export default function NewsSection() {
   return (
     <section
       id="noticias"
-      className="py-14 sm:py-20 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 font-sans transition-colors"
+      className="py-14 sm:py-20 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 font-sans transition-colors scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}

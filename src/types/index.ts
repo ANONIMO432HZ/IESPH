@@ -25,6 +25,28 @@ export interface CareerModule {
   description: string
 }
 
+export interface CourseUnit {
+  name: string
+  credits: number
+  hours: number
+  semesterHours?: number
+}
+
+export interface SemesterCurriculum {
+  semester: string
+  courses: CourseUnit[]
+}
+
+export interface EmployabilityCompetency {
+  title: string
+  description: string
+}
+
+export interface PerformanceEntity {
+  name: string
+  areas: string
+}
+
 export interface Career {
   id: string
   name: string
@@ -32,6 +54,7 @@ export interface Career {
   tagline: string
   description: string
   overview: string
+  introduction?: string
   degreeAwarded: string
   duration: string
   semesters: number
@@ -44,7 +67,12 @@ export interface Career {
   color: string
   modules: CareerModule[]
   jobOpportunities: string[]
+  competencies?: string[]
+  employabilityCompetencies?: EmployabilityCompetency[]
+  performanceEntities?: PerformanceEntity[]
   requirements: string[]
+  curriculum?: SemesterCurriculum[]
+  experimentalCenter?: CampusLocation
 }
 
 export interface AdmissionStep {
@@ -89,6 +117,7 @@ export interface TeacherItem {
 }
 
 export interface CampusLocation {
+  purpose: ReactNode
   name: string
   tag: string
   address: string

@@ -57,9 +57,8 @@ export default function ServicesSection() {
   return (
     <section
       id="servicios"
-      className="py-14 sm:py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 font-sans transition-colors relative"
+      className="py-14 sm:py-20 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 font-sans transition-colors relative scroll-mt-20"
     >
-      <div id="transparencia" className="absolute -top-20" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -98,7 +97,7 @@ export default function ServicesSection() {
         {/* Campus Location Card — Dignified, Professional */}
         <div
           id="contacto"
-          className="mt-10 sm:mt-14 bg-linear-to-br from-blue-50/80 via-white to-slate-100 dark:from-[#0F223A] dark:via-[#0c1b2f] dark:to-[#09182a] text-slate-900 dark:text-white rounded-2xl p-6 sm:p-8 lg:p-10 border border-slate-200 dark:border-slate-800 shadow-md dark:shadow-xl transition-colors"
+          className="mt-10 sm:mt-14 bg-linear-to-br from-blue-50/80 via-white to-slate-100 dark:from-[#0F223A] dark:via-[#0c1b2f] dark:to-[#09182a] text-slate-900 dark:text-white rounded-2xl p-6 sm:p-8 lg:p-10 border border-slate-200 dark:border-slate-800 shadow-md dark:shadow-xl transition-colors scroll-mt-20"
         >
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
             <div className="space-y-4">

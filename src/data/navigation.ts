@@ -6,48 +6,37 @@ export const TOP_NAV_LINKS: QuickLink[] = [
     label: "Portal Estudiante (SIGAEST)",
     href: "https://iestphuanta.sistema.edu.pe/login/",
   },
-  {
-    label: "Portal Docente (SISPA)",
-    href: "https://sispa.iestphuanta.edu.pe/docente/login/",
-  },
   { label: "Bolsa Laboral (AVANZA)", href: "https://avanza.minedu.gob.pe/" },
-  { label: "Transparencia", href: "/transparencia" },
 ]
 
 export const MAIN_NAV_ITEMS: NavItem[] = [
   {
     label: "Nosotros",
-    href: "/nosotros",
+    href: "/presentacion",
     children: [
       {
         label: "Presentación",
-        href: "/nosotros#presentacion",
-        description: "Historia, creación y trayectoria institucional",
+        href: "/presentacion",
       },
       {
         label: "Visión, Misión y Valores",
-        href: "/nosotros#mision-vision",
-        description: "Rumbo estratégico institucional al 2031",
+        href: "/mision-vision",
       },
       {
         label: "Organización Institucional",
-        href: "/nosotros#organizacion",
-        description: "Organigrama y estructura de gestión",
+        href: "/organizacion",
       },
       {
         label: "Plana jerárquica",
-        href: "/nosotros#plana-jerarquica",
-        description: "Directorio de autoridades y directivos",
+        href: "/plana-jerarquica",
       },
       {
         label: "Plana docente",
-        href: "/nosotros#plana-docente",
-        description: "Docentes especializados por programa de estudio",
+        href: "/plana-docente",
       },
       {
         label: "Local",
-        href: "/nosotros#local",
-        description: "Sede principal e infraestructura institucional",
+        href: "/local",
       },
     ],
   },
@@ -58,27 +47,27 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     children: [
       {
         label: "Diseño y Programación Web",
-        href: "/carreras",
+        href: "/carreras/diseno-programacion-web",
         description: "Tecnologías digitales y software",
       },
       {
         label: "Enfermería Técnica",
-        href: "/carreras",
+        href: "/carreras/enfermeria-tecnica",
         description: "Ciencia del cuidado y salud asistencial",
       },
       {
         label: "Mecatrónica Automotriz",
-        href: "/carreras",
+        href: "/carreras/mecatronica-automotriz",
         description: "Diagnóstico electrónico y sistemas vehiculares",
       },
       {
         label: "Industrias de Alimentos y Bebidas",
-        href: "/carreras",
+        href: "/carreras/industrias-alimentos-bebidas",
         description: "Transformación agroindustrial y control HACCP",
       },
       {
         label: "Producción Agropecuaria",
-        href: "/carreras",
+        href: "/carreras/produccion-agropecuaria",
         description: "Agricultura tecnificada y sanidad pecuaria",
       },
     ],
@@ -165,11 +154,26 @@ export const FOOTER_SECTIONS: FooterSection[] = [
   {
     title: "Académico",
     links: [
-      { label: "Diseño y Programación Web", href: "/carreras" },
-      { label: "Enfermería Técnica", href: "/carreras" },
-      { label: "Mecatrónica Automotriz", href: "/carreras" },
-      { label: "Industrias de Alimentos y Bebidas", href: "/carreras" },
-      { label: "Producción Agropecuaria", href: "/carreras" },
+      {
+        label: "Diseño y Programación Web",
+        href: "/carreras/diseno-programacion-web",
+      },
+      {
+        label: "Enfermería Técnica",
+        href: "/carreras/enfermeria-tecnica",
+      },
+      {
+        label: "Mecatrónica Automotriz",
+        href: "/carreras/mecatronica-automotriz",
+      },
+      {
+        label: "Industrias de Alimentos y Bebidas",
+        href: "/carreras/industrias-alimentos-bebidas",
+      },
+      {
+        label: "Producción Agropecuaria",
+        href: "/carreras/produccion-agropecuaria",
+      },
       { label: "Admisión 2026", href: "/admision" },
       {
         label: "Resultados Admisión 2026 (PDF)",

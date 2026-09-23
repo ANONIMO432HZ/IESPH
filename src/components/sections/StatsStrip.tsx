@@ -3,7 +3,6 @@ import {
   IconAward,
   IconClock,
   IconExternalLink,
-  IconShieldCheck,
   IconUsers,
 } from "@/components/icons/Icons"
 import {
@@ -119,13 +118,12 @@ export default function StatsStrip() {
         </div>
 
         {/* Enlaces de Interés y Transparencia del Estado */}
-        <div className="pt-8 border-t border-slate-200/80 dark:border-slate-800/80">
+        <div
+          id="transparencia"
+          className="pt-8 border-t border-slate-200/80 dark:border-slate-800/80 scroll-mt-20"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#7114EF] dark:text-[#08D9FF] mb-1">
-                <IconShieldCheck className="w-4 h-4 text-[#1475F7] dark:text-[#08D9FF]" />
-                Validación y Transparencia
-              </div>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
                 Enlaces Oficiales del Estado Peruano
               </h3>

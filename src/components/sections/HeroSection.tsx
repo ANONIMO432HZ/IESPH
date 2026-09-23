@@ -1,154 +1,458 @@
-import heroGraduate from "@/assets/campus/hero-graduate.jpg"
 import {
-  IconAcademicCap,
-  IconBeaker,
-  IconComputer,
-  IconHeartPulse,
-  IconLeaf,
-  IconWrench,
-} from "@/components/icons/Icons"
+  Apple,
+  ChevronLeft,
+  ChevronRight,
+  Code2,
+  Maximize2,
+  Play,
+  Stethoscope,
+  Volume2,
+  VolumeX,
+  Wheat,
+  Wrench,
+} from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import egresadoHero from "@/assets/egresado-hero.jpg"
+import egresadosHero from "@/assets/egresados-hero.png"
+import bgSlider from "@/assets/h2-bg-slider2-3-1.jpg"
+import videoInstitucional from "@/assets/video-institucional.mp4"
+import ConstellationGrid from "@/components/ui/constellation-grid"
 import { CAREERS } from "@/data/careers"
-import { STATE_PLATFORMS } from "@/data/institution"
-import type { Career } from "@/types"
+import { navigateTo } from "@/utils/navigation"
 
 interface HeroSectionProps {
   onCareerSelect?: (careerName: string) => void
-  onOpenCareerModal?: (career: Career) => void
   onOpenApplyModal?: () => void
+  onOpenVideoModal?: () => void
 }
 
-function getCareerIcon(id: string) {
-  switch (id) {
-    case "diseno-programacion-web":
-      return (
-        <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-[#7114EF] dark:text-purple-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconComputer className="w-6 h-6" />
-        </div>
-      )
-    case "enfermeria-tecnica":
-      return (
-        <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-[#1475F7] dark:text-sky-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconHeartPulse className="w-6 h-6" />
-        </div>
-      )
-    case "mecatronica-automotriz":
-      return (
-        <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconWrench className="w-6 h-6" />
-        </div>
-      )
-    case "industrias-alimentos-bebidas":
-      return (
-        <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconBeaker className="w-6 h-6" />
-        </div>
-      )
-    case "produccion-agropecuaria":
-      return (
-        <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconLeaf className="w-6 h-6" />
-        </div>
-      )
-    default:
-      return (
-        <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
-          <IconAcademicCap className="w-6 h-6" />
-        </div>
-      )
-  }
+interface HeroSlide {
+  id: string
+  type: "image" | "video"
+  badge: string
+  title: string
+  highlight?: string
+  description: string
+  image?: string
+  videoSrc?: string
+  alt: string
+  imagePosition?: string
+  tag: string
+  ctaSecondaryText: string
+  ctaSecondaryHref: string
 }
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: "calidad-licenciada",
+    type: "image",
+    badge: 'INSTITUTO DE EDUCACIÓN SUPERIOR PÚBLICO "HUANTA"',
+    title: "Construye tu futuro con",
+    highlight: "formación de calidad",
+    description:
+      "El Instituto de Educación Superior Público Huanta se enorgullece de ser un instituto licenciado, lo que garantiza que nuestros programas académicos cumplen con los más altos estándares de calidad establecidos por las autoridades educativas.",
+    image: egresadoHero,
+    alt: "Estudiante graduado con toga oficial y diploma del IESPH",
+    imagePosition: "object-[78%_center]",
+    tag: "Instituto Licenciado",
+    ctaSecondaryText: "Conócenos",
+    ctaSecondaryHref: "#presentacion",
+  },
+  {
+    id: "excelencia-educativa",
+    type: "image",
+    badge: "Somos una institución educativa de excelencia ~",
+    title: "Piensa en grande.",
+    highlight: "¡Hacemos lo imposible posible!",
+    description:
+      "Nuestro compromiso es brindarte una educación de calidad que te prepare para enfrentar los desafíos del mercado laboral actual con formación técnica de primer nivel.",
+    image: bgSlider,
+    alt: "Estudiante del IESPH en el campus institucional",
+    imagePosition: "object-[80%_center]",
+    tag: "Excelencia Educativa",
+    ctaSecondaryText: "Sobre Nosotros",
+    ctaSecondaryHref: "#presentacion",
+  },
+  {
+    id: "video-institucional",
+    type: "video",
+    badge: "Campus y Experiencia IESPH",
+    title: "Conoce nuestra institución",
+    highlight: "en video oficial",
+    description:
+      "Recorre nuestras modernas instalaciones, talleres de especialidad, laboratorios de cómputo y conoce a la comunidad que lidera la educación superior tecnológica en Huanta.",
+    videoSrc: videoInstitucional,
+    alt: "Video institucional oficial del Instituto de Educación Superior Público Huanta",
+    tag: "Video Institucional",
+    ctaSecondaryText: "Ver Instalaciones",
+    ctaSecondaryHref: "#servicios",
+  },
+  {
+    id: "comunidad-egresados",
+    type: "image",
+    badge: "Comunidad y Egresados de Éxito",
+    title: "Tu meta profesional",
+    highlight: "a un paso de ser realidad",
+    description:
+      "Titulados con certificación oficial a nombre de la Nación. Más de 39 años formando profesionales de excelencia con educación 100% pública y gratuita en Huanta.",
+    image: egresadosHero,
+    alt: "Ceremonia de graduación de egresados del IESPH",
+    imagePosition: "object-center",
+    tag: "Graduación y Titulación",
+    ctaSecondaryText: "Ver Carreras",
+    ctaSecondaryHref: "#carreras",
+  },
+]
 
 export default function HeroSection({
   onCareerSelect,
-  onOpenCareerModal,
   onOpenApplyModal,
+  onOpenVideoModal,
 }: HeroSectionProps) {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [videoProgress, setVideoProgress] = useState(0)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  // Auto-slide interval (solamente corre en diapositivas con fotos; en el video se espera a que termine completo)
+  useEffect(() => {
+    if (isPaused) return
+
+    // Si la diapositiva actual es video, NO cambiamos por temporizador: dejamos que termine
+    if (HERO_SLIDES[currentSlide].type === "video") return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length)
+    }, 6000)
+
+    return () => clearInterval(interval)
+  }, [isPaused, currentSlide])
+
+  // Manage video play/pause when sliding
+  useEffect(() => {
+    const video = videoRef.current
+    setVideoProgress(0)
+    if (!video) return
+
+    if (HERO_SLIDES[currentSlide].type === "video") {
+      video.currentTime = 0
+      video
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false))
+    } else {
+      video.pause()
+      setIsPlaying(false)
+    }
+  }, [currentSlide])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide(
+      (prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length,
+    )
+  }
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current?.duration) {
+      setVideoProgress(
+        (videoRef.current.currentTime / videoRef.current.duration) * 100,
+      )
+    }
+  }
+
+  const handleVideoEnded = () => {
+    // Al finalizar la reproducción completa del video, avanzamos naturalmente al siguiente slide
+    nextSlide()
+  }
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const nextMuted = !isMuted
+      videoRef.current.muted = nextMuted
+      setIsMuted(nextMuted)
+    }
+  }
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {})
+      } else {
+        videoRef.current.pause()
+        setIsPlaying(false)
+      }
+    }
+  }
+
+  const activeSlide = HERO_SLIDES[currentSlide]
+
+  // Configuración de los 5 programas licenciados con iconos semánticos exactos
+  const programCards = [
+    {
+      id: "diseno-programacion-web",
+      name: "Diseño y Programación Web",
+      badgeColor:
+        "bg-purple-100 text-[#7114EF] dark:bg-purple-950/60 dark:text-purple-300",
+      icon: <Code2 className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+    },
+    {
+      id: "enfermeria-tecnica",
+      name: "Enfermería Técnica",
+      altName: "Enfermería Técnica",
+      badgeColor:
+        "bg-sky-100 text-[#1475F7] dark:bg-sky-950/60 dark:text-sky-300",
+      icon: (
+        <Stethoscope className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />
+      ),
+    },
+    {
+      id: "mecatronica-automotriz",
+      name: "Mecatrónica Automotriz",
+      altName: "Mecatrónica Automotriz",
+      badgeColor:
+        "bg-blue-100 text-blue-600 dark:bg-blue-950/60 dark:text-blue-300",
+      icon: <Wrench className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+    },
+    {
+      id: "industrias-alimentos-bebidas",
+      name: "Industrias Alimentarias",
+      altName: "Industrias de Alimentos y Bebidas",
+      badgeColor:
+        "bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-300",
+      icon: <Apple className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+    },
+    {
+      id: "produccion-agropecuaria",
+      name: "Producción Agropecuaria",
+      altName: "Producción Agropecuaria",
+      badgeColor:
+        "bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-300",
+      icon: <Wheat className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+    },
+  ]
+
+  const handleCardClick = (cardId: string) => {
+    navigateTo(`/carreras/${cardId}`)
+    const career = CAREERS.find((c) => c.id === cardId)
+    if (career) {
+      if (onCareerSelect) onCareerSelect(career.name)
+    }
+  }
+
   return (
-    <section className="relative font-sans bg-[#0c1836] text-white overflow-hidden">
-      {/* ── Main Hero Stage ────────────────────────────────────────────── */}
-      <div className="relative pt-12 pb-24 sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-36 bg-linear-to-br from-[#0c1938] via-[#102d6b] to-[#45187e]">
-        {/* Dynamic atmospheric lighting */}
-        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#1475F7]/25 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 left-10 w-[450px] h-[450px] bg-[#7114EF]/25 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative font-sans bg-white dark:bg-slate-950 transition-colors">
+      {/* ── 1. Hero Stage Principal con Gradiente y Acento Diagonal ──── */}
+      <div className="relative bg-linear-to-r from-[#11244e] via-[#1a3875] to-[#2b519a] text-white pt-10 pb-24 sm:pt-14 sm:pb-28 lg:pt-16 lg:pb-32 overflow-hidden">
+        {/* Constellation Grid Interactive Mesh */}
+        <ConstellationGrid transparent className="z-0" />
+
+        {/* Dynamic diagonal color band en la esquina superior derecha */}
+        <div
+          className="absolute -top-32 -right-24 sm:-top-40 sm:-right-20 w-137.5 sm:w-175 h-87.5 sm:h-112.5 bg-linear-to-bl from-[#7114EF] via-[#1475F7] to-transparent opacity-85 rotate-[-22deg] pointer-events-none blur-[1px]"
+          aria-hidden="true"
+        />
+
+        {/* Dynamic ambient lights */}
+        <div
+          className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#1475F7]/20 rounded-full blur-3xl pointer-events-none"
+          aria-hidden="true"
+        />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-center">
-            {/* Left Content (Text inspired by Image 1) */}
+          <div className="grid lg:grid-cols-[1fr_1.1fr] xl:grid-cols-[1.05fr_1.15fr] gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Columna Izquierda: Información Institucional Dinámica */}
             <div className="space-y-5 text-left z-10">
-              {/* Institutional Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wide shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#08D9FF] animate-pulse" />
-                <span>INSTITUTO DE EDUCACIÓN SUPERIOR PÚBLICO "HUANTA"</span>
+              {/* Badge Institucional */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all duration-300">
+                <span>{activeSlide.badge}</span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.35rem] font-black text-white leading-[1.12] tracking-tight">
-                Construye tu futuro con{" "}
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-300 via-cyan-200 to-indigo-200">
-                  formación de calidad
-                </span>
+              {/* Título Principal Sincronizado */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem] font-black text-white leading-[1.14] tracking-tight transition-all duration-300 min-h-[3.8rem] sm:min-h-18">
+                {activeSlide.title}{" "}
+                {activeSlide.highlight && (
+                  <>
+                    <br className="hidden sm:inline" />
+                    <span className="text-[#08D9FF]">
+                      {activeSlide.highlight}
+                    </span>
+                  </>
+                )}
               </h1>
 
-              {/* Subtitle / Description */}
-              <p className="text-sm sm:text-base md:text-lg text-slate-200/90 max-w-xl leading-relaxed font-normal">
-                El Instituto de Educación Superior Público Huanta te ofrece una
-                formación técnica de excelencia, diseñada para responder a las
-                demandas del sector productivo y ayudarte a alcanzar tus metas
-                profesionales.
+              {/* Subtítulo / Descripción Institucional */}
+              <p className="text-sm sm:text-base text-slate-200/90 max-w-xl leading-relaxed font-normal min-h-[4.2rem] transition-all duration-300">
+                {activeSlide.description}
               </p>
 
-              {/* CTAs */}
+              {/* Botones de Acción */}
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => onOpenApplyModal?.()}
-                  className="btn-pill-gradient text-white font-bold text-xs sm:text-sm px-6 py-3.5 shadow-xl shadow-purple-950/40 hover:shadow-purple-600/30 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
+                  className="btn-pill-gradient text-white font-bold text-xs sm:text-sm px-6 py-3.5 shadow-lg shadow-purple-950/40 hover:shadow-purple-600/30 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
                 >
-                  <span>Postula en Línea</span>
+                  <span>Postula</span>
                   <span>→</span>
                 </button>
 
                 <a
-                  href="#carreras"
-                  className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 hover:border-white/40 transition-all cursor-pointer"
+                  href={activeSlide.ctaSecondaryHref}
+                  className="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 hover:border-white/40 transition-all cursor-pointer"
                 >
-                  Conocer las 5 Carreras
+                  {activeSlide.ctaSecondaryText}
                 </a>
-              </div>
-
-              {/* Micro Indicators */}
-              <div className="pt-3 flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <span className="text-[#08D9FF]">✔</span> Título Oficial a
-                  Nombre de la Nación
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="text-[#08D9FF]">✔</span> 100% Gratuito y
-                  Licenciado
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="text-[#08D9FF]">✔</span> 3 Años de Duración
-                </span>
               </div>
             </div>
 
-            {/* Right: Smiling Graduate Student Photo (from Image 1 / OKOK.jpg) */}
-            <div className="relative flex justify-center lg:justify-end z-10">
-              <div className="relative w-72 sm:w-88 lg:w-[420px] aspect-4/5 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/15 bg-linear-to-b from-blue-900/40 to-purple-950/60 group">
-                <img
-                  src={heroGraduate}
-                  alt="Estudiante graduado con toga y título oficial del IESPH"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-[#0c1836]/90 via-transparent to-transparent flex items-end p-5">
-                  <div className="text-white space-y-0.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#08D9FF]">
-                      Orgullo IESPH
-                    </span>
-                    <div className="text-sm font-black">
-                      Titulados Insertados en el Mercado Laboral
+            {/* Columna Derecha: Showcase de Imágenes y Video Institucional (Ampliado y Responsivo) */}
+            <div className="relative flex justify-center items-center z-10 w-full">
+              <div
+                className="relative w-full max-w-105 sm:max-w-130 lg:max-w-145 xl:max-w-155 aspect-16/10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-linear-to-b from-[#1475F7]/30 to-[#7114EF]/30 group select-none transition-all duration-300"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+              >
+                {HERO_SLIDES.map((slide, idx) => (
+                  <div
+                    key={slide.id}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      idx === currentSlide
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    {slide.type === "video" ? (
+                      <div className="relative w-full h-full bg-black">
+                        <video
+                          ref={videoRef}
+                          src={slide.videoSrc}
+                          muted={isMuted}
+                          playsInline
+                          onEnded={handleVideoEnded}
+                          onTimeUpdate={handleTimeUpdate}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={togglePlay}
+                        />
+
+                        {/* Barra de progreso de reproducción del video */}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-30 pointer-events-none">
+                          <div
+                            className="h-full bg-linear-to-r from-[#1475F7] to-[#08D9FF] transition-all duration-150"
+                            style={{ width: `${videoProgress}%` }}
+                          />
+                        </div>
+
+                        {/* Indicador de play/pause overlay central al pausar */}
+                        {!isPlaying && (
+                          <div
+                            onClick={togglePlay}
+                            className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs cursor-pointer"
+                          >
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1475F7]/90 text-white flex items-center justify-center shadow-xl border border-white/30 hover:scale-110 transition-transform">
+                              <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Barra de Controles Rápidos del Video */}
+                        <div className="absolute top-3 right-3 z-30 flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleMute()
+                            }}
+                            className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-md"
+                            title={
+                              isMuted ? "Activar audio" : "Silenciar video"
+                            }
+                            aria-label={
+                              isMuted ? "Activar sonido" : "Silenciar"
+                            }
+                          >
+                            {isMuted ? (
+                              <VolumeX className="w-4 h-4 text-slate-300" />
+                            ) : (
+                              <Volume2 className="w-4 h-4 text-[#08D9FF]" />
+                            )}
+                          </button>
+
+                          {onOpenVideoModal && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                onOpenVideoModal()
+                              }}
+                              className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-md"
+                              title="Ver en pantalla completa"
+                              aria-label="Abrir video en pantalla completa"
+                            >
+                              <Maximize2 className="w-4 h-4 text-[#08D9FF]" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <img
+                        src={slide.image}
+                        alt={slide.alt}
+                        className={`w-full h-full object-cover ${slide.imagePosition} group-hover:scale-105 transition-transform duration-700`}
+                        loading={idx === 0 ? "eager" : "lazy"}
+                      />
+                    )}
+
+                    {/* Gradiente inferior para legibilidad y badge informativo */}
+                    <div className="absolute inset-0 bg-linear-to-t from-[#0e1d3e]/95 via-[#0e1d3e]/20 to-transparent flex flex-col justify-end p-4 sm:p-5 pointer-events-none">
+                      <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#08D9FF] bg-[#08D9FF]/15 backdrop-blur-md border border-[#08D9FF]/30 px-2.5 py-1 rounded-full w-fit mb-1 shadow-xs pointer-events-auto">
+                        {slide.tag}
+                      </span>
                     </div>
                   </div>
+                ))}
+
+                {/* Controles de navegación manual (Flechas Anterior / Siguiente) */}
+                <button
+                  type="button"
+                  onClick={prevSlide}
+                  aria-label="Diapositiva anterior"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 cursor-pointer"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextSlide}
+                  aria-label="Siguiente diapositiva"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 cursor-pointer"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                {/* Indicadores de diapositiva interactivos */}
+                <div className="absolute bottom-3.5 right-4 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15">
+                  {HERO_SLIDES.map((slide, idx) => (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      onClick={() => setCurrentSlide(idx)}
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        idx === currentSlide
+                          ? "w-5 bg-[#08D9FF]"
+                          : "w-1.5 bg-white/40 hover:bg-white/75"
+                      }`}
+                      aria-label={`Ver ${slide.tag}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -156,57 +460,28 @@ export default function HeroSection({
         </div>
       </div>
 
-      {/* ── 5 Floating Program Cards (Overlapping the Hero as in Image 1) ── */}
-      <div className="relative -mt-16 sm:-mt-20 z-20 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          {CAREERS.map((career) => (
+      {/* ── 2. Las 5 Tarjetas Blancas de Programas (Superpuestas) ──── */}
+      <div className="relative -mt-14 sm:-mt-18 z-20 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+          {programCards.map((card) => (
             <div
-              key={career.id}
-              onClick={() => {
-                if (onOpenCareerModal) onOpenCareerModal(career)
-                if (onCareerSelect) onCareerSelect(career.name)
-              }}
-              className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center justify-between min-h-[160px]"
+              key={card.id}
+              onClick={() => handleCardClick(card.id)}
+              className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center justify-center min-h-38.75 sm:min-h-43.75"
             >
-              {/* Icon Container */}
-              <div className="mb-3">{getCareerIcon(career.id)}</div>
+              {/* Contenedor del Icono Temático con Color Identificativo */}
+              <div
+                className={`w-13 h-13 sm:w-14 sm:h-14 rounded-2xl ${card.badgeColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs mb-3`}
+              >
+                {card.icon}
+              </div>
 
-              {/* Career Title */}
-              <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors leading-snug line-clamp-2">
-                {career.name}
+              {/* Título del Programa Formativo */}
+              <h3 className="font-bold text-slate-800 dark:text-white text-xs sm:text-sm group-hover:text-[#1475F7] transition-colors leading-tight">
+                {card.name}
               </h3>
-
-              {/* Action Hint */}
-              <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold mt-2 group-hover:text-purple-600 dark:group-hover:text-sky-400 transition-colors">
-                Ver Carrera →
-              </span>
             </div>
           ))}
-        </div>
-
-        {/* ── Official Institutional Platforms Strip (Underneath Cards as in Image 1) ── */}
-        <div className="mt-8 pt-6 pb-4 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-between gap-6 text-slate-300">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-            Enlaces Oficiales del Estado:
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
-            {STATE_PLATFORMS.map((platform) => (
-              <a
-                key={platform.name}
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={platform.description}
-                className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:scale-105 transition-all"
-              >
-                <img
-                  src={platform.logo}
-                  alt={platform.name}
-                  className="h-7 sm:h-8 w-auto object-contain brightness-0 invert"
-                />
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </section>

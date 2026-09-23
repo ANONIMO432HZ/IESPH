@@ -345,30 +345,17 @@ export const FACULTY_LIST: TeacherItem[] = [
 export const CAMPUS_LOCATIONS: CampusLocation[] = [
   {
     name: "Sede Central Institucional",
-    tag: "Sede Principal",
+    tag: "Sede Principal Licenciada",
     address: "Jr. Córdova N° 650, Huanta, Ayacucho",
     description:
       "Complejo educativo central que alberga la Dirección General, aulas pedagógicas modernizadas, laboratorios de cómputo para Desarrollo Web, talleres de mecatrónica automotriz, clínica simulada de enfermería técnica y biblioteca central.",
     features: [
       "Dirección General y Secretaría Académica",
-      "Laboratorios de Cómputo y Conectividad Fibra Óptica",
+      "Laboratorios de Cómputo e Informática",
       "Taller Mecatrónico de Diagnóstico Automotriz",
       "Laboratorio de Simulación Asistencial en Salud",
       "Planta Piloto de Procesamiento de Alimentos",
       "Auditorio Institucional y Biblioteca",
-    ],
-  },
-  {
-    name: "Centro de Producción y Fundo Experimental",
-    tag: "Centro Experimental",
-    address: "Valle de Huanta / Luricocha, Ayacucho",
-    description:
-      "Área agronómica y pecuaria especializada para las prácticas en situaciones reales de trabajo de los programas de Producción Agropecuaria e Industrias de Alimentos y Bebidas.",
-    features: [
-      "Campos de Cultivo e Invernaderos Tecnificados",
-      "Sistemas de Riego por Goteo y Aspersión",
-      "Módulos de Crianza y Sanidad Pecuaria",
-      "Parcelas Demostrativas de Palto y Frutales",
     ],
   },
 ]

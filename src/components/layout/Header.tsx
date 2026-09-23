@@ -1,27 +1,24 @@
 import { useState } from "react"
 import logoIES from "@/assets/logo.webp"
 import {
-  IconClock,
   IconMapPin,
   IconPhone,
   MorphMenuToggle,
   MorphThemeToggle,
 } from "@/components/icons/Icons"
-import type { InstitutionalTab } from "@/components/modals/InstitutionalModal"
 import { INSTITUTION_CONTACT } from "@/data/institution"
 import { MAIN_NAV_ITEMS, TOP_NAV_LINKS } from "@/data/navigation"
 import { useTheme } from "@/hooks/useTheme"
+import { navigateTo } from "@/utils/navigation"
 
 interface HeaderProps {
   onOpenApplyModal?: () => void
   onOpenComplaintsModal?: () => void
-  onOpenAboutModal?: (tab?: InstitutionalTab) => void
 }
 
 export default function Header({
   onOpenApplyModal,
   onOpenComplaintsModal,
-  onOpenAboutModal,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -34,29 +31,25 @@ export default function Header({
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    if (href.startsWith("/nosotros#") || href === "/nosotros") {
-      e.preventDefault()
-      setActiveDropdown(null)
-      setMobileActiveDropdown(null)
-      setMobileMenuOpen(false)
-      const tab = href.includes("#")
-        ? (href.split("#")[1] as InstitutionalTab)
-        : "presentacion"
-      onOpenAboutModal?.(tab)
-    } else if (
+    setActiveDropdown(null)
+    setMobileActiveDropdown(null)
+    setMobileMenuOpen(false)
+
+    if (
       href === "/libro-de-reclamaciones" ||
       href === "#libro-de-reclamaciones"
     ) {
       e.preventDefault()
-      setActiveDropdown(null)
-      setMobileActiveDropdown(null)
-      setMobileMenuOpen(false)
       onOpenComplaintsModal?.()
-    } else {
-      setActiveDropdown(null)
-      setMobileActiveDropdown(null)
-      setMobileMenuOpen(false)
+      return
     }
+
+    if (href.startsWith("http://") || href.startsWith("https://")) {
+      return
+    }
+
+    e.preventDefault()
+    navigateTo(href)
   }
 
   return (
@@ -78,45 +71,64 @@ export default function Header({
               <IconMapPin className="w-3.5 h-3.5 text-slate-400 dark:text-sky-300 shrink-0" />
               <span>{INSTITUTION_CONTACT.address}</span>
             </span>
-            <span className="hidden lg:inline-block text-slate-300 dark:text-slate-700">
-              |
-            </span>
-            <span className="hidden lg:flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
-              <IconClock className="w-3.5 h-3.5 text-slate-400 dark:text-sky-300 shrink-0" />
-              <span>{INSTITUTION_CONTACT.schedule}</span>
-            </span>
           </div>
 
           {/* Right: Direct institutional links */}
           <div className="flex items-center gap-3 text-xs">
             {/* Quick role links on mobile */}
-            <div className="flex sm:hidden items-center gap-2.5 text-[11px]">
-              <a
-                href="/admision"
-                className="text-slate-700 dark:text-slate-300 hover:text-blue-900 dark:hover:text-white font-semibold transition-colors"
-              >
-                Admisión 2026
-              </a>
-              <span className="text-slate-300 dark:text-slate-700">·</span>
-              <a
-                href="/transparencia"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-900 dark:hover:text-white font-medium transition-colors"
-              >
-                Transparencia
-              </a>
+            <div className="flex sm:hidden items-center gap-2 text-[11px]">
+              {TOP_NAV_LINKS.map((link, idx) => {
+                const isExternal =
+                  link.href.startsWith("http://") ||
+                  link.href.startsWith("https://")
+                return (
+                  <span key={link.label} className="flex items-center gap-2">
+                    {idx > 0 && (
+                      <span className="text-slate-300 dark:text-slate-700">
+                        ·
+                      </span>
+                    )}
+                    <a
+                      href={link.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      onClick={
+                        isExternal
+                          ? undefined
+                          : (e) => handleNavClick(e, link.href)
+                      }
+                      className="text-slate-700 dark:text-slate-300 hover:text-blue-900 dark:hover:text-white font-medium transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </span>
+                )
+              })}
             </div>
 
             {/* Role links on desktop */}
             <div className="hidden sm:flex items-center gap-3 md:gap-4">
-              {TOP_NAV_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-slate-600 dark:text-slate-300 hover:text-blue-900 dark:hover:text-white transition-colors font-medium py-0.5"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {TOP_NAV_LINKS.map((link) => {
+                const isExternal =
+                  link.href.startsWith("http://") ||
+                  link.href.startsWith("https://")
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    onClick={
+                      isExternal
+                        ? undefined
+                        : (e) => handleNavClick(e, link.href)
+                    }
+                    className="text-slate-600 dark:text-slate-300 hover:text-blue-900 dark:hover:text-white transition-colors font-medium py-0.5"
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -127,6 +139,7 @@ export default function Header({
         {/* Brand identity */}
         <a
           href="/"
+          onClick={(e) => handleNavClick(e, "/")}
           className="flex items-center gap-2 sm:gap-3.5 shrink-0 group py-1"
         >
           <img
@@ -163,17 +176,12 @@ export default function Header({
               >
                 {/* Active/Hover Top Gradient Bar (as in Image 2) */}
                 {isDropdownActive && (
-                  <span className="absolute top-0 left-2 right-2 h-[3px] bg-linear-to-r from-[#1475F7] to-[#7114EF] rounded-full" />
+                  <span className="absolute top-0 left-2 right-2 h-0.75 bg-linear-to-r from-[#1475F7] to-[#7114EF] rounded-full" />
                 )}
 
                 <a
                   href={item.href}
-                  onClick={(e) => {
-                    if (isNosotros) {
-                      e.preventDefault()
-                      onOpenAboutModal?.("presentacion")
-                    }
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`px-2 xl:px-2.5 2xl:px-3.5 py-1.5 xl:py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-colors flex items-center gap-1 whitespace-nowrap cursor-pointer ${
                     isDropdownActive
                       ? "text-[#7114EF] dark:text-[#08D9FF] bg-purple-50/60 dark:bg-slate-800/80"
@@ -218,7 +226,7 @@ export default function Header({
                   >
                     <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden">
                       {/* Top gradient accent line on the dropdown panel */}
-                      <div className="h-[3px] w-full bg-linear-to-r from-[#1475F7] to-[#7114EF]" />
+                      <div className="h-0.75 w-full bg-linear-to-r from-[#1475F7] to-[#7114EF]" />
                       <div className="p-1.5 space-y-0.5">
                         {item.children.map((child) => (
                           <a
@@ -347,7 +355,7 @@ export default function Header({
                 ) : (
                   <a
                     href={item.href}
-                    onClick={() => setMobileActiveDropdown(null)}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className="px-2.5 py-1.5 rounded-md text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/60 transition-colors inline-block"
                   >
                     {item.shortLabel ?? item.label}
@@ -356,13 +364,6 @@ export default function Header({
               </div>
             )
           })}
-          <a
-            href="/transparencia"
-            onClick={() => setMobileActiveDropdown(null)}
-            className="px-2.5 py-1.5 rounded-md text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/60 transition-colors shrink-0"
-          >
-            Transparencia
-          </a>
         </div>
       </div>
 
@@ -378,7 +379,7 @@ export default function Header({
       {mobileActiveDropdown && (
         <div className="lg:hidden absolute left-3 z-50 w-72 max-w-[calc(100vw-24px)] pt-1">
           <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden">
-            <div className="h-[3px] w-full bg-linear-to-r from-[#1475F7] to-[#7114EF]" />
+            <div className="h-0.75 w-full bg-linear-to-r from-[#1475F7] to-[#7114EF]" />
             <div className="p-1.5 space-y-0.5">
               {MAIN_NAV_ITEMS.find(
                 (i) => i.label === mobileActiveDropdown,
@@ -475,16 +476,28 @@ export default function Header({
               Accesos Institucionales
             </span>
             <div className="grid grid-cols-2 gap-2">
-              {TOP_NAV_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
-                >
-                  <span>{link.label}</span>
-                </a>
-              ))}
+              {TOP_NAV_LINKS.map((link) => {
+                const isExternal =
+                  link.href.startsWith("http://") ||
+                  link.href.startsWith("https://")
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    onClick={(e) => {
+                      setMobileMenuOpen(false)
+                      if (!isExternal) {
+                        handleNavClick(e, link.href)
+                      }
+                    }}
+                    className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
+                  >
+                    <span>{link.label}</span>
+                  </a>
+                )
+              })}
             </div>
           </div>
 

@@ -6,18 +6,27 @@ import {
 } from "lucide"
 import {
   Activity,
+  Apple,
+  ArrowLeft,
+  ArrowRight,
   Award,
   BookOpen,
   Briefcase,
   Building2,
   Calendar,
+  Car,
   Check,
   ChevronDown,
+  ChevronUp,
   Clock,
+  Code2,
+  Cpu,
   ExternalLink,
   FileCheck,
   FileText,
   FlaskConical,
+  Gauge,
+  Globe,
   GraduationCap,
   Loader2,
   Mail,
@@ -29,9 +38,13 @@ import {
   ShieldCheck,
   Sparkles,
   Sprout,
+  Stethoscope,
   Sun,
+  User,
   Users,
+  Wheat,
   Wrench,
+  Zap,
 } from "lucide-react"
 import { MorphIcon } from "morphicons/react"
 
@@ -201,6 +214,18 @@ export function IconChevronDown({
   return <ChevronDown className={className} />
 }
 
+export function IconChevronUp({
+  className = "w-4 h-4",
+}: {
+  className?: string
+}) {
+  return <ChevronUp className={className} />
+}
+
+export function IconCode({ className = "w-5 h-5" }: { className?: string }) {
+  return <Code2 className={className} />
+}
+
 export function IconUsers({ className = "w-4 h-4" }: { className?: string }) {
   return <Users className={className} />
 }
@@ -227,6 +252,62 @@ export function IconFileCheck({
 
 export function IconSearch({ className = "w-4 h-4" }: { className?: string }) {
   return <Search className={className} />
+}
+
+export function IconArrowLeft({
+  className = "w-4 h-4",
+}: {
+  className?: string
+}) {
+  return <ArrowLeft className={className} />
+}
+
+export function IconArrowRight({
+  className = "w-4 h-4",
+}: {
+  className?: string
+}) {
+  return <ArrowRight className={className} />
+}
+
+export function IconUser({ className = "w-4 h-4" }: { className?: string }) {
+  return <User className={className} />
+}
+
+export function IconStethoscope({
+  className = "w-4 h-4",
+}: {
+  className?: string
+}) {
+  return <Stethoscope className={className} />
+}
+
+export function IconGlobe({ className = "w-4 h-4" }: { className?: string }) {
+  return <Globe className={className} />
+}
+
+export function IconCpu({ className = "w-4 h-4" }: { className?: string }) {
+  return <Cpu className={className} />
+}
+
+export function IconCar({ className = "w-4 h-4" }: { className?: string }) {
+  return <Car className={className} />
+}
+
+export function IconApple({ className = "w-4 h-4" }: { className?: string }) {
+  return <Apple className={className} />
+}
+
+export function IconWheat({ className = "w-4 h-4" }: { className?: string }) {
+  return <Wheat className={className} />
+}
+
+export function IconGauge({ className = "w-4 h-4" }: { className?: string }) {
+  return <Gauge className={className} />
+}
+
+export function IconZap({ className = "w-4 h-4" }: { className?: string }) {
+  return <Zap className={className} />
 }
 
 // Brand SVG for WhatsApp (Lucide doesn't include commercial third-party brand logos)

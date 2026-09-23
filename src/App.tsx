@@ -5,37 +5,30 @@ import AdmissionSection from "@/components/sections/AdmissionSection"
 import CareersSection from "@/components/sections/CareersSection"
 import CtaBanner from "@/components/sections/CtaBanner"
 import HeroSection from "@/components/sections/HeroSection"
+import InstitutionalSection from "@/components/sections/InstitutionalSection"
 import NewsSection from "@/components/sections/NewsSection"
 import ServicesSection from "@/components/sections/ServicesSection"
 import StatsStrip from "@/components/sections/StatsStrip"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
 import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection"
-import type { Career } from "@/types"
-import { navigateTo } from "@/utils/navigation"
+import CareerDetailPage from "@/pages/CareerDetailPage"
+import { navigateTo, scrollToTop } from "@/utils/navigation"
 
-// Lazy loading diferido bajo demanda para optimización en redes lentas
-const CareerModal = lazy(() => import("@/components/modals/CareerModal"))
+// Lazy loading diferido bajo demanda para modales interactivos
+const AdmissionModal = lazy(() => import("@/components/modals/AdmissionModal"))
 const ComplaintsBookModal = lazy(
   () => import("@/components/modals/ComplaintsBookModal"),
 )
-const InstitutionalModal = lazy(
-  () => import("@/components/modals/InstitutionalModal"),
-)
+const VideoModal = lazy(() => import("@/components/modals/VideoModal"))
 
 export default function App() {
-  const [activeCareerModal, setActiveCareerModal] = useState<Career | null>(
-    null,
-  )
+  const [currentCareerId, setCurrentCareerId] = useState<string | null>(null)
   const [complaintsModalOpen, setComplaintsModalOpen] = useState(false)
-  const [institutionalModalOpen, setInstitutionalModalOpen] = useState(false)
-  const [institutionalTab, setInstitutionalTab] = useState<
-    | "presentacion"
-    | "mision-vision"
-    | "organizacion"
-    | "plana-jerarquica"
-    | "plana-docente"
-    | "local"
-  >("presentacion")
+  const [admissionModalOpen, setAdmissionModalOpen] = useState(false)
+  const [selectedCareerForApply, setSelectedCareerForApply] = useState<
+    string | undefined
+  >()
+  const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   // Listen for clean path navigation and browser back/forward (popstate)
   useEffect(() => {
@@ -43,40 +36,43 @@ export default function App() {
       const path = window.location.pathname
       const hash = window.location.hash
 
-      if (
-        path === "/libro-de-reclamaciones" ||
-        hash === "#libro-de-reclamaciones"
-      ) {
-        setComplaintsModalOpen(true)
-      } else if (
-        path === "/nosotros" ||
-        hash === "#presentacion" ||
-        hash === "#mision-vision" ||
-        hash === "#organizacion" ||
-        hash === "#plana-jerarquica" ||
-        hash === "#plana-docente" ||
-        hash === "#local"
-      ) {
-        const tab = hash
-          ? (hash.replace(/^#/, "") as
-              | "presentacion"
-              | "mision-vision"
-              | "organizacion"
-              | "plana-jerarquica"
-              | "plana-docente"
-              | "local")
-          : "presentacion"
-        setInstitutionalTab(tab)
-        setInstitutionalModalOpen(true)
-      } else {
+      if (path.startsWith("/carreras/")) {
+        const careerId = path.replace(/^\/carreras\//, "").replace(/\/$/, "")
+        setCurrentCareerId(careerId)
         setComplaintsModalOpen(false)
-        if (path !== "/" && path !== "") {
-          const sectionId = path.replace(/^\//, "")
-          const el = document.getElementById(sectionId)
-          if (el) el.scrollIntoView({ behavior: "smooth" })
-        } else if (hash) {
-          const el = document.getElementById(hash.replace(/^#/, ""))
-          if (el) el.scrollIntoView({ behavior: "smooth" })
+        setAdmissionModalOpen(false)
+        scrollToTop()
+      } else {
+        setCurrentCareerId(null)
+
+        if (
+          path === "/libro-de-reclamaciones" ||
+          hash === "#libro-de-reclamaciones"
+        ) {
+          setComplaintsModalOpen(true)
+        } else if (path === "/postular" || hash === "#postular") {
+          setAdmissionModalOpen(true)
+        } else {
+          setComplaintsModalOpen(false)
+          const targetId = hash
+            ? hash.replace(/^#/, "")
+            : path !== "/" && path !== ""
+              ? path.replace(/^\//, "")
+              : null
+
+          if (targetId) {
+            const attemptScroll = (attempts = 0) => {
+              const el = document.getElementById(targetId)
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth" })
+              } else if (attempts < 15) {
+                setTimeout(() => attemptScroll(attempts + 1), 50)
+              }
+            }
+            requestAnimationFrame(() => attemptScroll())
+          } else {
+            scrollToTop()
+          }
         }
       }
     }
@@ -91,7 +87,7 @@ export default function App() {
     window.addEventListener("popstate", handlePopState)
     window.addEventListener("open-complaints-modal", handleOpenModal)
 
-    // Global click interceptor for clean internal paths (/carreras, /nosotros, etc.)
+    // Global click interceptor for clean internal paths (/carreras, /admision, etc.)
     const handleDocumentClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest("a")
       if (!target) return
@@ -107,6 +103,10 @@ export default function App() {
       }
     }
 
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"
+    }
+
     document.addEventListener("click", handleDocumentClick)
 
     return () => {
@@ -116,73 +116,73 @@ export default function App() {
     }
   }, [])
 
-  const handleScrollToApply = (careerName?: string) => {
-    const el = document.getElementById("postular")
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" })
-      // If a career name was selected, pre-fill the career select in the form
-      if (careerName) {
-        const select = el.querySelector("select")
-        if (select) {
-          select.value = careerName
-          select.dispatchEvent(new Event("change", { bubbles: true }))
-        }
-      }
+  // Guarantee instant scroll reset when navigating between career pages
+  useEffect(() => {
+    if (currentCareerId !== undefined) {
+      scrollToTop()
     }
+  }, [currentCareerId])
+
+  const handleOpenApplyModal = (careerName?: string) => {
+    setSelectedCareerForApply(careerName)
+    setAdmissionModalOpen(true)
   }
 
   return (
     <div className="min-h-full bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-600 selection:text-white flex flex-col transition-colors">
       {/* ── Main Site Header ────────────────────────────────────────── */}
       <Header
-        onOpenApplyModal={() => handleScrollToApply()}
+        onOpenApplyModal={() => handleOpenApplyModal()}
         onOpenComplaintsModal={() => setComplaintsModalOpen(true)}
-        onOpenAboutModal={(tab) => {
-          setInstitutionalTab(tab ?? "presentacion")
-          setInstitutionalModalOpen(true)
-        }}
       />
 
-      {/* ── Main Content Landmark ──────────────────────────────────── */}
+      {/* ── Main Content: Página de Carrera Dedicada o Landing Page ──── */}
       <main className="flex-1">
-        {/* Hero Section with Lead Capture Form */}
-        <HeroSection
-          onOpenCareerModal={(career) => setActiveCareerModal(career)}
-          onCareerSelect={(careerName) => handleScrollToApply(careerName)}
-          onOpenApplyModal={() => handleScrollToApply()}
-        />
+        {currentCareerId ? (
+          <CareerDetailPage key={currentCareerId} careerId={currentCareerId} />
+        ) : (
+          <>
+            {/* Hero Section con 5 programas destacados y enlaces del Estado */}
+            <HeroSection
+              onCareerSelect={(careerName) => handleOpenApplyModal(careerName)}
+              onOpenApplyModal={() => handleOpenApplyModal()}
+              onOpenVideoModal={() => setVideoModalOpen(true)}
+            />
 
-        {/* Institutional Statistics Strip */}
-        <StatsStrip />
+            {/* Franja de Métricas Institucionales */}
+            <StatsStrip />
 
-        {/* 5 Licensed Study Programs */}
-        <CareersSection
-          onOpenCareerModal={(career) => setActiveCareerModal(career)}
-          onApplyForCareer={(careerName) => handleScrollToApply(careerName)}
-        />
+            {/* 5 Programas de Estudio Licenciados (Tabs y Enlaces Dedicados) */}
+            <CareersSection
+              onApplyForCareer={(careerName) =>
+                handleOpenApplyModal(careerName)
+              }
+            />
 
-        {/* Institutional Value Proposition & Vision 2031 */}
-        <WhyChooseUsSection
-          onOpenAboutModal={(tab) => {
-            setInstitutionalTab(tab ?? "presentacion")
-            setInstitutionalModalOpen(true)
-          }}
-        />
+            {/* Presentación Institucional y Misión / Visión (#presentacion y mision-vision) */}
+            <WhyChooseUsSection
+              onOpenVideoModal={() => setVideoModalOpen(true)}
+            />
 
-        {/* 4-Step Admission Process & Requirements */}
-        <AdmissionSection onStartApply={() => handleScrollToApply()} />
+            {/* Secciones Institucionales Nativas: Organización, Plana Jerárquica, Plana Docente y Locales */}
+            <InstitutionalSection />
 
-        {/* Campus Facilities & Specialized Services */}
-        <ServicesSection />
+            {/* 4 Pasos del Proceso de Admisión y Requisitos */}
+            <AdmissionSection onStartApply={() => handleOpenApplyModal()} />
 
-        {/* Institutional News & Highlights */}
-        <NewsSection />
+            {/* Infraestructura de Talleres y Servicios Especializados */}
+            <ServicesSection />
 
-        {/* Real Student and Alumni Testimonials */}
-        <TestimonialsSection />
+            {/* Noticias y Comunicados Oficiales */}
+            <NewsSection />
 
-        {/* High-Conversion Admission CTA */}
-        <CtaBanner onApplyClick={() => handleScrollToApply()} />
+            {/* Testimonios Reales de Egresados y Estudiantes */}
+            <TestimonialsSection />
+
+            {/* Banner de Llamado a la Postulación */}
+            <CtaBanner onApplyClick={() => handleOpenApplyModal()} />
+          </>
+        )}
       </main>
 
       {/* ── Site Footer ─────────────────────────────────────────────── */}
@@ -190,11 +190,26 @@ export default function App() {
 
       {/* ── Modales cargados bajo demanda con Suspense ───────────── */}
       <Suspense fallback={null}>
-        {activeCareerModal && (
-          <CareerModal
-            career={activeCareerModal}
-            onClose={() => setActiveCareerModal(null)}
-            onSelectForApply={(careerName) => handleScrollToApply(careerName)}
+        {admissionModalOpen && (
+          <AdmissionModal
+            isOpen={admissionModalOpen}
+            initialCareer={selectedCareerForApply}
+            onClose={() => {
+              setAdmissionModalOpen(false)
+              if (
+                window.location.pathname === "/postular" ||
+                window.location.hash === "#postular"
+              ) {
+                window.history.pushState(null, "", "/")
+              }
+            }}
+          />
+        )}
+
+        {videoModalOpen && (
+          <VideoModal
+            isOpen={videoModalOpen}
+            onClose={() => setVideoModalOpen(false)}
           />
         )}
 
@@ -206,22 +221,6 @@ export default function App() {
               if (
                 window.location.pathname === "/libro-de-reclamaciones" ||
                 window.location.hash === "#libro-de-reclamaciones"
-              ) {
-                window.history.pushState(null, "", "/")
-              }
-            }}
-          />
-        )}
-
-        {institutionalModalOpen && (
-          <InstitutionalModal
-            isOpen={institutionalModalOpen}
-            initialTab={institutionalTab}
-            onClose={() => {
-              setInstitutionalModalOpen(false)
-              if (
-                window.location.pathname === "/nosotros" ||
-                window.location.hash.startsWith("#")
               ) {
                 window.history.pushState(null, "", "/")
               }
