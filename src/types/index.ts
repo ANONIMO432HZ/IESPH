@@ -79,6 +79,23 @@ export interface AuthorityItem {
   phone?: string
 }
 
+export interface TeacherItem {
+  name: string
+  programId: string
+  programName: string
+  courses: string[]
+  academicPeriod: string
+  cvUrl?: string
+}
+
+export interface CampusLocation {
+  name: string
+  tag: string
+  address: string
+  description: string
+  features: string[]
+}
+
 export interface PartnerPlatform {
   name: string
   url: string

@@ -5,10 +5,12 @@ import registraLogo from "@/assets/partners/registra.png"
 import titulaLogo from "@/assets/partners/titula.png"
 import type {
   AuthorityItem,
+  CampusLocation,
   InstitutionContact,
   InstitutionValues,
   OfficialStateLink,
   PartnerPlatform,
+  TeacherItem,
 } from "@/types"
 
 export const INSTITUTION_CONTACT: InstitutionContact = {
@@ -159,6 +161,215 @@ export const AUTHORITIES: AuthorityItem[] = [
     role: "Jefe de Unidad de Formación Continua",
     email: "nayito.rodriguez@gmail.com",
     phone: "955 956 599",
+  },
+]
+
+export const INSTITUTIONAL_PRESENTATION = {
+  title: "Breve Presentación de la Institución",
+  creationResolution: "R.M. N° 265-86-ED (05 de junio de 1986)",
+  licensingResolution: "R.M. N° 068-2020-MINEDU",
+  trajectorySummary:
+    'El Instituto de Educación Superior Público "Huanta" fue creado por R.M. N° 265-86-ED, del 05 de junio de 1986. Nació con las especialidades de Agropecuaria y Electricidad, incorporando al año siguiente Enfermería Técnica (R.D. N° 3983-87-ED). Con el crecimiento tecnológico y productivo de la provincia, se crearon Computación e Informática (hoy Diseño y Programación Web), Industrias de Alimentos y Bebidas y Mecatrónica Automotriz.',
+  commitmentText:
+    "Como institución pública licenciada por el Ministerio de Educación (MINEDU), garantizamos que nuestros 5 programas de estudios cumplen rigurosamente con las Condiciones Básicas de Calidad (CBC), brindando formación técnica de vanguardia, infraestructura moderna y titulación oficial a nombre de la Nación.",
+  videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Video Institucional oficial
+}
+
+export const FACULTY_LIST: TeacherItem[] = [
+  // Diseño y Programación Web
+  {
+    name: "Lic. Alfonso Álvaro Moreno Márquez",
+    programId: "diseno-programacion-web",
+    programName: "Diseño y Programación Web",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: ["Comunicación Oral", "Solución de Problemas"],
+  },
+  {
+    name: "Ing. Juan Carlos Torres Lozano",
+    programId: "diseno-programacion-web",
+    programName: "Diseño y Programación Web",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Fundamentos de Programación",
+      "Programación Orientada a Objetos",
+    ],
+  },
+  {
+    name: "Tec. Kevin Vlaes Bando Gómez",
+    programId: "diseno-programacion-web",
+    programName: "Diseño y Programación Web",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Gestión y Administración de Sitios Web",
+      "Diagramación Digital",
+      "Redes e Internet",
+      "Marketing Digital",
+    ],
+  },
+  {
+    name: "Ing. Aníbal Yucra Curo",
+    programId: "diseno-programacion-web",
+    programName: "Diseño y Programación Web",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Administración de Base de Datos",
+      "Programación de Aplicaciones Web",
+      "Diseño de Soluciones Web",
+    ],
+  },
+  {
+    name: "Ing. Cristhian Alegría Ñaccha",
+    programId: "diseno-programacion-web",
+    programName: "Diseño y Programación Web",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Introducción a Base de Datos",
+      "Diseño de Interfaces Web",
+      "Programación de Aplicaciones Móviles",
+    ],
+  },
+
+  // Enfermería Técnica
+  {
+    name: "Lic. Ismael Lira Huamán",
+    programId: "enfermeria-tecnica",
+    programName: "Enfermería Técnica",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: ["Educación para la Salud", "Atención del Adulto y Adulto Mayor"],
+  },
+  {
+    name: "Lic. Constancia Quiquin Conga",
+    programId: "enfermeria-tecnica",
+    programName: "Enfermería Técnica",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Administración de Medicamentos",
+      "Asistencia Básica Hospitalaria",
+      "Salud Materno Neonatal",
+    ],
+  },
+  {
+    name: "Lic. Ketty Shirly Cárdenas Pérez",
+    programId: "enfermeria-tecnica",
+    programName: "Enfermería Técnica",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Seguridad y Salud en el Trabajo",
+      "Documentación en Salud",
+      "Atención del Niño y Adolescente",
+      "Atención al Usuario Quirúrgico",
+    ],
+  },
+  {
+    name: "Lic. Ida René Huamán Barzola",
+    programId: "enfermeria-tecnica",
+    programName: "Enfermería Técnica",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Salud Comunitaria",
+      "Promoción de la Salud",
+      "Asistencia en Inmunizaciones",
+    ],
+  },
+
+  // Mecatrónica Automotriz
+  {
+    name: "Lic. Juan Renán Ludeña Aranda",
+    programId: "mecatronica-automotriz",
+    programName: "Mecatrónica Automotriz",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Motores Otto y Diésel",
+      "Sistemas de Implementos y Confort Automotriz",
+      "Inyección Electrónica Vehicular",
+    ],
+  },
+  {
+    name: "Ing. Mecatrónico Docente Especialista",
+    programId: "mecatronica-automotriz",
+    programName: "Mecatrónica Automotriz",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Sistemas de Transmisión y Frenos ABS",
+      "Autotrónica y Redes CAN Bus",
+    ],
+  },
+
+  // Industrias de Alimentos y Bebidas
+  {
+    name: "Ing. Ernesto Andía Ovalle",
+    programId: "industrias-alimentos-bebidas",
+    programName: "Industrias de Alimentos y Bebidas",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Procesamiento de Frutas y Hortalizas",
+      "Control de Calidad y Normativa HACCP",
+      "Tecnología de Alimentos Agroindustriales",
+    ],
+  },
+  {
+    name: "Especialista en Agroindustria",
+    programId: "industrias-alimentos-bebidas",
+    programName: "Industrias de Alimentos y Bebidas",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Procesamiento de Lácteos y Derivados",
+      "Microbiología Industrial y Bioseguridad",
+    ],
+  },
+
+  // Producción Agropecuaria
+  {
+    name: "Ing. René Ángel Alejandro Salazar",
+    programId: "produccion-agropecuaria",
+    programName: "Producción Agropecuaria",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Manejo y Producción Agrícola Sostenible",
+      "Riego Tecnificado y Fertirrigación",
+      "Sanidad Vegetal y Agroecología",
+    ],
+  },
+  {
+    name: "Médico Veterinario / Zootecnista",
+    programId: "produccion-agropecuaria",
+    programName: "Producción Agropecuaria",
+    academicPeriod: "Periodo Lectivo 2026-I",
+    courses: [
+      "Manejo de Animales Menores y Ganado Vacuno",
+      "Nutrición y Reproducción Pecuaria",
+    ],
+  },
+]
+
+export const CAMPUS_LOCATIONS: CampusLocation[] = [
+  {
+    name: "Sede Central Institucional",
+    tag: "Sede Principal",
+    address: "Jr. Córdova N° 650, Huanta, Ayacucho",
+    description:
+      "Complejo educativo central que alberga la Dirección General, aulas pedagógicas modernizadas, laboratorios de cómputo para Desarrollo Web, talleres de mecatrónica automotriz, clínica simulada de enfermería técnica y biblioteca central.",
+    features: [
+      "Dirección General y Secretaría Académica",
+      "Laboratorios de Cómputo y Conectividad Fibra Óptica",
+      "Taller Mecatrónico de Diagnóstico Automotriz",
+      "Laboratorio de Simulación Asistencial en Salud",
+      "Planta Piloto de Procesamiento de Alimentos",
+      "Auditorio Institucional y Biblioteca",
+    ],
+  },
+  {
+    name: "Centro de Producción y Fundo Experimental",
+    tag: "Centro Experimental",
+    address: "Valle de Huanta / Luricocha, Ayacucho",
+    description:
+      "Área agronómica y pecuaria especializada para las prácticas en situaciones reales de trabajo de los programas de Producción Agropecuaria e Industrias de Alimentos y Bebidas.",
+    features: [
+      "Campos de Cultivo e Invernaderos Tecnificados",
+      "Sistemas de Riego por Goteo y Aspersión",
+      "Módulos de Crianza y Sanidad Pecuaria",
+      "Parcelas Demostrativas de Palto y Frutales",
+    ],
   },
 ]
 

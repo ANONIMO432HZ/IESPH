@@ -1,296 +1,212 @@
-import { type FormEvent, useState } from "react"
-import campusFrontis from "@/assets/campus/frontis-principal.jpg"
+import heroGraduate from "@/assets/campus/hero-graduate.jpg"
 import {
   IconAcademicCap,
-  IconBriefcase,
-  IconBuilding,
-  IconCheck,
-  IconClock,
-  IconSpinner,
+  IconBeaker,
+  IconComputer,
+  IconHeartPulse,
+  IconLeaf,
+  IconWrench,
 } from "@/components/icons/Icons"
 import { CAREERS } from "@/data/careers"
+import { STATE_PLATFORMS } from "@/data/institution"
 import type { Career } from "@/types"
 
 interface HeroSectionProps {
   onCareerSelect?: (careerName: string) => void
   onOpenCareerModal?: (career: Career) => void
+  onOpenApplyModal?: () => void
+}
+
+function getCareerIcon(id: string) {
+  switch (id) {
+    case "diseno-programacion-web":
+      return (
+        <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-[#7114EF] dark:text-purple-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconComputer className="w-6 h-6" />
+        </div>
+      )
+    case "enfermeria-tecnica":
+      return (
+        <div className="w-12 h-12 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-[#1475F7] dark:text-sky-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconHeartPulse className="w-6 h-6" />
+        </div>
+      )
+    case "mecatronica-automotriz":
+      return (
+        <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconWrench className="w-6 h-6" />
+        </div>
+      )
+    case "industrias-alimentos-bebidas":
+      return (
+        <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconBeaker className="w-6 h-6" />
+        </div>
+      )
+    case "produccion-agropecuaria":
+      return (
+        <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconLeaf className="w-6 h-6" />
+        </div>
+      )
+    default:
+      return (
+        <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xs">
+          <IconAcademicCap className="w-6 h-6" />
+        </div>
+      )
+  }
 }
 
 export default function HeroSection({
   onCareerSelect,
-  onOpenCareerModal: _onOpenCareerModal,
+  onOpenCareerModal,
+  onOpenApplyModal,
 }: HeroSectionProps) {
-  const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
-  const [selectedCareer, setSelectedCareer] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    if (!name.trim() || !phone.trim() || !selectedCareer) {
-      alert("Por favor completa todos los campos requeridos.")
-      return
-    }
-    setIsSubmitting(true)
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitted(true)
-    }, 450)
-  }
-
   return (
-    <section className="relative bg-linear-to-b from-slate-50 via-white to-blue-50/20 dark:from-[#071322] dark:via-[#09182a] dark:to-[#071322] text-slate-900 dark:text-white py-16 lg:py-24 border-b border-slate-200 dark:border-slate-800/80 overflow-hidden font-sans transition-colors">
-      {/* Dynamic ambient lighting accents */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/4 -right-32 w-96 h-96 bg-purple-500/10 dark:bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-sky-400/10 dark:bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative font-sans bg-[#0c1836] text-white overflow-hidden">
+      {/* ── Main Hero Stage ────────────────────────────────────────────── */}
+      <div className="relative pt-12 pb-24 sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-36 bg-linear-to-br from-[#0c1938] via-[#102d6b] to-[#45187e]">
+        {/* Dynamic atmospheric lighting */}
+        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#1475F7]/25 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 left-10 w-[450px] h-[450px] bg-[#7114EF]/25 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Campus photography with atmospheric gradient blend */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={campusFrontis}
-          alt="Sede Central del IESP Huanta - Jr. Córdova 650"
-          className="w-full h-full object-cover opacity-10 dark:opacity-20 mix-blend-multiply dark:mix-blend-luminosity"
-        />
-        <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/90 to-blue-50/80 dark:from-[#071322] dark:via-[#09182a]/95 dark:to-[#0b1e35]/85" />
-      </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-center">
+            {/* Left Content (Text inspired by Image 1) */}
+            <div className="space-y-5 text-left z-10">
+              {/* Institutional Pill Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wide shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#08D9FF] animate-pulse" />
+                <span>INSTITUTO DE EDUCACIÓN SUPERIOR PÚBLICO "HUANTA"</span>
+              </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1.1fr_420px] gap-10 lg:gap-12 items-center">
-        {/* Left: Value Proposition & Institutional Mission */}
-        <div className="space-y-6">
-          {/* Institutional Accreditation */}
-          <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-sky-400">
-            Resolución Ministerial N° 068-2020
-          </div>
+              {/* Main Headline */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.35rem] font-black text-white leading-[1.12] tracking-tight">
+                Construye tu futuro con{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-300 via-cyan-200 to-indigo-200">
+                  formación de calidad
+                </span>
+              </h1>
 
-          {/* Main Title — Prestigious & Punchy */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-            Educación superior pública para{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-indigo-600 to-sky-600 dark:from-sky-300 dark:via-blue-200 dark:to-indigo-200">
-              transformar tu futuro
-            </span>{" "}
-            en 3 años
-          </h1>
+              {/* Subtitle / Description */}
+              <p className="text-sm sm:text-base md:text-lg text-slate-200/90 max-w-xl leading-relaxed font-normal">
+                El Instituto de Educación Superior Público Huanta te ofrece una
+                formación técnica de excelencia, diseñada para responder a las
+                demandas del sector productivo y ayudarte a alcanzar tus metas
+                profesionales.
+              </p>
 
-          {/* Subtitle */}
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed font-normal">
-            Formamos profesionales técnicos líderes con sólida formación
-            práctica y ética en Huanta y la región Ayacucho. Clases 100%
-            presenciales, laboratorios equipados y{" "}
-            <strong className="text-slate-900 dark:text-white font-semibold underline decoration-blue-600/50 dark:decoration-sky-400/50 underline-offset-4">
-              Título Oficial a Nombre de la Nación
-            </strong>
-            .
-          </p>
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => onOpenApplyModal?.()}
+                  className="btn-pill-gradient text-white font-bold text-xs sm:text-sm px-6 py-3.5 shadow-xl shadow-purple-950/40 hover:shadow-purple-600/30 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
+                >
+                  <span>Postula en Línea</span>
+                  <span>→</span>
+                </button>
 
-          {/* Academic Highlights Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2 text-xs">
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 dark:bg-white/4 border border-slate-200 dark:border-white/8 shadow-xs dark:shadow-none hover:bg-white dark:hover:bg-white/[0.07] transition-colors">
-              <span className="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/15 border border-sky-200 dark:border-sky-400/25 text-sky-700 dark:text-sky-300 flex items-center justify-center shrink-0">
-                <IconAcademicCap className="w-4 h-4" />
-              </span>
-              <div className="leading-snug">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">
-                  5 Carreras Licenciadas
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Certificación modular anual
-                </div>
+                <a
+                  href="#carreras"
+                  className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 hover:border-white/40 transition-all cursor-pointer"
+                >
+                  Conocer las 5 Carreras
+                </a>
+              </div>
+
+              {/* Micro Indicators */}
+              <div className="pt-3 flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#08D9FF]">✔</span> Título Oficial a
+                  Nombre de la Nación
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#08D9FF]">✔</span> 100% Gratuito y
+                  Licenciado
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="text-[#08D9FF]">✔</span> 3 Años de Duración
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 dark:bg-white/4 border border-slate-200 dark:border-white/8 shadow-xs dark:shadow-none hover:bg-white dark:hover:bg-white/[0.07] transition-colors">
-              <span className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/15 border border-blue-200 dark:border-blue-400/25 text-blue-700 dark:text-blue-300 flex items-center justify-center shrink-0">
-                <IconClock className="w-4 h-4" />
-              </span>
-              <div className="leading-snug">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">
-                  Turno Mañana Exclusivo
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Horario: 7:30 am – 1:15 pm
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 dark:bg-white/4 border border-slate-200 dark:border-white/8 shadow-xs dark:shadow-none hover:bg-white dark:hover:bg-white/[0.07] transition-colors">
-              <span className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-500/15 border border-purple-200 dark:border-purple-400/25 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
-                <IconBuilding className="w-4 h-4" />
-              </span>
-              <div className="leading-snug">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">
-                  Talleres y Laboratorios
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Prácticas especializadas
+            {/* Right: Smiling Graduate Student Photo (from Image 1 / OKOK.jpg) */}
+            <div className="relative flex justify-center lg:justify-end z-10">
+              <div className="relative w-72 sm:w-88 lg:w-[420px] aspect-4/5 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/15 bg-linear-to-b from-blue-900/40 to-purple-950/60 group">
+                <img
+                  src={heroGraduate}
+                  alt="Estudiante graduado con toga y título oficial del IESPH"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0c1836]/90 via-transparent to-transparent flex items-end p-5">
+                  <div className="text-white space-y-0.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#08D9FF]">
+                      Orgullo IESPH
+                    </span>
+                    <div className="text-sm font-black">
+                      Titulados Insertados en el Mercado Laboral
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/80 dark:bg-white/4 border border-slate-200 dark:border-white/8 shadow-xs dark:shadow-none hover:bg-white dark:hover:bg-white/[0.07] transition-colors">
-              <span className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-500/15 border border-amber-200 dark:border-amber-400/25 text-amber-700 dark:text-amber-300 flex items-center justify-center shrink-0">
-                <IconBriefcase className="w-4 h-4" />
-              </span>
-              <div className="leading-snug">
-                <div className="text-xs font-bold text-slate-900 dark:text-white">
-                  Convenios y Beca 18
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Prácticas pre-profesionales
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
-            <a
-              href="/carreras"
-              className="w-full sm:w-auto text-center min-h-12 flex items-center justify-center bg-linear-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white font-bold px-7 py-3.5 rounded-xl text-xs sm:text-sm shadow-lg shadow-amber-950/20 dark:shadow-amber-950/40 hover:shadow-amber-500/25 active:scale-[0.99] transition-all"
-            >
-              Conocer Carreras 2026
-            </a>
-            <a
-              href="/admision"
-              className="w-full sm:w-auto text-center min-h-12 flex items-center justify-center bg-slate-100 hover:bg-slate-200 dark:bg-white/8 dark:hover:bg-white/[0.14] text-slate-800 dark:text-white font-semibold px-6 py-3.5 rounded-xl text-xs sm:text-sm border border-slate-300 dark:border-white/15 shadow-xs dark:shadow-none active:scale-[0.99] transition-all"
-            >
-              Requisitos de Admisión →
-            </a>
           </div>
         </div>
+      </div>
 
-        {/* Right: Lead Capture Form Card */}
-        <div
-          id="postular"
-          className="w-full max-w-xl mx-auto lg:max-w-none bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl p-5 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 relative pt-7 transition-colors"
-        >
-          {/* Accent top gradient strip */}
-          <div className="h-1.5 w-full bg-linear-to-r from-[#7114EF] via-[#1475F7] to-[#08D9FF] rounded-t-2xl absolute top-0 left-0 right-0" />
+      {/* ── 5 Floating Program Cards (Overlapping the Hero as in Image 1) ── */}
+      <div className="relative -mt-16 sm:-mt-20 z-20 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          {CAREERS.map((career) => (
+            <div
+              key={career.id}
+              onClick={() => {
+                if (onOpenCareerModal) onOpenCareerModal(career)
+                if (onCareerSelect) onCareerSelect(career.name)
+              }}
+              className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center justify-between min-h-[160px]"
+            >
+              {/* Icon Container */}
+              <div className="mb-3">{getCareerIcon(career.id)}</div>
 
-          <div className="border-b border-slate-100 dark:border-slate-800 pb-4 mb-5">
-            <span className="text-xs font-bold text-indigo-600 dark:text-sky-400 uppercase tracking-wider block">
-              Convocatoria 2026
-            </span>
-            <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-1">
-              Inscripción e Informes de Admisión
-            </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-normal">
-              Déjanos tus datos y un asesor de secretaría académica te
-              contactará con los requisitos oficiales.
-            </p>
-          </div>
-
-          {submitted ? (
-            <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-6 text-center space-y-3">
-              <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-lg flex items-center justify-center mx-auto">
-                <IconCheck className="w-5 h-5 text-slate-700 dark:text-slate-200" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                Pre-inscripción Registrada
+              {/* Career Title */}
+              <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#7114EF] dark:group-hover:text-[#08D9FF] transition-colors leading-snug line-clamp-2">
+                {career.name}
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Estimado(a) <strong>{name}</strong>, nos comunicaremos al
-                teléfono <strong>{phone}</strong> con la carpeta de admisión
-                para <strong>{selectedCareer}</strong>.
-              </p>
-              <button
-                onClick={() => {
-                  setSubmitted(false)
-                  setName("")
-                  setPhone("")
-                  setSelectedCareer("")
-                }}
-                className="mt-2 text-xs font-semibold text-slate-700 dark:text-sky-400 hover:text-slate-900 dark:hover:text-sky-300 underline"
-              >
-                Registrar otra postulación
-              </button>
+
+              {/* Action Hint */}
+              <span className="text-[11px] text-slate-400 dark:text-slate-500 font-semibold mt-2 group-hover:text-purple-600 dark:group-hover:text-sky-400 transition-colors">
+                Ver Carrera →
+              </span>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Nombres y Apellidos
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Ej. Juan Pérez Quispe"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-sky-500 focus:border-slate-900 transition"
-                />
-              </div>
+          ))}
+        </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Teléfono / WhatsApp
-                </label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="9XX XXX XXX"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-sky-500 focus:border-slate-900 transition"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Carrera Técnica de Interés
-                </label>
-                <select
-                  required
-                  value={selectedCareer}
-                  onChange={(e) => {
-                    setSelectedCareer(e.target.value)
-                    if (onCareerSelect) onCareerSelect(e.target.value)
-                  }}
-                  className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-sky-500 focus:border-slate-900 transition"
-                >
-                  <option value="">Selecciona una carrera técnica</option>
-                  {CAREERS.map((c) => (
-                    <option key={c.id} value={c.name}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Modalidad y Turno
-                </label>
-                <div className="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 flex justify-between">
-                  <span>Presencial · Sede Huanta</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">
-                    7:30 am – 1:15 pm
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full min-h-11 flex items-center justify-center gap-2 btn-pill-gradient text-white font-bold text-xs sm:text-sm py-3 px-4 shadow-lg active:scale-[0.98] transition-all disabled:opacity-75 cursor-pointer"
+        {/* ── Official Institutional Platforms Strip (Underneath Cards as in Image 1) ── */}
+        <div className="mt-8 pt-6 pb-4 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-between gap-6 text-slate-300">
+          <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            Enlaces Oficiales del Estado:
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+            {STATE_PLATFORMS.map((platform) => (
+              <a
+                key={platform.name}
+                href={platform.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={platform.description}
+                className="flex items-center gap-2 opacity-80 hover:opacity-100 hover:scale-105 transition-all"
               >
-                {isSubmitting ? (
-                  <>
-                    <IconSpinner className="w-4 h-4 text-white" />
-                    <span>Procesando solicitud...</span>
-                  </>
-                ) : (
-                  <span>Solicitar Información de Admisión</span>
-                )}
-              </button>
-
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center leading-tight">
-                Atención presencial en Secretaría Académica: Jr. Córdova N° 650,
-                Huanta.
-              </p>
-            </form>
-          )}
+                <img
+                  src={platform.logo}
+                  alt={platform.name}
+                  className="h-7 sm:h-8 w-auto object-contain brightness-0 invert"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

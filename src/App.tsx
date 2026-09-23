@@ -18,12 +18,24 @@ const CareerModal = lazy(() => import("@/components/modals/CareerModal"))
 const ComplaintsBookModal = lazy(
   () => import("@/components/modals/ComplaintsBookModal"),
 )
+const InstitutionalModal = lazy(
+  () => import("@/components/modals/InstitutionalModal"),
+)
 
 export default function App() {
   const [activeCareerModal, setActiveCareerModal] = useState<Career | null>(
     null,
   )
   const [complaintsModalOpen, setComplaintsModalOpen] = useState(false)
+  const [institutionalModalOpen, setInstitutionalModalOpen] = useState(false)
+  const [institutionalTab, setInstitutionalTab] = useState<
+    | "presentacion"
+    | "mision-vision"
+    | "organizacion"
+    | "plana-jerarquica"
+    | "plana-docente"
+    | "local"
+  >("presentacion")
 
   // Listen for clean path navigation and browser back/forward (popstate)
   useEffect(() => {
@@ -36,6 +48,26 @@ export default function App() {
         hash === "#libro-de-reclamaciones"
       ) {
         setComplaintsModalOpen(true)
+      } else if (
+        path === "/nosotros" ||
+        hash === "#presentacion" ||
+        hash === "#mision-vision" ||
+        hash === "#organizacion" ||
+        hash === "#plana-jerarquica" ||
+        hash === "#plana-docente" ||
+        hash === "#local"
+      ) {
+        const tab = hash
+          ? (hash.replace(/^#/, "") as
+              | "presentacion"
+              | "mision-vision"
+              | "organizacion"
+              | "plana-jerarquica"
+              | "plana-docente"
+              | "local")
+          : "presentacion"
+        setInstitutionalTab(tab)
+        setInstitutionalModalOpen(true)
       } else {
         setComplaintsModalOpen(false)
         if (path !== "/" && path !== "") {
@@ -105,6 +137,10 @@ export default function App() {
       <Header
         onOpenApplyModal={() => handleScrollToApply()}
         onOpenComplaintsModal={() => setComplaintsModalOpen(true)}
+        onOpenAboutModal={(tab) => {
+          setInstitutionalTab(tab ?? "presentacion")
+          setInstitutionalModalOpen(true)
+        }}
       />
 
       {/* ── Main Content Landmark ──────────────────────────────────── */}
@@ -113,6 +149,7 @@ export default function App() {
         <HeroSection
           onOpenCareerModal={(career) => setActiveCareerModal(career)}
           onCareerSelect={(careerName) => handleScrollToApply(careerName)}
+          onOpenApplyModal={() => handleScrollToApply()}
         />
 
         {/* Institutional Statistics Strip */}
@@ -125,7 +162,12 @@ export default function App() {
         />
 
         {/* Institutional Value Proposition & Vision 2031 */}
-        <WhyChooseUsSection />
+        <WhyChooseUsSection
+          onOpenAboutModal={(tab) => {
+            setInstitutionalTab(tab ?? "presentacion")
+            setInstitutionalModalOpen(true)
+          }}
+        />
 
         {/* 4-Step Admission Process & Requirements */}
         <AdmissionSection onStartApply={() => handleScrollToApply()} />
@@ -164,6 +206,22 @@ export default function App() {
               if (
                 window.location.pathname === "/libro-de-reclamaciones" ||
                 window.location.hash === "#libro-de-reclamaciones"
+              ) {
+                window.history.pushState(null, "", "/")
+              }
+            }}
+          />
+        )}
+
+        {institutionalModalOpen && (
+          <InstitutionalModal
+            isOpen={institutionalModalOpen}
+            initialTab={institutionalTab}
+            onClose={() => {
+              setInstitutionalModalOpen(false)
+              if (
+                window.location.pathname === "/nosotros" ||
+                window.location.hash.startsWith("#")
               ) {
                 window.history.pushState(null, "", "/")
               }
