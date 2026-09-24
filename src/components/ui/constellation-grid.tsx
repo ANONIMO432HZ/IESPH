@@ -10,6 +10,14 @@ interface Node {
   radius: number
   label: string
   pulse: number
+  glow: number
+}
+
+interface SynapticPulse {
+  fromIdx: number
+  toIdx: number
+  progress: number
+  speed: number
 }
 
 export interface ConstellationGridProps {
@@ -28,10 +36,7 @@ export default function ConstellationGrid({
   useEffect(() => {
     const updateTheme = () => {
       if (typeof document !== "undefined") {
-        setIsDarkMode(
-          document.documentElement.classList.contains("dark") ||
-            window.matchMedia("(prefers-color-scheme: dark)").matches,
-        )
+        setIsDarkMode(document.documentElement.classList.contains("dark"))
       }
     }
 
@@ -72,13 +77,17 @@ export default function ConstellationGrid({
       prevY: -1000,
       vx: 0,
       vy: 0,
-      radius: 200,
+      radius: 170,
     }
 
     let nodes: Node[] = []
+    const pulses: SynapticPulse[] = []
+    const MAX_CONN_DIST = 75
+    const MAX_CONN_DIST_SQ = MAX_CONN_DIST * MAX_CONN_DIST
 
     const initNodes = () => {
       nodes = []
+      pulses.length = 0
       if (width <= 0 || height <= 0) return
 
       const spacing = 52 // Grid spacing for crisp constellation density
@@ -96,9 +105,10 @@ export default function ConstellationGrid({
             vy: 0,
             baseX: x,
             baseY: y,
-            radius: Math.random() * 1.3 + 1.2,
+            radius: Math.random() * 1.2 + 1.1,
             label: `${(i * 7).toString(16).toUpperCase()}:${(j * 11).toString(16).toUpperCase()}`,
             pulse: Math.random() * Math.PI * 2,
+            glow: 0,
           })
         }
       }
@@ -132,12 +142,11 @@ export default function ConstellationGrid({
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
 
-      // Track cursor accurately when within canvas boundaries + padding
       if (
-        x >= -50 &&
-        x <= rect.width + 50 &&
-        y >= -50 &&
-        y <= rect.height + 50
+        x >= -60 &&
+        x <= rect.width + 60 &&
+        y >= -60 &&
+        y <= rect.height + 60
       ) {
         mouse.x = x
         mouse.y = y
@@ -155,7 +164,6 @@ export default function ConstellationGrid({
     // Set initial size
     updateSize()
 
-    // Observe size changes dynamically via ResizeObserver
     const resizeObserver = new ResizeObserver(() => {
       updateSize()
     })
@@ -178,11 +186,10 @@ export default function ConstellationGrid({
         return
       }
 
-      // Normalize dt across high-refresh displays
-      const dt = Math.min((now - lastTime) / 1000, 0.05)
+      const dt = Math.min((now - lastTime) / 1000, 0.04)
       lastTime = now
 
-      // Mouse velocity calculation
+      // Mouse velocity calculation with damping
       mouse.vx = (mouse.x - mouse.prevX) / (dt * 1000 || 1)
       mouse.vy = (mouse.y - mouse.prevY) / (dt * 1000 || 1)
       mouse.prevX = mouse.x
@@ -190,7 +197,6 @@ export default function ConstellationGrid({
 
       const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy)
 
-      // Color paletting for dark/light seamlessness
       const nodeColor =
         isDarkMode || transparent ? "255, 255, 255" : "15, 23, 42"
       const accentColor = "8, 217, 255" // Sky Cyan Accent (#08D9FF)
@@ -198,55 +204,83 @@ export default function ConstellationGrid({
       if (transparent) {
         ctx.clearRect(0, 0, width, height)
       } else {
-        const bgColor = isDarkMode ? "#030407" : "#f8fafc"
+        const bgColor = isDarkMode ? "#020617" : "#f8fafc"
         ctx.fillStyle = bgColor
         ctx.fillRect(0, 0, width, height)
       }
 
-      // Node Physics Engine (Hooke's Law Spring-Mass-Damping system)
-      const SPRING_K = 18 // Spring stiffness
-      const DAMPING = 0.82 // Velocity resistance
+      // Physics Step (Gentle Spring-Mass with clamped displacement)
+      const SPRING_K = 22
+      const DAMPING = 0.84
 
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i]
-        n.pulse += dt * 3
+        n.pulse += dt * 2.8
+        n.glow = Math.max(0, n.glow - dt * 1.6)
 
-        // Mouse distance vectors
         const dx = mouse.x - n.x
         const dy = mouse.y - n.y
         const dist = Math.sqrt(dx * dx + dy * dy)
 
-        // Dynamic shockwave repulsion based on cursor speed
+        // Gentle, soft repulsion: never clusters nodes or creates violent knots
         if (dist < mouse.radius && dist > 0) {
           const power = 1 - dist / mouse.radius
-          const force = power * (1500 + speed * 150)
+          const force = power * (320 + Math.min(speed, 50) * 12)
           const angle = Math.atan2(dy, dx)
 
-          // Impulse force pushing node away from cursor
           n.vx -= Math.cos(angle) * force * dt
           n.vy -= Math.sin(angle) * force * dt
         }
 
-        // Calculate restoring force back to home anchor point (baseX, baseY)
         const homeDx = n.baseX - n.x
         const homeDy = n.baseY - n.y
 
         n.vx += homeDx * SPRING_K * dt
         n.vy += homeDy * SPRING_K * dt
 
-        // Apply Damping
         n.vx *= DAMPING
         n.vy *= DAMPING
 
-        // Integrate position
+        // Clamp velocity to avoid sudden flings
+        const maxV = 10
+        const curV = Math.sqrt(n.vx * n.vx + n.vy * n.vy)
+        if (curV > maxV) {
+          n.vx = (n.vx / curV) * maxV
+          n.vy = (n.vy / curV) * maxV
+        }
+
         n.x += n.vx * dt * 60
         n.y += n.vy * dt * 60
       }
 
-      // Draw Connections (Optimized Distance Culling)
-      const MAX_CONN_DIST = 75
-      const MAX_CONN_DIST_SQ = MAX_CONN_DIST * MAX_CONN_DIST
+      // Spawn Subtle Synaptic Data Pulses (traveling glowing packets)
+      if (Math.random() < 0.22 && nodes.length > 0 && pulses.length < 28) {
+        const fromIdx = Math.floor(Math.random() * nodes.length)
+        const fromNode = nodes[fromIdx]
 
+        // Find connected neighbors within MAX_CONN_DIST
+        const neighbors: number[] = []
+        for (let j = 0; j < nodes.length; j++) {
+          if (j === fromIdx) continue
+          const dx = fromNode.x - nodes[j].x
+          const dy = fromNode.y - nodes[j].y
+          if (dx * dx + dy * dy < MAX_CONN_DIST_SQ) {
+            neighbors.push(j)
+          }
+        }
+
+        if (neighbors.length > 0) {
+          const toIdx = neighbors[Math.floor(Math.random() * neighbors.length)]
+          pulses.push({
+            fromIdx,
+            toIdx,
+            progress: 0,
+            speed: 1.1 + Math.random() * 1.5,
+          })
+        }
+      }
+
+      // Draw Base Network Connections
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i]
 
@@ -272,7 +306,41 @@ export default function ConstellationGrid({
         }
       }
 
-      // Render Node Points & Interactive Highlights
+      // Draw Synaptic Data Pulses & Shimmering Traveling Lines
+      for (let p = pulses.length - 1; p >= 0; p--) {
+        const pulse = pulses[p]
+        pulse.progress += dt * pulse.speed
+
+        const n1 = nodes[pulse.fromIdx]
+        const n2 = nodes[pulse.toIdx]
+
+        if (!n1 || !n2 || pulse.progress >= 1) {
+          if (n2) n2.glow = 1.0 // pulse arrived at destination node
+          pulses.splice(p, 1)
+          continue
+        }
+
+        // Shimmering accent line segment while packet travels
+        const lineAlpha =
+          (1 - Math.abs(pulse.progress - 0.5) * 2) * (isDarkMode ? 0.6 : 0.4)
+        ctx.strokeStyle = `rgba(${accentColor}, ${lineAlpha})`
+        ctx.lineWidth = 1.15
+        ctx.beginPath()
+        ctx.moveTo(n1.x, n1.y)
+        ctx.lineTo(n2.x, n2.y)
+        ctx.stroke()
+
+        // Traveling glowing photon packet
+        const px = n1.x + (n2.x - n1.x) * pulse.progress
+        const py = n1.y + (n2.y - n1.y) * pulse.progress
+
+        ctx.fillStyle = `rgb(${accentColor})`
+        ctx.beginPath()
+        ctx.arc(px, py, 2.0, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      // Render Nodes & Subtle Radar Highlights
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i]
         const dx = mouse.x - n.x
@@ -280,36 +348,45 @@ export default function ConstellationGrid({
         const dist = Math.sqrt(dx * dx + dy * dy)
         const isNear = dist < mouse.radius
 
-        // Visible pulsing alpha for stars
-        const baseAlpha = isNear ? 1 : 0.4 + Math.sin(n.pulse) * 0.18
+        // Extra glowing halo when stimulated by traveling pulse
+        if (n.glow > 0.05) {
+          ctx.fillStyle = `rgba(${accentColor}, ${n.glow * 0.35})`
+          ctx.beginPath()
+          ctx.arc(n.x, n.y, (n.radius + 3) * (1 + n.glow * 0.4), 0, Math.PI * 2)
+          ctx.fill()
+        }
 
-        ctx.fillStyle = isNear
-          ? `rgba(${accentColor}, ${baseAlpha})`
-          : `rgba(${nodeColor}, ${baseAlpha})`
+        const baseAlpha = isNear
+          ? 1
+          : 0.35 + Math.sin(n.pulse) * 0.15 + n.glow * 0.5
+
+        ctx.fillStyle =
+          isNear || n.glow > 0.3
+            ? `rgba(${accentColor}, ${baseAlpha})`
+            : `rgba(${nodeColor}, ${baseAlpha})`
 
         const currentRadius = isNear
-          ? n.radius * 2.2
-          : n.radius + Math.sin(n.pulse) * 0.3
+          ? n.radius * 1.8
+          : n.radius + Math.sin(n.pulse) * 0.25
 
         ctx.beginPath()
-        ctx.arc(n.x, n.y, Math.max(0.5, currentRadius), 0, Math.PI * 2)
+        ctx.arc(n.x, n.y, Math.max(0.6, currentRadius), 0, Math.PI * 2)
         ctx.fill()
 
-        // High-tech Spatial Radar Rings on active proximity
-        if (dist < 90) {
-          const pulseRing = ((n.pulse * 20) % 30) + 4
-          const ringAlpha = (1 - pulseRing / 34) * 0.6
+        // Elegant minimal radar ring near cursor (only very close, non-intrusive)
+        if (dist < 70) {
+          const pulseRing = ((n.pulse * 18) % 24) + 3
+          const ringAlpha = (1 - pulseRing / 28) * 0.35
 
           ctx.strokeStyle = `rgba(${accentColor}, ${ringAlpha})`
-          ctx.lineWidth = 1.2
+          ctx.lineWidth = 0.9
           ctx.beginPath()
           ctx.arc(n.x, n.y, pulseRing, 0, Math.PI * 2)
           ctx.stroke()
 
-          // Hex Coordinate Readout
-          ctx.font = "9px ui-monospace, SFMono-Regular, Consolas, monospace"
-          ctx.fillStyle = `rgba(${accentColor}, 0.95)`
-          ctx.fillText(n.label, n.x + 10, n.y - 10)
+          ctx.font = "8px ui-monospace, SFMono-Regular, Consolas, monospace"
+          ctx.fillStyle = `rgba(${accentColor}, 0.75)`
+          ctx.fillText(n.label, n.x + 8, n.y - 8)
         }
       }
 
@@ -342,13 +419,12 @@ export default function ConstellationGrid({
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseleave", handleMouseLeave)
     }
-  }, [isDarkMode, transparent])
+  }, [transparent, isDarkMode])
 
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 block w-full h-full pointer-events-none ${className}`}
-      aria-hidden="true"
+      className={`absolute inset-0 block w-full h-full pointer-events-none select-none transition-opacity duration-700 ${className}`}
     />
   )
 }

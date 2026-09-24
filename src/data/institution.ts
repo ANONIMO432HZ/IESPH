@@ -37,6 +37,48 @@ export const INSTITUTION_VALUES: InstitutionValues = {
     "¡Transforma tu Futuro en solo 3 Años con Título a Nombre de la Nación!",
 }
 
+export const INSTITUTION_HISTORY = {
+  subtitle: "Reseña histórica",
+  title: "Breve Presentación de la Institución",
+  narrative:
+    'El Instituto de Educación Superior Público "Huanta" fue creado por R.M. N° 265-86-ED del 05 de junio de 1986. Inicialmente inició sus actividades con las especialidades de Agropecuaria y Electricidad. Al año siguiente se creó la especialidad de Enfermería Técnica con R.D. N° 3983-87-ED. Posteriormente, las necesidades formativas de la educación técnica y la demanda del mercado laboral regional permitieron la ampliación de nuevos programas de estudios: Computación e Informática (hoy Diseño y Programación Web) creado por R.D. N° 109-96-ED; Industrias Alimentarias (hoy Industrias de Alimentos y Bebidas) creado por R.D. N° 0257-97-ED el 19 de abril de 1997; y Mecánica Automotriz (hoy Mecatrónica Automotriz) creado por R.D. N° 2001-2009-ED el 24 de agosto de 2009.',
+}
+
+export const LICENSING_INFO = {
+  badge: "INSTITUTO LICENCIADO",
+  slogan: "Estamos consolidados como un referente en la formación de calidad.",
+  resolution: "R.M. N° 0371-2025-MINEDU",
+  pdfUrl: "/docs/Licenciamiento-RMN371-2025-MINEDU.pdf",
+  mineduLaw: "Condiciones Básicas de Calidad (CBC) — Ley N° 30512",
+  paragraphs: [
+    'El Instituto de Educación Superior Público "Huanta" está comprometido en mejorar continuamente la calidad de la educación que ofrecemos, consolidando los más altos estándares exigidos por el Ministerio de Educación.',
+    "El licenciamiento institucional es un paso fundamental que garantiza que nuestros programas académicos y servicios cumplen con los estándares y requisitos establecidos por las autoridades educativas competentes. Gracias a este proceso, hemos asegurado que nuestros estudiantes reciban una formación de calidad y que nuestras instalaciones estén a la altura de las expectativas.",
+    "Contar con el licenciamiento refleja nuestro compromiso con la excelencia académica y el desarrollo de nuestra comunidad educativa. Seguimos trabajando continuamente para mantener y superar estos estándares, consolidando así una educación sólida, gratuita y de calidad para todos nuestros estudiantes.",
+  ],
+  pillars: [
+    {
+      title: "5 Programas Licenciados",
+      description:
+        "Planes modulares vigentes alineados al Catálogo Nacional de la Oferta Formativa (CNOF).",
+    },
+    {
+      title: "Talleres y Laboratorios",
+      description:
+        "Infraestructura especializada equipada para el aprendizaje práctico en cada especialidad.",
+    },
+    {
+      title: "Docentes Titulados",
+      description:
+        "Plana académica calificada con sólida experiencia profesional en el sector productivo.",
+    },
+    {
+      title: "Título a Nombre de la Nación",
+      description:
+        "Grado de Profesional Técnico oficial reconocido por el MINEDU en todo el Perú.",
+    },
+  ],
+}
+
 export const HISTORICAL_MILESTONES = [
   {
     year: "1986",
@@ -58,7 +100,7 @@ export const HISTORICAL_MILESTONES = [
     year: "1996",
     date: "1996",
     resolution: "R.D. N° 109-96-ED",
-    title: "Computación e Informática (Hoy DPW)",
+    title: "Computación e Informática",
     description:
       "Creación de la especialidad de Computación e Informática para responder a la revolución tecnológica de la región.",
   },
@@ -79,9 +121,9 @@ export const HISTORICAL_MILESTONES = [
       "Creación del programa de Mecánica/Mecatrónica Automotriz para responder a la tecnificación vehicular y del transporte.",
   },
   {
-    year: "2020",
-    date: "2020",
-    resolution: "R.M. N° 068-2020-MINEDU",
+    year: "2025",
+    date: "2025",
+    resolution: "R.M. N° 0371-2025-MINEDU",
     title: "Licenciamiento Institucional",
     description:
       "Acreditación de las Condiciones Básicas de Calidad (CBC) por el Ministerio de Educación como Instituto Licenciado.",
@@ -346,6 +388,8 @@ export const CAMPUS_LOCATIONS: CampusLocation[] = [
   {
     name: "Sede Central Institucional",
     tag: "Sede Principal Licenciada",
+    purpose:
+      "Sede académica y administrativa central para la formación profesional técnica.",
     address: "Jr. Córdova N° 650, Huanta, Ayacucho",
     description:
       "Complejo educativo central que alberga la Dirección General, aulas pedagógicas modernizadas, laboratorios de cómputo para Desarrollo Web, talleres de mecatrónica automotriz, clínica simulada de enfermería técnica y biblioteca central.",

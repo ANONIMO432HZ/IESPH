@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import videoInstitucional from "@/assets/video-institucional.mp4"
 
 interface VideoModalProps {
@@ -9,15 +9,43 @@ interface VideoModalProps {
 export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
+  const stopAndResetVideo = useCallback(() => {
+    // If the browser entered native fullscreen, exit cleanly
+    if (typeof document !== "undefined" && document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {})
+    }
+    // Halt playback and reset playback head to prevent ghost audio loops
+    if (videoRef.current) {
+      try {
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0
+      } catch {
+        // Ignore playback pause errors
+      }
+    }
+  }, [])
+
+  const handleClose = useCallback(() => {
+    stopAndResetVideo()
+    onClose()
+  }, [stopAndResetVideo, onClose])
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {})
+        } else {
+          handleClose()
+        }
+      }
     }
 
     if (isOpen) {
       document.body.style.overflow = "hidden"
       window.addEventListener("keydown", handleKeyDown)
-      // Autoplay video
+
+      // Start playing safely
       if (videoRef.current) {
         videoRef.current.currentTime = 0
         videoRef.current.play().catch(() => {
@@ -26,16 +54,15 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
       }
     } else {
       document.body.style.overflow = "unset"
-      if (videoRef.current) {
-        videoRef.current.pause()
-      }
+      stopAndResetVideo()
     }
 
     return () => {
       document.body.style.overflow = "unset"
       window.removeEventListener("keydown", handleKeyDown)
+      stopAndResetVideo()
     }
-  }, [isOpen, onClose])
+  }, [isOpen, handleClose, stopAndResetVideo])
 
   if (!isOpen) return null
 
@@ -47,7 +74,11 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200"
     >
       {/* Backdrop */}
-      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
+      <div
+        className="absolute inset-0"
+        onClick={handleClose}
+        aria-hidden="true"
+      />
 
       {/* Video Container */}
       <div className="relative z-10 w-full max-w-4xl rounded-3xl bg-[#09152b] border border-slate-700/60 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
@@ -63,7 +94,7 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer text-sm font-bold"
             aria-label="Cerrar video"
           >
@@ -79,6 +110,7 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
             controls
             autoPlay
             playsInline
+            preload="auto"
             className="w-full h-full object-contain"
           >
             <track kind="captions" />
@@ -91,7 +123,7 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
           <span>Instituto Licenciado por MINEDU • R.M. N° 068-2020-MINEDU</span>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="text-xs font-semibold text-sky-400 hover:underline cursor-pointer"
           >
             Cerrar ventana

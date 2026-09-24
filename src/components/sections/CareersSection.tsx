@@ -1,14 +1,11 @@
+import { CarFront, FlaskConical, Stethoscope, TreePine } from "lucide-react"
 import { useState } from "react"
 import {
   IconAcademicCap,
   IconArrowRight,
-  IconBeaker,
   IconCheck,
   IconComputer,
-  IconHeartPulse,
-  IconLeaf,
   IconWhatsApp,
-  IconWrench,
 } from "@/components/icons/Icons"
 import { CAREERS } from "@/data/careers"
 import { INSTITUTION_CONTACT } from "@/data/institution"
@@ -18,31 +15,72 @@ interface CareersSectionProps {
   onApplyForCareer?: (careerName: string) => void
 }
 
-function getCareerIcon(id: string) {
+function getCareerIcon(id: string, isSelected = false) {
+  const iconBase = "w-5 h-5 shrink-0"
+
+  if (isSelected) {
+    switch (id) {
+      case "diseno-programacion-web":
+        return (
+          <IconComputer className={`${iconBase} text-white drop-shadow-xs`} />
+        )
+      case "enfermeria-tecnica":
+        return (
+          <Stethoscope className={`${iconBase} text-white drop-shadow-xs`} />
+        )
+      case "mecatronica-automotriz":
+        return <CarFront className={`${iconBase} text-white drop-shadow-xs`} />
+      case "industrias-alimentos-bebidas":
+        return (
+          <FlaskConical className={`${iconBase} text-white drop-shadow-xs`} />
+        )
+      case "produccion-agropecuaria":
+        return <TreePine className={`${iconBase} text-white drop-shadow-xs`} />
+      default:
+        return (
+          <IconAcademicCap
+            className={`${iconBase} text-white drop-shadow-xs`}
+          />
+        )
+    }
+  }
+
   switch (id) {
     case "diseno-programacion-web":
       return (
-        <IconComputer className="w-5 h-5 text-blue-600 dark:text-sky-300" />
+        <IconComputer
+          className={`${iconBase} text-[#7114EF] dark:text-sky-300`}
+        />
       )
     case "enfermeria-tecnica":
       return (
-        <IconHeartPulse className="w-5 h-5 text-rose-600 dark:text-rose-300" />
+        <Stethoscope
+          className={`${iconBase} text-rose-600 dark:text-rose-300`}
+        />
       )
     case "mecatronica-automotriz":
       return (
-        <IconWrench className="w-5 h-5 text-amber-600 dark:text-amber-300" />
+        <CarFront
+          className={`${iconBase} text-amber-600 dark:text-amber-300`}
+        />
       )
     case "industrias-alimentos-bebidas":
       return (
-        <IconBeaker className="w-5 h-5 text-purple-600 dark:text-purple-300" />
+        <FlaskConical
+          className={`${iconBase} text-purple-600 dark:text-purple-300`}
+        />
       )
     case "produccion-agropecuaria":
       return (
-        <IconLeaf className="w-5 h-5 text-emerald-600 dark:text-emerald-300" />
+        <TreePine
+          className={`${iconBase} text-emerald-600 dark:text-emerald-300`}
+        />
       )
     default:
       return (
-        <IconAcademicCap className="w-5 h-5 text-indigo-600 dark:text-indigo-300" />
+        <IconAcademicCap
+          className={`${iconBase} text-indigo-600 dark:text-indigo-300`}
+        />
       )
   }
 }
@@ -65,9 +103,6 @@ export default function CareersSection({
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header matching reference capture */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-block px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider mb-3">
-            ¿Qué Aprenderás?
-          </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Ofrecemos <span className="text-[#1475F7]">Educación Técnica</span>{" "}
             de Alta Calidad
@@ -93,7 +128,7 @@ export default function CareersSection({
                     : "bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800"
                 }`}
               >
-                <span>{getCareerIcon(c.id)}</span>
+                <span>{getCareerIcon(c.id, isSelected)}</span>
                 <span className="truncate max-w-45 sm:max-w-none">
                   {c.name}
                 </span>
@@ -210,7 +245,7 @@ export default function CareersSection({
               Campus y Servicios
             </span>
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-              Académicos <span className="text-[#1475F7]">Entorno</span>
+              Académicos
             </h3>
           </div>
 

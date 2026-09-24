@@ -117,7 +117,7 @@ export interface TeacherItem {
 }
 
 export interface CampusLocation {
-  purpose: ReactNode
+  purpose?: string
   name: string
   tag: string
   address: string

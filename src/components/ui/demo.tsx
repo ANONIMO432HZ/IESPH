@@ -1,6 +1,9 @@
-import ConstellationGrid from "@/components/ui/constellation-grid"
+import AetherFlowHero from "@/components/ui/aether-flow-hero"
 
-// ONLY DEFAULT EXPORT WILL BE TREATED AS A DEMO
 export default function DemoOne() {
-  return <ConstellationGrid />
+  return (
+    <main className="App bg-black">
+      <AetherFlowHero />
+    </main>
+  )
 }

@@ -1978,6 +1978,8 @@ export const CAREERS: Career[] = [
     experimentalCenter: {
       name: "Centro de Producción y Fundo Experimental",
       tag: "Centro Experimental",
+      purpose:
+        "Prácticas en situaciones reales de trabajo agrícola, pecuario y agroindustrial.",
       address: "Valle de Huanta / Luricocha, Ayacucho",
       description:
         "Área agronómica y pecuaria especializada para las prácticas en situaciones reales de trabajo de los programas de Producción Agropecuaria e Industrias de Alimentos y Bebidas.",

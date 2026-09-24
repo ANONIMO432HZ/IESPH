@@ -1,15 +1,15 @@
 import {
-  Apple,
+  CarFront,
   ChevronLeft,
   ChevronRight,
   Code2,
+  FlaskConical,
   Maximize2,
   Play,
   Stethoscope,
+  TreePine,
   Volume2,
   VolumeX,
-  Wheat,
-  Wrench,
 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import egresadoHero from "@/assets/egresado-hero.jpg"
@@ -201,7 +201,7 @@ export default function HeroSection({
       id: "diseno-programacion-web",
       name: "Diseño y Programación Web",
       badgeColor:
-        "bg-purple-100 text-[#7114EF] dark:bg-purple-950/60 dark:text-purple-300",
+        "bg-purple-100 text-[#7114EF] dark:bg-purple-950/70 dark:text-purple-300 dark:ring-1 dark:ring-purple-500/30",
       icon: <Code2 className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
     },
     {
@@ -209,7 +209,7 @@ export default function HeroSection({
       name: "Enfermería Técnica",
       altName: "Enfermería Técnica",
       badgeColor:
-        "bg-sky-100 text-[#1475F7] dark:bg-sky-950/60 dark:text-sky-300",
+        "bg-sky-100 text-[#1475F7] dark:bg-sky-950/70 dark:text-sky-300 dark:ring-1 dark:ring-sky-500/30",
       icon: (
         <Stethoscope className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />
       ),
@@ -219,24 +219,26 @@ export default function HeroSection({
       name: "Mecatrónica Automotriz",
       altName: "Mecatrónica Automotriz",
       badgeColor:
-        "bg-blue-100 text-blue-600 dark:bg-blue-950/60 dark:text-blue-300",
-      icon: <Wrench className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+        "bg-blue-100 text-blue-600 dark:bg-blue-950/70 dark:text-blue-300 dark:ring-1 dark:ring-blue-500/30",
+      icon: <CarFront className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
     },
     {
       id: "industrias-alimentos-bebidas",
       name: "Industrias Alimentarias",
       altName: "Industrias de Alimentos y Bebidas",
       badgeColor:
-        "bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-300",
-      icon: <Apple className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+        "bg-amber-100 text-amber-600 dark:bg-amber-950/70 dark:text-amber-300 dark:ring-1 dark:ring-amber-500/30",
+      icon: (
+        <FlaskConical className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />
+      ),
     },
     {
       id: "produccion-agropecuaria",
       name: "Producción Agropecuaria",
       altName: "Producción Agropecuaria",
       badgeColor:
-        "bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-300",
-      icon: <Wheat className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
+        "bg-emerald-100 text-emerald-600 dark:bg-emerald-950/70 dark:text-emerald-300 dark:ring-1 dark:ring-emerald-500/30",
+      icon: <TreePine className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden="true" />,
     },
   ]
 
@@ -249,21 +251,25 @@ export default function HeroSection({
   }
 
   return (
-    <section className="relative font-sans bg-white dark:bg-slate-950 transition-colors">
+    <section className="relative font-sans bg-white dark:bg-slate-950 transition-colors pb-6 sm:pb-8">
       {/* ── 1. Hero Stage Principal con Gradiente y Acento Diagonal ──── */}
-      <div className="relative bg-linear-to-r from-[#11244e] via-[#1a3875] to-[#2b519a] text-white pt-10 pb-24 sm:pt-14 sm:pb-28 lg:pt-16 lg:pb-32 overflow-hidden">
-        {/* Constellation Grid Interactive Mesh */}
+      <div className="relative bg-linear-to-r from-[#11244e] via-[#1a3875] to-[#2b519a] dark:from-[#050c19] dark:via-[#0a1628] dark:to-[#0f223a] text-white pt-10 pb-24 sm:pt-14 sm:pb-28 lg:pt-16 lg:pb-32 overflow-hidden transition-colors duration-300">
+        {/* Constellation Grid Interactive Mesh with Synaptic Pulses */}
         <ConstellationGrid transparent className="z-0" />
 
         {/* Dynamic diagonal color band en la esquina superior derecha */}
         <div
-          className="absolute -top-32 -right-24 sm:-top-40 sm:-right-20 w-137.5 sm:w-175 h-87.5 sm:h-112.5 bg-linear-to-bl from-[#7114EF] via-[#1475F7] to-transparent opacity-85 rotate-[-22deg] pointer-events-none blur-[1px]"
+          className="absolute -top-32 -right-24 sm:-top-40 sm:-right-20 w-137.5 sm:w-175 h-87.5 sm:h-112.5 bg-linear-to-bl from-[#7114EF] via-[#1475F7] to-transparent opacity-85 dark:opacity-40 dark:from-[#7114EF]/70 dark:via-[#1475F7]/40 rotate-[-22deg] pointer-events-none blur-[1px] transition-opacity duration-300"
           aria-hidden="true"
         />
 
-        {/* Dynamic ambient lights */}
+        {/* Dynamic ambient lights con brillo sutil y armónico */}
         <div
-          className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#1475F7]/20 rounded-full blur-3xl pointer-events-none"
+          className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#1475F7]/20 dark:bg-[#1475F7]/12 rounded-full blur-3xl pointer-events-none transition-colors"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute -bottom-10 right-10 w-80 h-80 bg-[#7114EF]/15 dark:bg-[#7114EF]/15 rounded-full blur-3xl pointer-events-none hidden sm:block transition-colors"
           aria-hidden="true"
         />
 
@@ -272,7 +278,7 @@ export default function HeroSection({
             {/* Columna Izquierda: Información Institucional Dinámica */}
             <div className="space-y-5 text-left z-10">
               {/* Badge Institucional */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all duration-300">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 text-white dark:text-slate-100 text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all duration-300">
                 <span>{activeSlide.badge}</span>
               </div>
 
@@ -282,7 +288,7 @@ export default function HeroSection({
                 {activeSlide.highlight && (
                   <>
                     <br className="hidden sm:inline" />
-                    <span className="text-[#08D9FF]">
+                    <span className="text-[#08D9FF] dark:text-[#08D9FF] dark:drop-shadow-[0_0_20px_rgba(8,217,255,0.4)]">
                       {activeSlide.highlight}
                     </span>
                   </>
@@ -290,7 +296,7 @@ export default function HeroSection({
               </h1>
 
               {/* Subtítulo / Descripción Institucional */}
-              <p className="text-sm sm:text-base text-slate-200/90 max-w-xl leading-relaxed font-normal min-h-[4.2rem] transition-all duration-300">
+              <p className="text-sm sm:text-base text-slate-200/90 dark:text-slate-300 max-w-xl leading-relaxed font-normal min-h-[4.2rem] transition-all duration-300">
                 {activeSlide.description}
               </p>
 
@@ -299,7 +305,7 @@ export default function HeroSection({
                 <button
                   type="button"
                   onClick={() => onOpenApplyModal?.()}
-                  className="btn-pill-gradient text-white font-bold text-xs sm:text-sm px-6 py-3.5 shadow-lg shadow-purple-950/40 hover:shadow-purple-600/30 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
+                  className="btn-pill-gradient text-white font-bold text-xs sm:text-sm px-6 py-3.5 shadow-lg shadow-purple-950/40 hover:shadow-purple-600/30 dark:shadow-purple-950/70 dark:hover:shadow-purple-500/30 active:scale-[0.98] transition-all cursor-pointer inline-flex items-center gap-2"
                 >
                   <span>Postula</span>
                   <span>→</span>
@@ -307,7 +313,7 @@ export default function HeroSection({
 
                 <a
                   href={activeSlide.ctaSecondaryHref}
-                  className="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 hover:border-white/40 transition-all cursor-pointer"
+                  className="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 dark:bg-white/5 dark:hover:bg-white/15 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 hover:border-white/40 dark:border-white/15 dark:hover:border-white/25 transition-all cursor-pointer"
                 >
                   {activeSlide.ctaSecondaryText}
                 </a>
@@ -317,7 +323,7 @@ export default function HeroSection({
             {/* Columna Derecha: Showcase de Imágenes y Video Institucional (Ampliado y Responsivo) */}
             <div className="relative flex justify-center items-center z-10 w-full">
               <div
-                className="relative w-full max-w-105 sm:max-w-130 lg:max-w-145 xl:max-w-155 aspect-16/10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-linear-to-b from-[#1475F7]/30 to-[#7114EF]/30 group select-none transition-all duration-300"
+                className="relative w-full max-w-105 sm:max-w-130 lg:max-w-145 xl:max-w-155 aspect-16/10 rounded-3xl overflow-hidden shadow-2xl dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.85)] border-2 border-white/20 dark:border-slate-800/80 bg-linear-to-b from-[#1475F7]/30 to-[#7114EF]/30 dark:from-slate-900/80 dark:to-slate-950/80 group select-none transition-all duration-300"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
               >
@@ -344,7 +350,7 @@ export default function HeroSection({
                         />
 
                         {/* Barra de progreso de reproducción del video */}
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-30 pointer-events-none">
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 dark:bg-white/10 z-30 pointer-events-none">
                           <div
                             className="h-full bg-linear-to-r from-[#1475F7] to-[#08D9FF] transition-all duration-150"
                             style={{ width: `${videoProgress}%` }}
@@ -355,7 +361,7 @@ export default function HeroSection({
                         {!isPlaying && (
                           <div
                             onClick={togglePlay}
-                            className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs cursor-pointer"
+                            className="absolute inset-0 flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-xs cursor-pointer"
                           >
                             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#1475F7]/90 text-white flex items-center justify-center shadow-xl border border-white/30 hover:scale-110 transition-transform">
                               <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
@@ -371,7 +377,7 @@ export default function HeroSection({
                               e.stopPropagation()
                               toggleMute()
                             }}
-                            className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-md"
+                            className="p-2 rounded-full bg-black/60 hover:bg-black/80 dark:bg-black/75 dark:hover:bg-black/90 text-white backdrop-blur-md border border-white/20 dark:border-white/10 transition-all cursor-pointer shadow-md"
                             title={
                               isMuted ? "Activar audio" : "Silenciar video"
                             }
@@ -391,9 +397,13 @@ export default function HeroSection({
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation()
+                                if (videoRef.current) {
+                                  videoRef.current.pause()
+                                  setIsPlaying(false)
+                                }
                                 onOpenVideoModal()
                               }}
-                              className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 transition-all cursor-pointer shadow-md"
+                              className="p-2 rounded-full bg-black/60 hover:bg-black/80 dark:bg-black/75 dark:hover:bg-black/90 text-white backdrop-blur-md border border-white/20 dark:border-white/10 transition-all cursor-pointer shadow-md"
                               title="Ver en pantalla completa"
                               aria-label="Abrir video en pantalla completa"
                             >
@@ -412,8 +422,8 @@ export default function HeroSection({
                     )}
 
                     {/* Gradiente inferior para legibilidad y badge informativo */}
-                    <div className="absolute inset-0 bg-linear-to-t from-[#0e1d3e]/95 via-[#0e1d3e]/20 to-transparent flex flex-col justify-end p-4 sm:p-5 pointer-events-none">
-                      <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#08D9FF] bg-[#08D9FF]/15 backdrop-blur-md border border-[#08D9FF]/30 px-2.5 py-1 rounded-full w-fit mb-1 shadow-xs pointer-events-auto">
+                    <div className="absolute inset-0 bg-linear-to-t from-[#0e1d3e]/95 via-[#0e1d3e]/20 to-transparent dark:from-slate-950/95 dark:via-slate-950/30 flex flex-col justify-end p-4 sm:p-5 pointer-events-none">
+                      <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#08D9FF] bg-[#08D9FF]/15 dark:bg-[#08D9FF]/20 backdrop-blur-md border border-[#08D9FF]/30 dark:border-[#08D9FF]/40 px-2.5 py-1 rounded-full w-fit mb-1 shadow-xs pointer-events-auto">
                         {slide.tag}
                       </span>
                     </div>
@@ -425,7 +435,7 @@ export default function HeroSection({
                   type="button"
                   onClick={prevSlide}
                   aria-label="Diapositiva anterior"
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 cursor-pointer"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 dark:bg-black/70 dark:hover:bg-black/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 dark:border-white/10 cursor-pointer"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -433,13 +443,13 @@ export default function HeroSection({
                   type="button"
                   onClick={nextSlide}
                   aria-label="Siguiente diapositiva"
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 cursor-pointer"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 dark:bg-black/70 dark:hover:bg-black/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md border border-white/20 dark:border-white/10 cursor-pointer"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
 
                 {/* Indicadores de diapositiva interactivos */}
-                <div className="absolute bottom-3.5 right-4 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15">
+                <div className="absolute bottom-3.5 right-4 z-20 flex items-center gap-1.5 bg-black/50 dark:bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 dark:border-white/10">
                   {HERO_SLIDES.map((slide, idx) => (
                     <button
                       key={slide.id}
@@ -448,7 +458,7 @@ export default function HeroSection({
                       className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                         idx === currentSlide
                           ? "w-5 bg-[#08D9FF]"
-                          : "w-1.5 bg-white/40 hover:bg-white/75"
+                          : "w-1.5 bg-white/40 hover:bg-white/75 dark:bg-white/30 dark:hover:bg-white/60"
                       }`}
                       aria-label={`Ver ${slide.tag}`}
                     />
@@ -467,7 +477,7 @@ export default function HeroSection({
             <div
               key={card.id}
               onClick={() => handleCardClick(card.id)}
-              className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center justify-center min-h-38.75 sm:min-h-43.75"
+              className="bg-white dark:bg-slate-900/95 dark:backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-xl hover:shadow-2xl dark:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.6)] dark:hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.85)] dark:hover:border-slate-700 hover:-translate-y-2 transition-all duration-300 cursor-pointer group flex flex-col items-center text-center justify-center min-h-38.75 sm:min-h-43.75"
             >
               {/* Contenedor del Icono Temático con Color Identificativo */}
               <div
@@ -477,7 +487,7 @@ export default function HeroSection({
               </div>
 
               {/* Título del Programa Formativo */}
-              <h3 className="font-bold text-slate-800 dark:text-white text-xs sm:text-sm group-hover:text-[#1475F7] transition-colors leading-tight">
+              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm group-hover:text-[#1475F7] dark:group-hover:text-[#08D9FF] transition-colors leading-tight">
                 {card.name}
               </h3>
             </div>

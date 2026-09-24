@@ -1,3 +1,4 @@
+import { Minus, Search } from "lucide-react"
 import { useState } from "react"
 import campusFrontis from "@/assets/campus/frontis-principal.jpg"
 import organigramaImg from "@/assets/campus/organigrama-institucional.png"
@@ -35,7 +36,7 @@ export default function InstitutionalSection() {
   return (
     <div className="font-sans">
       {/* ══════════════════════════════════════════════════════════════════
-          1. ORGANIZACIÓN INSTITUCIONAL (#organizacion)
+          1. ORGANIZACIÓN INSTITUCIONAL (organizacion)
           ══════════════════════════════════════════════════════════════════ */}
       <section
         id="organizacion"
@@ -76,7 +77,11 @@ export default function InstitutionalSection() {
                 <span>
                   {zoomOrganigram ? "Reducir Vista" : "Ampliar Organigrama"}
                 </span>
-                <span>🔍</span>
+                {zoomOrganigram ? (
+                  <Minus className="w-3.5 h-3.5" aria-hidden="true" />
+                ) : (
+                  <Search className="w-3.5 h-3.5" aria-hidden="true" />
+                )}
               </button>
             </div>
 

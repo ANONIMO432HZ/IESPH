@@ -1,3 +1,4 @@
+import { CarFront, FlaskConical, Stethoscope, TreePine } from "lucide-react"
 import { useEffect, useState } from "react"
 import {
   IconAcademicCap,
@@ -41,23 +42,21 @@ function getCareerIcon(id: string) {
   switch (id) {
     case "diseno-programacion-web":
       return (
-        <IconComputer className="w-8 h-8 text-blue-600 dark:text-sky-300" />
+        <IconComputer className="w-8 h-8 text-[#7114EF] dark:text-sky-300" />
       )
     case "enfermeria-tecnica":
       return (
-        <IconHeartPulse className="w-8 h-8 text-rose-600 dark:text-rose-300" />
+        <Stethoscope className="w-8 h-8 text-rose-600 dark:text-rose-300" />
       )
     case "mecatronica-automotriz":
-      return (
-        <IconWrench className="w-8 h-8 text-amber-600 dark:text-amber-300" />
-      )
+      return <CarFront className="w-8 h-8 text-amber-600 dark:text-amber-300" />
     case "industrias-alimentos-bebidas":
       return (
-        <IconBeaker className="w-8 h-8 text-purple-600 dark:text-purple-300" />
+        <FlaskConical className="w-8 h-8 text-purple-600 dark:text-purple-300" />
       )
     case "produccion-agropecuaria":
       return (
-        <IconLeaf className="w-8 h-8 text-emerald-600 dark:text-emerald-300" />
+        <TreePine className="w-8 h-8 text-emerald-600 dark:text-emerald-300" />
       )
     default:
       return (

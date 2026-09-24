@@ -142,7 +142,7 @@ export const FOOTER_SECTIONS: FooterSection[] = [
       { label: "Presentación y Reseña", href: "/nosotros" },
       { label: "Misión y Visión al 2031", href: "/nosotros" },
       {
-        label: "Licenciamiento (R.M. 068-2020)",
+        label: "Licenciamiento (R.M. 0371-2025)",
         href: "/docs/Licenciamiento-RMN371-2025-MINEDU.pdf",
       },
       { label: "Organización Institucional", href: "/nosotros" },
